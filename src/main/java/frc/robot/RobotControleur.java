@@ -10,20 +10,34 @@ import edu.wpi.first.wpilibj.TimedRobot;
 public class RobotControleur extends TimedRobot {
 
   int ROUE_AVANT_DROITE = 4; // ID 4 
-  CANSparkMax roueAvantroite;
+  int ROUE_AVANT_GAUCHE = 3; // ID 4 
+  int ROUE_ARRIERE_DROITE = 2; // ID 4 
+  int ROUE_ARRIERE_GAUCHE = 1; // ID 4 
+  CANSparkMax roueAvantDroite;
+  CANSparkMax roueAvantGauche;
+  CANSparkMax roueArriereDroite;
+  CANSparkMax roueArriereGauche;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
-    this.roueAvantroite = new CANSparkMax(ROUE_AVANT_DROITE, MotorType.kBrushless);
-    this.roueAvantroite.restoreFactoryDefaults();
+    this.roueAvantDroite = new CANSparkMax(ROUE_AVANT_DROITE, MotorType.kBrushless);
+    this.roueAvantGauche = new CANSparkMax(ROUE_AVANT_GAUCHE, MotorType.kBrushless);
+    this.roueArriereDroite = new CANSparkMax(ROUE_ARRIERE_DROITE, MotorType.kBrushless);
+    this.roueArriereGauche = new CANSparkMax(ROUE_ARRIERE_GAUCHE, MotorType.kBrushless);
+    this.roueAvantDroite.restoreFactoryDefaults();
+    this.roueAvantGauche.restoreFactoryDefaults();
+    this.roueArriereDroite.restoreFactoryDefaults();
+    this.roueArriereGauche.restoreFactoryDefaults();;
   }
 
   @Override
   public void robotPeriodic() {
     System.out.println("robotPeriodic()");
-    System.out.println("Test sur la roue " + ROUE_AVANT_DROITE);
-    this.roueAvantroite.set(0.05);
+    this.roueAvantDroite.set(0.05);
+    this.roueAvantGauche.set(0.1);
+    this.roueArriereGauche.set(0.15);
+    this.roueArriereDroite.set(0.2);
   }
 
   @Override
