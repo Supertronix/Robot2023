@@ -1,71 +1,78 @@
 // Code par l'équipe Supertronix 5910
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class RobotControleur extends TimedRobot {
-  private Command commande;
-
-  private Contexte conteneur;
 
   @Override
   public void robotInit() {
-    conteneur = new Contexte();
+    System.out.println("robotInit()");
   }
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
+    System.out.println("robotPeriodic()");
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    System.out.println("disabledInit()");
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    System.out.println("disabledPeriodic()");
+  }
 
   @Override
-  public void disabledExit() {}
+  public void disabledExit() {
+    System.out.println("disabledExit()");
+  }
 
   @Override
   public void autonomousInit() {
-    commande = conteneur.getAutonomousCommand();
-
-    if (commande != null) {
-      commande.schedule();
-    }
+    System.out.println("autonomousInit()");
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    System.out.println("autonomousPeriodic()");
+  }
 
   @Override
-  public void autonomousExit() {}
+  public void autonomousExit() {
+    System.out.println("autonomousExit()");
+  }
 
   @Override
   public void teleopInit() {
-    if (commande != null) {
-      commande.cancel();
-    }
+    System.out.println("teleopInit()");
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    System.out.println("teleopPeriodic()");   
+  }
 
   @Override
-  public void teleopExit() {}
+  public void teleopExit() {
+    System.out.println("teleopExit()");
+
+  }
 
   @Override
   public void testInit() {
-    CommandScheduler.getInstance().cancelAll();
+    System.out.println("testInit()");
   }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    System.out.println("testPeriodic()");
+  }
 
   @Override
-  public void testExit() {}
+  public void testExit() {
+    System.out.println("testExit()");
+  }
 }
