@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-public class RobotControleur extends TimedRobot {
+public class RobotControleurAvecCommande extends TimedRobot {
   private Command commande;
 
   private Contexte conteneur;
