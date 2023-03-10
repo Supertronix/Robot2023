@@ -3,6 +3,8 @@ package frc.robot.soussysteme;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import frc.robot.Materiel;
+
 interface Roulable
 {
     public void arreter();
@@ -27,12 +29,8 @@ interface Dirigeable
     public void conduireSelonGyro(double x, double y, double z, double gyro); 
 }
 
-abstract public class Roues implements Roulable, Dirigeable {
+abstract public class Roues implements Roulable, Dirigeable, Materiel.Roues {
 
-    public int ROUE_AVANT_DROITE = 4; // ID 4 
-    public int ROUE_ARRIERE_DROITE = 2; // ID 2 
-    public int ROUE_AVANT_GAUCHE = 3; // ID 3 
-    public int ROUE_ARRIERE_GAUCHE = 1; // ID 1 
     protected CANSparkMax roueAvantDroite;
     protected CANSparkMax roueAvantGauche;
     protected CANSparkMax roueArriereDroite;
