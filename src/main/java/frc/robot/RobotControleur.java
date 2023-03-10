@@ -5,14 +5,19 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
 
 public class RobotControleur extends TimedRobot {
 
+  // roues droites avancent
   int ROUE_AVANT_DROITE = 4; // ID 4 
-  int ROUE_AVANT_GAUCHE = 3; // ID 4 
   int ROUE_ARRIERE_DROITE = 2; // ID 4 
+
+  // roues gauches avancent
+  int ROUE_AVANT_GAUCHE = 3; // ID 4 
   int ROUE_ARRIERE_GAUCHE = 1; // ID 4 
+
   CANSparkMax roueAvantDroite;
   CANSparkMax roueAvantGauche;
   CANSparkMax roueArriereDroite;
