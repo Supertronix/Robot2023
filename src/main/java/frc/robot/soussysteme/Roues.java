@@ -33,5 +33,44 @@ public class Roues {
         this.roueArriereGauche.set(0.05);
         this.roueArriereDroite.set(-0.05);    
     }
+
+    public void reculer()
+    {
+        this.roueAvantDroite.set(0.05);
+        this.roueAvantGauche.set(-0.05);
+        this.roueArriereGauche.set(-0.05);
+        this.roueArriereDroite.set(0.05);    
+    }
+
+    public void tasserCoteDroit()
+    {
+        this.roueAvantDroite.set(0.05);
+        this.roueAvantGauche.set(0.05);
+        this.roueArriereGauche.set(-0.05);
+        this.roueArriereDroite.set(-0.05);
+   }
+    public void tasserCoteGauche()
+    {
+        this.roueAvantDroite.set(-0.05);
+        this.roueAvantGauche.set(-0.05);
+        this.roueArriereGauche.set(0.05);
+        this.roueArriereDroite.set(0.05);    
+    }
+    public void tournerDroite()
+    {
+        this.roueAvantDroite.set(-0.05);
+        this.roueAvantGauche.set(-0.05);
+        this.roueArriereGauche.set(-0.05);
+        this.roueArriereDroite.set(-0.05);    
+    }
+    public void tournerGauche()
+    {
+        this.roueAvantDroite.set(0.05);
+        this.roueAvantGauche.set(0.05);
+        this.roueArriereGauche.set(0.05);
+        this.roueArriereDroite.set(0.05);
+    }
+
+
   
 }
