@@ -3,7 +3,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.soussysteme.Roues;
+import frc.robot.soussysteme.*;
 
 public class RobotControleur extends TimedRobot {
 
@@ -13,7 +13,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
-    this.roues = new Roues();
+    this.roues = new RouesMecanum();
   }
 
   @Override
@@ -29,7 +29,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     System.out.println("autonomousPeriodic()");
-    this.roues.reculerEtTournerDroite();
+    this.roues.reculer(0.05);
   }
 
   @Override

@@ -3,8 +3,22 @@ package frc.robot.soussysteme;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+interface Roulable
+{
+    public void avancer(double vitesse);
+    public void reculer(double vitesse);
+    public void tasserCoteDroit(double vitesse);
+    public void tasserCoteGauche(double vitesse);
+    public void tournerDroite(double vitesse);
+    public void tournerGauche(double vitesse);
+    public void avancerEtTournerDroite(double vitesse);
+    public void avancerEtTournerGauche(double vitesse);
+    public void reculerEtTournerDroite(double vitesse);
+    public void reculerEtTournerGauche(double vitesse);
+}
 
-public class Roues {
+abstract public class Roues implements Roulable {
+
     public int ROUE_AVANT_DROITE = 4; // ID 4 
     public int ROUE_ARRIERE_DROITE = 2; // ID 2 
     public int ROUE_AVANT_GAUCHE = 3; // ID 3 
@@ -26,78 +40,9 @@ public class Roues {
         this.roueArriereGauche.restoreFactoryDefaults();;    
     }
 
-    public void avancer()
-    {
-        this.roueAvantDroite.set(-0.05);
-        this.roueAvantGauche.set(0.05);
-        this.roueArriereGauche.set(0.05);
-        this.roueArriereDroite.set(-0.05);    
-    }
-
-    public void reculer()
-    {
-        this.roueAvantDroite.set(0.05);
-        this.roueAvantGauche.set(-0.05);
-        this.roueArriereGauche.set(-0.05);
-        this.roueArriereDroite.set(0.05);    
-    }
-
-    public void tasserCoteDroit()
-    {
-        this.roueAvantDroite.set(0.05);
-        this.roueAvantGauche.set(0.05);
-        this.roueArriereGauche.set(-0.05);
-        this.roueArriereDroite.set(-0.05);
-   }
-    public void tasserCoteGauche()
-    {
-        this.roueAvantDroite.set(-0.05);
-        this.roueAvantGauche.set(-0.05);
-        this.roueArriereGauche.set(0.05);
-        this.roueArriereDroite.set(0.05);    
-    }
-    public void tournerDroite()
-    {
-        this.roueAvantDroite.set(-0.05);
-        this.roueAvantGauche.set(-0.05);
-        this.roueArriereGauche.set(-0.05);
-        this.roueArriereDroite.set(-0.05);    
-    }
-    public void tournerGauche()
-    {
-        this.roueAvantDroite.set(0.05);
-        this.roueAvantGauche.set(0.05);
-        this.roueArriereGauche.set(0.05);
-        this.roueArriereDroite.set(0.05);
-    }
-
-    public void avancerEtTournerDroite()
-    {
-        this.roueAvantDroite.set(-0.05);
-        this.roueAvantGauche.set(0.00); // plus c'est negatif plus la courbe est longue
-        this.roueArriereGauche.set(0.00);
-        this.roueArriereDroite.set(-0.05);
-    }   
-    public void avancerEtTournerGauche()
-    {
-        this.roueAvantDroite.set(0.00);
-        this.roueAvantGauche.set(0.05);
-        this.roueArriereGauche.set(0.05);
-        this.roueArriereDroite.set(0.00);
-    }
-    public void reculerEtTournerDroite()
-    {
-        this.roueAvantDroite.set(0.05);
-        this.roueAvantGauche.set(0.00); 
-        this.roueArriereGauche.set(0.00);
-        this.roueArriereDroite.set(0.05);
-    }   
-    public void reculerEtTournerGauche()
-    {
-        this.roueAvantDroite.set(0.00);
-        this.roueAvantGauche.set(-0.05);
-        this.roueArriereGauche.set(-0.05);
-        this.roueArriereDroite.set(0.00);
-    }
+	public double limiter(double vitesse) 
+	{
+		return Math.max(-1, Math.min(1, vitesse));
+	}
 
 }
