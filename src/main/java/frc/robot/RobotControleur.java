@@ -14,7 +14,7 @@ public class RobotControleur extends TimedRobot {
   int ROUE_AVANT_DROITE = 4; // ID 4 
   int ROUE_ARRIERE_DROITE = 2; // ID 4 
 
-  // roues gauches avancent
+  // roues gauches reculent
   int ROUE_AVANT_GAUCHE = 3; // ID 4 
   int ROUE_ARRIERE_GAUCHE = 1; // ID 4 
 
@@ -40,9 +40,9 @@ public class RobotControleur extends TimedRobot {
   public void robotPeriodic() {
     System.out.println("robotPeriodic()");
     this.roueAvantDroite.set(0.05);
-    this.roueAvantGauche.set(0.1);
-    this.roueArriereGauche.set(0.15);
-    this.roueArriereDroite.set(0.2);
+    this.roueAvantGauche.set(0.05);
+    this.roueArriereGauche.set(0.05);
+    this.roueArriereDroite.set(0.05);
   }
 
   @Override
