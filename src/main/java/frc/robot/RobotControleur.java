@@ -29,7 +29,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     System.out.println("autonomousPeriodic()");
-    this.roues.reculer(0.05);
+    this.roues.conduireAvecAngle(0.05, 1, 0.05);
   }
 
   @Override
