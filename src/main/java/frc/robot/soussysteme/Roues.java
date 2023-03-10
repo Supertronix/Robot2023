@@ -71,6 +71,33 @@ public class Roues {
         this.roueArriereDroite.set(0.05);
     }
 
+    public void avancerEtTournerDroite()
+    {
+        this.roueAvantDroite.set(-0.05);
+        this.roueAvantGauche.set(0.00); // plus c'est negatif plus la courbe est longue
+        this.roueArriereGauche.set(0.00);
+        this.roueArriereDroite.set(-0.05);
+    }   
+    public void avancerEtTournerGauche()
+    {
+        this.roueAvantDroite.set(0.00);
+        this.roueAvantGauche.set(0.05);
+        this.roueArriereGauche.set(0.05);
+        this.roueArriereDroite.set(0.00);
+    }
+    public void reculerEtTournerDroite()
+    {
+        this.roueAvantDroite.set(0.05);
+        this.roueAvantGauche.set(0.00); 
+        this.roueArriereGauche.set(0.00);
+        this.roueArriereDroite.set(0.05);
+    }   
+    public void reculerEtTournerGauche()
+    {
+        this.roueAvantDroite.set(0.00);
+        this.roueAvantGauche.set(-0.05);
+        this.roueArriereGauche.set(-0.05);
+        this.roueArriereDroite.set(0.00);
+    }
 
-  
 }
