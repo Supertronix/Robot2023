@@ -3,16 +3,18 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.interaction.*;
 import frc.robot.soussysteme.*;
 
 public class RobotControleur extends TimedRobot {
 
-
+  protected Manette manette;
   protected Roues roues;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
+    this.manette = Manette.getInstance();
     this.roues = new RouesMecanum();
   }
 
@@ -29,7 +31,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     System.out.println("autonomousPeriodic()");
-    this.roues.conduireAvecAngle(0.05, 1, 0.05);
+    this.roues.avancer(0.05);
   }
 
   @Override
@@ -44,7 +46,8 @@ public class RobotControleur extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    System.out.println("teleopPeriodic()");   
+    //System.out.println("teleopPeriodic()");   
+    this.roues.conduireAvecManette(this.manette);
   }
 
   @Override
@@ -59,7 +62,8 @@ public class RobotControleur extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-    System.out.println("testPeriodic()");
+    //System.out.println("testPeriodic()");
+    this.roues.conduireAvecManette(this.manette);
   }
 
   @Override

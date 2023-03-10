@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Materiel;
+import frc.robot.interaction.Manette;
 
 interface Roulable
 {
@@ -22,7 +23,7 @@ interface Roulable
 }
 interface Dirigeable
 {
-    public void conduireAvecManette();
+    public void conduireAvecManette(Manette manette);
     public void conduire(double vitesseX, double vitesseY);
     public void conduireToutesDirections(double vitesseAvantGauche, double vitesseAvantDroite, double vitesseArriereGauche, double vitesseArriereDroite);
     public void conduireAvecAngle(double vitesse, double angle, double vitesseRotation);
