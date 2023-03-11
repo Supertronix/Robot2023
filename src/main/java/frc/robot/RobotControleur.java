@@ -4,20 +4,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.interaction.*;
-import frc.robot.soussysteme.*;
 
 public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
-  protected Roues roues;
-  protected Bras bras;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
     this.manette = Manette.getInstance();
-    this.roues = new RouesMecanum();
-    this.bras = new Bras();
   }
 
   @Override
