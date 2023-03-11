@@ -8,11 +8,13 @@ import frc.robot.interaction.*;
 public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
+  protected Robot robot;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
     this.manette = Manette.getInstance();
+    this.robot = new Robot();
   }
 
   @Override
@@ -28,7 +30,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //System.out.println("autonomousPeriodic()");
-    //this.roues.avancer(0.05);
+    //robot.roues.avancer(0.05);
   }
 
   @Override
@@ -44,7 +46,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
-    //this.roues.
+    //robot.roues.
   }
 
   @Override
@@ -60,8 +62,8 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testPeriodic() {
     //System.out.println("testPeriodic()");
-    //this.roues.conduireAvecManette(this.manette);
-    //this.roues.avancer(0.05);
+    robot.roues.conduireAvecManette(this.manette);
+    //robot.roues.avancer(0.05);
   }
 
   @Override
