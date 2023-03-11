@@ -30,6 +30,12 @@ public interface Materiel {
       public static final int MAIN_DROITE_AXE_X = 4;    
       public static final int MAIN_GAUCHE_AXE_DECLENCHEUR = 2;
       public static final int MAIN_DROITE_AXE_DECLENCHEUR = 3;
-    }    
+    } 
+    public interface Bras
+    {
+      public static final int MOTEUR_PRINCIPAL = 5;
+      public static final int MOTEUR_SECONDAIRE_1 = 6;
+      public static final int MOTEUR_SECONDAIRE_2 = 7;
+    }
     
 }

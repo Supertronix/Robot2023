@@ -10,6 +10,7 @@ public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
   protected Roues roues;
+
   
   @Override
   public void robotInit() {
@@ -20,7 +21,7 @@ public class RobotControleur extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    System.out.println("robotPeriodic()");
+    //System.out.println("robotPeriodic()");
   }
 
   @Override
@@ -30,8 +31,8 @@ public class RobotControleur extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    System.out.println("autonomousPeriodic()");
-    this.roues.avancer(0.05);
+    //System.out.println("autonomousPeriodic()");
+    //this.roues.avancer(0.05);
   }
 
   @Override
@@ -47,7 +48,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
-    this.roues.conduireAvecManette(this.manette);
+    this.roues.
   }
 
   @Override
@@ -63,7 +64,8 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testPeriodic() {
     //System.out.println("testPeriodic()");
-    this.roues.conduireAvecManette(this.manette);
+    //this.roues.conduireAvecManette(this.manette);
+    //this.roues.avancer(0.05);
   }
 
   @Override
