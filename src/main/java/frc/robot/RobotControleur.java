@@ -3,18 +3,21 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.interaction.*;
 
 public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
   protected Robot robot;
+  double test = 5;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
     this.manette = Manette.getInstance();
     this.robot = new Robot();
+    SmartDashboard.putNumber("test", test); 
   }
 
   @Override
