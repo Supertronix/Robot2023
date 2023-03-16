@@ -35,15 +35,19 @@ public class Manette implements Materiel.Manette {
     protected Axe axeMainDroite = null;
     protected Axe axeMainGauche = null;
 
-    public Axe getAxeMainDroite()
+   public Axe getAxeMainDroite()
     {
       this.axeMainDroite = new Axe(manette.getRawAxis(MAIN_DROITE_AXE_X), manette.getRawAxis(MAIN_DROITE_AXE_Y));
+      // System.out.println("axe main droite " + this.axeMainDroite.x + " " + this.axeMainDroite.y);
       return this.axeMainDroite;
     }
     public Axe getAxeMainGauche()
     {
       this.axeMainGauche = new Axe(manette.getRawAxis(MAIN_GAUCHE_AXE_X), manette.getRawAxis(MAIN_GAUCHE_AXE_Y));
-		  return this.axeMainGauche;
+      // System.out.println("axe main gauche " + this.axeMainGauche.x + " " + this.axeMainGauche.y);
+      this.axeMainGauche.x = this.axeMainGauche.x - BIAIS_AXE_GAUCHE_X;
+      this.axeMainGauche.y = this.axeMainGauche.y - BIAIS_AXE_GAUCHE_Y;
+      return this.axeMainGauche;
     }
     public double getDeclencheurMainGauche() 
     {

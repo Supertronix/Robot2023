@@ -12,7 +12,9 @@ public class RouesMecanum extends Roues {
 
     public RouesMecanum()
     {
-       this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
+        this.roueAvantDroite.setInverted(true);
+        this.roueArriereDroite.setInverted(true);
+        //this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
     }
     public void avancer(double vitesse)
     {
@@ -97,7 +99,7 @@ public class RouesMecanum extends Roues {
     }    
     public void conduireAvecManette(Manette manette)
     {
-	    double facteur = 0.2;
+	    double facteur = 1;
 	    this.conduireToutesDirections(
 	      (manette.getAxeMainGauche().y*facteur + manette.getAxeMainGauche().x*facteur + manette.getAxeMainDroite().x*facteur), 
 	      (manette.getAxeMainGauche().y*facteur - manette.getAxeMainGauche().x*facteur - manette.getAxeMainDroite().x*facteur),	      
@@ -125,7 +127,7 @@ public class RouesMecanum extends Roues {
 
     public void conduireToutesDirections(double vitesseAvantGauche, double vitesseAvantDroite, double vitesseArriereGauche, double vitesseArriereDroite) 
     {
-        System.out.println("conduireToutesDirections("+vitesseAvantGauche+ " "+ vitesseAvantDroite + " " + vitesseArriereGauche + " " + vitesseArriereDroite + ")");
+        //System.out.println("conduireToutesDirections("+vitesseAvantGauche+ " "+ vitesseAvantDroite + " " + vitesseArriereGauche + " " + vitesseArriereDroite + ")");
         this.roueAvantGauche.set(limiter(vitesseAvantGauche));
         this.roueArriereGauche.set(limiter(vitesseArriereGauche));
         this.roueAvantDroite.set(limiter(vitesseAvantDroite));
