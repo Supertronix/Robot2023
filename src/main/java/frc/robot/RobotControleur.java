@@ -5,18 +5,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.interaction.*;
+import frc.robot.soussysteme.test.Testeur;
 
 public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
-  protected Robot robot;
+  //protected Robot robot;
+  protected Testeur testeur;
   double test = 5;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
     this.manette = Manette.getInstance();
-    this.robot = new Robot();
+    //this.robot = new Robot();
+    this.testeur = new Testeur();
     SmartDashboard.putNumber("test", test); 
   }
 
@@ -65,8 +68,9 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testPeriodic() {
     //System.out.println("testPeriodic()");
-    robot.roues.conduireAvecManette(this.manette);
+    //robot.roues.conduireAvecManette(this.manette);
     //robot.roues.avancer(0.05);
+    this.testeur.executer();
   }
 
   @Override

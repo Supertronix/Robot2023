@@ -4,10 +4,10 @@ public interface Materiel {
 
     public interface Roues
     {
-        public int ROUE_AVANT_DROITE = 4; // ID 4 
-        public int ROUE_ARRIERE_DROITE = 3; // ID 2 
-        public int ROUE_AVANT_GAUCHE = 1; // ID 3 
-        public int ROUE_ARRIERE_GAUCHE = 2; // ID 1     
+        public int ROUE_AVANT_DROITE = 4; // ID 4 // roule avant
+        public int ROUE_ARRIERE_DROITE = 3; // ID 3 // roule avant
+        public int ROUE_AVANT_GAUCHE = 1; // ID 1  // roule arriere
+        public int ROUE_ARRIERE_GAUCHE = 2; // ID 2 // roule arriere     
     }
     public interface Manette
     {
@@ -27,8 +27,8 @@ public interface Materiel {
       public static final int MAIN_DROITE_AXE_X = 4;    
       public static final int MAIN_GAUCHE_AXE_DECLENCHEUR = 2;
       public static final int MAIN_DROITE_AXE_DECLENCHEUR = 3;
-      
-      public static final double SEUIL_ZERO = 0.02;
+
+      public static final double SEUIL_ZERO = 0.08;//0.02;
       public static final double SEUIL_AXES_OPPOSES = 0.3;
       //static double BIAIS_AXE_GAUCHE_X = 0.06299212574958801;
       //static double BIAIS_AXE_GAUCHE_Y = -0.06299212574958801;

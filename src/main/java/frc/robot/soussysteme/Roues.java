@@ -1,8 +1,11 @@
 package frc.robot.soussysteme;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Materiel;
 import frc.robot.interaction.Manette;
 
@@ -36,7 +39,10 @@ abstract public class Roues implements Roulable, Dirigeable, Materiel.Roues {
     protected CANSparkMax roueAvantGauche;
     protected CANSparkMax roueArriereDroite;
     protected CANSparkMax roueArriereGauche;
-    
+    protected RelativeEncoder encodeurAvantDroit;
+    protected RelativeEncoder encodeurAvantGauche;
+    protected RelativeEncoder encodeurArriereDroit;
+    protected RelativeEncoder encodeurArriereGauche;        
 
     public Roues()
     {
@@ -47,15 +53,33 @@ abstract public class Roues implements Roulable, Dirigeable, Materiel.Roues {
         this.roueAvantDroite.restoreFactoryDefaults();
         this.roueAvantGauche.restoreFactoryDefaults();
         this.roueArriereDroite.restoreFactoryDefaults();
-        this.roueArriereGauche.restoreFactoryDefaults();;    
+        this.roueArriereGauche.restoreFactoryDefaults();   
+
+        // lire sur getAbsoluteEncoder et getAlternateEncoder()
+        // this.encodeurAvantDroit = this.roueAvantDroite.getEncoder();
+        // this.encodeurArriereDroit = this.roueArriereDroite.getEncoder();
+        // this.encodeurAvantGauche = this.roueAvantGauche.getEncoder();
+        // this.encodeurArriereGauche = this.roueArriereGauche.getEncoder();
+
+        this.roueAvantDroite.setIdleMode(IdleMode.kBrake);
+        this.roueAvantGauche.setIdleMode(IdleMode.kBrake);
+        this.roueArriereDroite.setIdleMode(IdleMode.kBrake);
+        this.roueArriereGauche.setIdleMode(IdleMode.kBrake);
+        
+        this.arreter();
     }
 
     public void arreter()
     {
-      this.roueAvantGauche.set(0);
-      this.roueArriereGauche.set(0);
-      this.roueAvantDroite.set(0);
-      this.roueArriereDroite.set(0);
+      this.roueAvantDroite.stopMotor();
+      this.roueAvantGauche.stopMotor();
+      this.roueArriereDroite.stopMotor();
+      this.roueArriereGauche.stopMotor();
+
+      // this.roueAvantGauche.set(0);
+      // this.roueArriereGauche.set(0);
+      // this.roueAvantDroite.set(0);
+      // this.roueArriereDroite.set(0);
     }
  
 	public double limiter(double vitesse) 
