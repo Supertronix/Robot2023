@@ -12,8 +12,8 @@ public class RouesMecanum extends Roues {
 
     public RouesMecanum()
     {
-        this.roueAvantDroite.setInverted(true);
-        this.roueArriereDroite.setInverted(true); 
+        this.roueAvantGauche.setInverted(true);
+        this.roueArriereGauche.setInverted(true); 
         //this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
     }
     public void avancer(double vitesse)

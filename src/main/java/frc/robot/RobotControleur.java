@@ -10,16 +10,16 @@ import frc.robot.soussysteme.test.Testeur;
 public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
-  //protected Robot robot;
+  protected Robot robot;
   protected Testeur testeur;
   double test = 5;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
-    this.manette = Manette.getInstance();
-    //this.robot = new Robot();
     this.testeur = new Testeur();
+    this.manette = Manette.getInstance();
+    this.robot = new Robot();
     SmartDashboard.putNumber("test", test); 
   }
 
@@ -52,7 +52,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
-    //robot.roues.
+    //robot.roues.conduireAvecManette(this.manette);
   }
 
   @Override
@@ -68,9 +68,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testPeriodic() {
     //System.out.println("testPeriodic()");
-    //robot.roues.conduireAvecManette(this.manette);
-    //robot.roues.avancer(0.05);
-    this.testeur.executer();
+    //this.testeur.executer();
   }
 
   @Override
