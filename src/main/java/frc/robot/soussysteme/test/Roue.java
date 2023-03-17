@@ -5,9 +5,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import frc.robot.Materiel;
-import frc.robot.interaction.Manette;
-
 public class Roue {
 
     protected CANSparkMax roue;
