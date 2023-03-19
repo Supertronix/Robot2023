@@ -20,14 +20,24 @@ public class ManetteTestBras extends Manette {
         // non deprecated version for this year is the CommandXboxController. 
         this.manette = new Joystick(MANETTE);
 
-        this.boutonTestBrasAbaisse = new JoystickButton(this.manette, BOUTON_A);
-        Command commandeTestBrasAbaisse = new CommandeAbaisserBras(Robot.getInstance().bras);
-        this.boutonTestBrasAbaisse.whenPressed(commandeTestBrasAbaisse);
-        this.boutonTestBrasAbaisse.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasAbaisse));        
+        //this.boutonTestBrasAbaisse = new JoystickButton(this.manette, BOUTON_A);
+        //Command commandeTestBrasAbaisse = new CommandeAbaisserBras(Robot.getInstance().bras);
+        //this.boutonTestBrasAbaisse.whenPressed(commandeTestBrasAbaisse);
+        //this.boutonTestBrasAbaisse.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasAbaisse)); 
 
-        this.boutonTestBrasReleve = new JoystickButton(this.manette, BOUTON_B);
-        Command commandeTestBrasReleve = new CommandeReleverBras(Robot.getInstance().bras);
-        this.boutonTestBrasReleve.whenPressed(commandeTestBrasReleve);
-        this.boutonTestBrasReleve.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasReleve)); 
+        //this.boutonTestBrasReleve = new JoystickButton(this.manette, BOUTON_B);
+        //Command commandeTestBrasReleve = new CommandeReleverBras(Robot.getInstance().bras);
+        //this.boutonTestBrasReleve.whenPressed(commandeTestBrasReleve);
+        //this.boutonTestBrasReleve.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasReleve)); 
+    }
+
+    public boolean getDemandeAbaisse()
+    {
+        //System.out.println("Bouton A est " + this.manette.getRawButton(BOUTON_A));
+        return this.manette.getRawButton(BOUTON_A);
+    }
+    public boolean getDemandeReleve()
+    {
+        return this.manette.getRawButton(BOUTON_B);
     }
 }

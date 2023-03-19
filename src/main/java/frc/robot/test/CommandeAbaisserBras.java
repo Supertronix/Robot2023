@@ -8,12 +8,17 @@ public class CommandeAbaisserBras extends CommandBase implements Finissable{
 
     protected Bras bras = null;
     protected boolean finie = false;
+    protected ManetteTestBras manette = null;
+    protected double vitesse = 0;
 
-    public CommandeAbaisserBras(Bras bras)
+    public CommandeAbaisserBras(Bras bras, ManetteTestBras manette, double vitesse)
     {
         System.out.println("new CommandeAbaisserBras()");
         this.bras = bras;
+        this.manette = manette;
+        this.vitesse = vitesse;
         if(bras == null) this.finie = true;
+        if(manette == null) this.finie = true;
     }
 
     public void setFinie()
@@ -24,9 +29,15 @@ public class CommandeAbaisserBras extends CommandBase implements Finissable{
 
     @Override
     public void execute() {
-        System.out.println("execute()");
+        if (manette.getDemandeAbaisse()) {
+            //System.out.println("execute() " + vitesse);
+            this.finie = false;
+            this.bras.tourner(vitesse);
+        } else {
+            if(!finie) this.bras.tourner(0);
+            this.setFinie();
+         }
 
-        this.bras.tourner(0.1);
     }
         
     @Override
@@ -41,6 +52,7 @@ public class CommandeAbaisserBras extends CommandBase implements Finissable{
     public boolean isFinished() 
     {
         System.out.println("isFinished()");
-        return this.finie;
+        //return this.finie;
+        return false;
     }
 }

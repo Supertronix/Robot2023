@@ -23,6 +23,7 @@ public class Manette implements Materiel.Manette {
     {
     	Manette.instance = null;    	
     }
+
  
     public class Axe 
     {

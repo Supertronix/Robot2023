@@ -8,32 +8,51 @@ public class CommandeReleverBras extends CommandBase implements Finissable{
 
     protected Bras bras = null;
     protected boolean finie = false;
+    protected ManetteTestBras manette = null;
+    protected double vitesse = 0;
 
-    public CommandeReleverBras(Bras bras)
+    public CommandeReleverBras(Bras bras, ManetteTestBras manette, double vitesse)
     {
+        System.out.println("new CommandeReleverBras()");
         this.bras = bras;
+        this.manette = manette;
+        this.vitesse = vitesse;
         if(bras == null) this.finie = true;
+        if(manette == null) this.finie = true;
     }
 
     public void setFinie()
     {
+        System.out.println("setFinie()");
         this.finie = true;
     }
 
     @Override
     public void execute() {
-        this.bras.tourner(-0.1);
+        if (manette.getDemandeReleve()) {
+            this.finie = false;
+            //System.out.println("execute() " + vitesse);
+            this.bras.tourner(-vitesse);
+        } else {
+            if(!finie) this.bras.tourner(0);
+            this.setFinie();
+         }
+
     }
         
     @Override
     public void initialize() 
     {
-        this.bras.relever();
+        System.out.println("initialize()");
+
+        this.bras.abaisser();
     }
 
     @Override
     public boolean isFinished() 
     {
-        return this.finie;
+        System.out.println("isFinished()");
+        //return this.finie;
+        return false;
     }
 }

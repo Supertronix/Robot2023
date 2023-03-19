@@ -63,7 +63,7 @@ public class Bras extends SousSysteme implements Materiel.Bras
 
     public void tourner(double vitesse)
     {
-        System.out.println("tourner()");
+        //System.out.println("tourner()");
         this.moteurPrincipal.set(limiter(vitesse));
     }
 
