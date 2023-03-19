@@ -38,9 +38,8 @@ public interface Materiel {
     } 
     public interface Bras
     {
-      public static final int MOTEUR_PRINCIPAL = 5;
-      public static final int MOTEUR_SECONDAIRE_1 = 6;
-      public static final int MOTEUR_SECONDAIRE_2 = 7;
+      public static final int MOTEUR_PRINCIPAL = 5; // tourne vers la batterie
+      public static final int MOTEUR_SECONDAIRE = 6; // tourne vers la batterie
     }
     
 }

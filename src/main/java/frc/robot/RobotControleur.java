@@ -17,7 +17,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
-    //this.testeur = new Testeur();
+    this.testeur = new Testeur();
     this.manette = Manette.getInstance();
     this.robot = new Robot();
     SmartDashboard.putNumber("test", test); 
@@ -68,7 +68,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testPeriodic() {
     //System.out.println("testPeriodic()");
-    //this.testeur.executer();
+    this.testeur.executer();
     //robot.roues.conduireAvecManette(this.manette);
   }
 

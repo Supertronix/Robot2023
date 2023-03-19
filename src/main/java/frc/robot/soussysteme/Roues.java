@@ -33,7 +33,7 @@ interface Dirigeable
     public void conduireSelonGyro(double x, double y, double z, double gyro); 
 }
 
-abstract public class Roues implements Roulable, Dirigeable, Materiel.Roues {
+abstract public class Roues extends SousSysteme implements Roulable, Dirigeable, Materiel.Roues {
 
     protected CANSparkMax roueAvantDroite;
     protected CANSparkMax roueAvantGauche;
