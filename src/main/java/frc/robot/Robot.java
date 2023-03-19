@@ -7,9 +7,16 @@ public class Robot {
     public Roues roues;
     public Bras bras;  
 
-    public Robot()
+    protected Robot()
     {
         this.roues = new RouesMecanum();
-        //this.bras = new Bras();    
+        this.bras = new Bras();    
+    }
+
+    public static Robot instance = null;
+    public static Robot getInstance()
+    {
+        if(Robot.instance == null) Robot.instance = new Robot();
+        return Robot.instance;
     }
 }

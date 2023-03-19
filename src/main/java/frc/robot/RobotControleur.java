@@ -4,8 +4,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.interaction.*;
-import frc.robot.soussysteme.test.Testeur;
+import frc.robot.test.Testeur;
 
 public class RobotControleur extends TimedRobot {
 
@@ -13,19 +14,21 @@ public class RobotControleur extends TimedRobot {
   protected Robot robot;
   protected Testeur testeur;
   double test = 5;
+  protected Contexte conteneur = null;
   
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
-    this.testeur = new Testeur();
-    this.manette = Manette.getInstance();
-    this.robot = new Robot();
+    conteneur = new Contexte();
+    //this.manette = Manette.getInstance();
+    this.robot = Robot.getInstance();
     SmartDashboard.putNumber("test", test); 
   }
 
   @Override
   public void robotPeriodic() {
     //System.out.println("robotPeriodic()");
+    CommandScheduler.getInstance().run();
   }
 
   @Override
@@ -47,12 +50,13 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopInit() {
     System.out.println("teleopInit()");
+    this.testeur = new Testeur();
   }
 
   @Override
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
-    robot.roues.conduireAvecManette(this.manette);
+    //robot.roues.conduireAvecManette(this.manette);
   }
 
   @Override
@@ -63,6 +67,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testInit() {
     System.out.println("testInit()");
+    this.testeur = new Testeur();
   }
 
   @Override
