@@ -19,7 +19,7 @@ public class Testeur {
     {
         //this.roue.tourner(0.1);
         //this.moteur.tourner(0.1);
-        this.bras.tourner(0.01);
+        this.bras.tourner(0.1);
     }
     
 

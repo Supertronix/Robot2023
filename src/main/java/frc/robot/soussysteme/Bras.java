@@ -22,14 +22,21 @@ public class Bras extends SousSysteme implements Materiel.Bras
     public Bras()
     {
         System.out.println("new Bras()");
+        
+        // creer
         this.moteurPrincipal = new CANSparkMax(MOTEUR_PRINCIPAL, MotorType.kBrushless);
         this.moteurSecondaire = new CANSparkMax(MOTEUR_SECONDAIRE, MotorType.kBrushless);
         this.moteurPrincipal.restoreFactoryDefaults();
         this.moteurSecondaire.restoreFactoryDefaults();
+
+        // configuration
         this.moteurPrincipal.setOpenLoopRampRate(0);
         this.moteurSecondaire.setOpenLoopRampRate(0);
         this.moteurPrincipal.setIdleMode(IdleMode.kBrake);
         this.moteurSecondaire.setIdleMode(IdleMode.kBrake);
+        this.moteurPrincipal.setInverted(true);
+        // on n'a pas besoin d'inverser le moteur secondaire meme s'il est inverse car il suit
+        // selon les tests les deux fonctionnenet
 
         // REVLibError	follow​(CANSparkMax leader)	
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID)	
