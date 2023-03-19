@@ -3,6 +3,7 @@ package frc.robot.soussysteme;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
@@ -17,6 +18,8 @@ public class Bras extends SousSysteme implements Materiel.Bras
 {
     protected CANSparkMax moteurPrincipal;
     protected CANSparkMax moteurSecondaire;
+    private SparkMaxLimitSwitch limiteAvant;
+    private SparkMaxLimitSwitch limiteArriere;
 
     // https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java
     // https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java/Motor%20Follower
@@ -51,20 +54,34 @@ public class Bras extends SousSysteme implements Materiel.Bras
 		//this.moteurPrincipal.configForwardSoftLimitThreshold(100, Constants.kTimeoutMs);
 		//this.moteurPrincipal.configReverseSoftLimitThreshold(-100, Constants.kTimeoutMs);
 
+        // https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Soft%20Limits/src/main/java/frc/robot/Robot.java
+        // https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Limit%20Switch/src/main/java/frc/robot/Robot.java
+        // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
+        // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+        // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+
         //https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Soft%20Limits/src/main/java/frc/robot/Robot.java
-        this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-        this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 200);
-        this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -200);
+        // SparkMaxLimitSwitch	getForwardLimitSwitch
+        // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 200);
+        // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -200);
+        
+        // nouveau code
+        this.limiteAvant = this.moteurPrincipal.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+        this.limiteArriere = this.moteurPrincipal.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+        this.limiteAvant.enableLimitSwitch(true);
+        this.limiteArriere.enableLimitSwitch(true);
 
         //SparkMaxPIDController pidMoteurPrincipal = this.moteurPrincipal.getPIDController();
         //SparkMaxPIDController pidMoteurSecondaire = this.moteurPrincipal.getPIDController();
+
     }
 
     public void tourner(double vitesse)
     {
         //System.out.println("tourner()");
         this.moteurPrincipal.set(limiter(vitesse));
+        //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
+        //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
     }
 
     // https://docs.revrobotics.com/sparkmax/software-resources/migrating-ctre-to-rev

@@ -23,7 +23,7 @@ public class CommandeAbaisserBras extends CommandBase implements Finissable{
 
     public void setFinie()
     {
-        System.out.println("setFinie()");
+        //System.out.println("setFinie()");
         this.finie = true;
     }
 
