@@ -44,6 +44,12 @@ public class Bras extends SousSysteme implements Materiel.Bras
         // REVLibError	follow​(CANSparkMax leader, boolean invert)	
         this.moteurSecondaire.follow(moteurPrincipal);
 
+        // limit switch
+        this.moteurPrincipal.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
+		this.moteurPrincipal.configReverseSoftLimitEnable(true, Constants.kTimeoutMs);
+		this.moteurPrincipal.configForwardSoftLimitThreshold(100, Constants.kTimeoutMs);
+		this.moteurPrincipal.configReverseSoftLimitThreshold(-100, Constants.kTimeoutMs);
+
         //SparkMaxPIDController pidMoteurPrincipal = this.moteurPrincipal.getPIDController();
         //SparkMaxPIDController pidMoteurSecondaire = this.moteurPrincipal.getPIDController();
     }
@@ -56,8 +62,8 @@ public class Bras extends SousSysteme implements Materiel.Bras
 
     @Override
     public void abaisser() {
-        //this.moteurPrincipal.
-        
+        this.moteurPrincipal.set(ControlMode.Position, 100);
+        //this.moteurPrincipal.set(ControlMode.PercentOutput, 0.1);
     }
 }
 
