@@ -3,6 +3,7 @@ package frc.robot.soussysteme;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.IdleMode;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel.motortype
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -25,7 +26,11 @@ public class Bras extends SousSysteme implements Materiel.Bras
         this.moteurSecondaire = new CANSparkMax(MOTEUR_SECONDAIRE, MotorType.kBrushless);
         this.moteurPrincipal.restoreFactoryDefaults();
         this.moteurSecondaire.restoreFactoryDefaults();
-        
+        this.moteurPrincipal.setOpenLoopRampRate(0);
+        this.moteurSecondaire.setOpenLoopRampRate(0);
+        this.moteurPrincipal.setIdleMode(IdleMode.kBrake);
+        this.moteurSecondaire.setIdleMode(IdleMode.kBrake);
+
         // REVLibError	follow​(CANSparkMax leader)	
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID)	
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID, boolean invert)	
