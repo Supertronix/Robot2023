@@ -56,6 +56,7 @@ public class Bras extends SousSysteme implements Materiel.Bras
 
     @Override
     public void abaisser() {
+        //this.moteurPrincipal.
         
     }
 }
