@@ -20,11 +20,12 @@ public class Roue {
 
         this.roue.setIdleMode(IdleMode.kBrake);
         
-        this.roue.stopMotor();
+        //this.roue.stopMotor();
     }
 
     public void tourner(double vitesse)
     {
+        System.out.println("tourner()");
         this.roue.set(limiter(vitesse));
     }
 

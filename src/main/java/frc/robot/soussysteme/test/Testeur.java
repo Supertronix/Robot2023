@@ -6,12 +6,13 @@ public class Testeur {
 
     public Testeur()
     {
-        this.roue = new Roue(4);        
+        this.roue = new Roue(2);        
     }
 
     public void executer()
     {
-        this.roue.tourner(0.02);
+        this.roue.tourner(0.1);
     }
     
+
 }

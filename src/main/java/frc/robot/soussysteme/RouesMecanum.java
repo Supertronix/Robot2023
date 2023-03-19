@@ -9,11 +9,14 @@ import frc.robot.interaction.Manette;
 public class RouesMecanum extends Roues {
 
     protected MecanumDrive mecanum;
+    double facteur = 1;
 
     public RouesMecanum()
     {
         this.roueAvantGauche.setInverted(true);
         this.roueArriereGauche.setInverted(true); 
+        this.facteur = FACTEUR_ROUES;
+
         //this.roueAvantDroite.setInverted(true);
         //this.roueArriereDroite.setInverted(true); 
         //this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
@@ -98,16 +101,29 @@ public class RouesMecanum extends Roues {
       this.roueArriereGauche.set(limiter(-vitesseGauche));
       this.roueAvantDroite.set(limiter(vitesseDroite));
       this.roueArriereDroite.set(limiter(-vitesseDroite));
-    }    
+    }   
+    double vitesseAvantGauche; 
+    double vitesseAvantDroite;
+    double vitesseArriereGauche;
+    double vitesseArriereDroite;
     public void conduireAvecManette(Manette manette)
     {
-	    double facteur = 1;
+        vitesseAvantGauche = facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x + manette.getAxeMainDroite().x);
+        vitesseAvantDroite = facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x - manette.getAxeMainDroite().x);
+        vitesseArriereGauche = facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x + manette.getAxeMainDroite().x);
+        vitesseArriereDroite = facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x - manette.getAxeMainDroite().x);
+        this.roueAvantGauche.set(limiter(vitesseAvantGauche));
+        this.roueAvantDroite.set(limiter(vitesseAvantDroite));
+        this.roueArriereGauche.set(limiter(vitesseArriereGauche));
+        this.roueArriereDroite.set(limiter(vitesseArriereDroite));
+
+        /* 
 	    this.conduireToutesDirections(
-	      (manette.getAxeMainGauche().y*facteur + manette.getAxeMainGauche().x*facteur + manette.getAxeMainDroite().x*facteur), 
-	      (manette.getAxeMainGauche().y*facteur - manette.getAxeMainGauche().x*facteur - manette.getAxeMainDroite().x*facteur),	      
-	      (manette.getAxeMainGauche().y*facteur - manette.getAxeMainGauche().x*facteur + manette.getAxeMainDroite().x*facteur), 
-	      (manette.getAxeMainGauche().y*facteur + manette.getAxeMainGauche().x*facteur - manette.getAxeMainDroite().x*facteur) 
-	      );
+            facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x + manette.getAxeMainDroite().x), 
+            facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x - manette.getAxeMainDroite().x),	      
+            facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x + manette.getAxeMainDroite().x), 
+            facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x - manette.getAxeMainDroite().x) 
+	      );*/
 
 	    //Formule 2017 (x + yGauche, yDroite - x, yGauche - x, x + yDroite);
     }
@@ -131,8 +147,8 @@ public class RouesMecanum extends Roues {
     {
         //System.out.println("conduireToutesDirections("+vitesseAvantGauche+ " "+ vitesseAvantDroite + " " + vitesseArriereGauche + " " + vitesseArriereDroite + ")");
         this.roueAvantGauche.set(limiter(vitesseAvantGauche));
-        this.roueArriereGauche.set(limiter(vitesseArriereGauche));
         this.roueAvantDroite.set(limiter(vitesseAvantDroite));
+        this.roueArriereGauche.set(limiter(vitesseArriereGauche));
         this.roueArriereDroite.set(limiter(vitesseArriereDroite));
     }
 }
