@@ -1,6 +1,11 @@
 package frc.robot.composant;
 
+// https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java
 import com.revrobotics.CANSparkMax;
+
+// https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel.motortype
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+// https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
 
 public class Moteur extends CANSparkMax{
     public Moteur(int id)
@@ -16,3 +21,5 @@ public class Moteur extends CANSparkMax{
 	}
 
 }
+
+//import com.revrobotics.ControlType;

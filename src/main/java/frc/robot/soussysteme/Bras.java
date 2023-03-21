@@ -1,16 +1,10 @@
 package frc.robot.soussysteme;
 
-// https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
+// import com.revrobotics.SparkMaxPIDController;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
-// https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel.motortype
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Materiel;
 import frc.robot.composant.Moteur;
 // https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
@@ -21,8 +15,6 @@ public class Bras extends SousSysteme implements Materiel.Bras
     private SparkMaxLimitSwitch limiteAvant;
     private SparkMaxLimitSwitch limiteArriere;
 
-    // https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java
-    // https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java/Motor%20Follower
     public Bras()
     {
         System.out.println("new Bras()");
@@ -40,6 +32,7 @@ public class Bras extends SousSysteme implements Materiel.Bras
         // on n'a pas besoin d'inverser le moteur secondaire meme s'il est inverse car il suit
         // selon les tests les deux fonctionnenet
 
+        // https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/Java/Motor%20Follower
         // REVLibError	follow​(CANSparkMax leader)	
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID)	
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID, boolean invert)	
