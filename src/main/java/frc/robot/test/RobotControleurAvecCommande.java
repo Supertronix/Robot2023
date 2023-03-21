@@ -1,10 +1,11 @@
 // Code par l'équipe Supertronix 5910
 
-package frc.robot;
+package frc.robot.test;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Contexte;
 
 public class RobotControleurAvecCommande extends TimedRobot {
   private Command commande;
