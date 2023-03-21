@@ -1,6 +1,5 @@
 package frc.robot.soussysteme;
 
-import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMax.IdleMode;
 // import com.revrobotics.SparkMaxPIDController;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
@@ -12,16 +11,14 @@ public class Bras extends SousSysteme implements Materiel.Bras
 {
     protected Moteur moteurPrincipal;
     protected Moteur moteurSecondaire;
-    private SparkMaxLimitSwitch limiteAvant;
-    private SparkMaxLimitSwitch limiteArriere;
 
     public Bras()
     {
         System.out.println("new Bras()");
         
         // creer
-        this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL);
-        this.moteurSecondaire = new Moteur(MOTEUR_SECONDAIRE);
+        this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL).avecLimites();
+        this.moteurSecondaire = new Moteur(MOTEUR_SECONDAIRE).avecLimites();
 
         // configuration
         this.moteurPrincipal.setOpenLoopRampRate(0);
@@ -38,29 +35,6 @@ public class Bras extends SousSysteme implements Materiel.Bras
         // REVLibError	follow​(CANSparkMax.ExternalFollower leader, int deviceID, boolean invert)	
         // REVLibError	follow​(CANSparkMax leader, boolean invert)	
         this.moteurSecondaire.follow(moteurPrincipal);
-
-        // limit switch
-        //this.moteurPrincipal.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
-		//this.moteurPrincipal.configReverseSoftLimitEnable(true, Constants.kTimeoutMs);
-		//this.moteurPrincipal.configForwardSoftLimitThreshold(100, Constants.kTimeoutMs);
-		//this.moteurPrincipal.configReverseSoftLimitThreshold(-100, Constants.kTimeoutMs);
-
-        // https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Soft%20Limits/src/main/java/frc/robot/Robot.java
-        // https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Limit%20Switch/src/main/java/frc/robot/Robot.java
-        // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax
-        // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-
-        //https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Soft%20Limits/src/main/java/frc/robot/Robot.java
-        // SparkMaxLimitSwitch	getForwardLimitSwitch
-        // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 200);
-        // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -200);
-        
-        // nouveau code
-        this.limiteAvant = this.moteurPrincipal.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-        this.limiteArriere = this.moteurPrincipal.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-        this.limiteAvant.enableLimitSwitch(true);
-        this.limiteArriere.enableLimitSwitch(true);
 
         //SparkMaxPIDController pidMoteurPrincipal = this.moteurPrincipal.getPIDController();
         //SparkMaxPIDController pidMoteurSecondaire = this.moteurPrincipal.getPIDController();
