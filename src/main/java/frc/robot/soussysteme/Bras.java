@@ -12,12 +12,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Materiel;
-
+import frc.robot.composant.Moteur;
 // https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
 public class Bras extends SousSysteme implements Materiel.Bras
 {
-    protected CANSparkMax moteurPrincipal;
-    protected CANSparkMax moteurSecondaire;
+    protected Moteur moteurPrincipal;
+    protected Moteur moteurSecondaire;
     private SparkMaxLimitSwitch limiteAvant;
     private SparkMaxLimitSwitch limiteArriere;
 
@@ -28,10 +28,8 @@ public class Bras extends SousSysteme implements Materiel.Bras
         System.out.println("new Bras()");
         
         // creer
-        this.moteurPrincipal = new CANSparkMax(MOTEUR_PRINCIPAL, MotorType.kBrushless);
-        this.moteurSecondaire = new CANSparkMax(MOTEUR_SECONDAIRE, MotorType.kBrushless);
-        this.moteurPrincipal.restoreFactoryDefaults();
-        this.moteurSecondaire.restoreFactoryDefaults();
+        this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL);
+        this.moteurSecondaire = new Moteur(MOTEUR_SECONDAIRE);
 
         // configuration
         this.moteurPrincipal.setOpenLoopRampRate(0);
