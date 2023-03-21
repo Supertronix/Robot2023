@@ -1,13 +1,14 @@
 package frc.robot.soussysteme;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Materiel;
 import frc.robot.interaction.Manette;
+import frc.robot.composant.Moteur;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 interface Roulable
 {
@@ -35,10 +36,10 @@ interface Dirigeable
 
 abstract public class Roues extends SousSysteme implements Roulable, Dirigeable, Materiel.Roues {
 
-    protected CANSparkMax roueAvantDroite;
-    protected CANSparkMax roueAvantGauche;
-    protected CANSparkMax roueArriereDroite;
-    protected CANSparkMax roueArriereGauche;
+    protected Moteur roueAvantDroite;
+    protected Moteur roueAvantGauche;
+    protected Moteur roueArriereDroite;
+    protected Moteur roueArriereGauche;
     protected RelativeEncoder encodeurAvantDroit;
     protected RelativeEncoder encodeurAvantGauche;
     protected RelativeEncoder encodeurArriereDroit;
@@ -46,14 +47,10 @@ abstract public class Roues extends SousSysteme implements Roulable, Dirigeable,
 
     public Roues()
     {
-        this.roueAvantDroite = new CANSparkMax(ROUE_AVANT_DROITE, MotorType.kBrushless);
-        this.roueAvantGauche = new CANSparkMax(ROUE_AVANT_GAUCHE, MotorType.kBrushless);
-        this.roueArriereDroite = new CANSparkMax(ROUE_ARRIERE_DROITE, MotorType.kBrushless);
-        this.roueArriereGauche = new CANSparkMax(ROUE_ARRIERE_GAUCHE, MotorType.kBrushless);
-        this.roueAvantDroite.restoreFactoryDefaults();
-        this.roueAvantGauche.restoreFactoryDefaults();
-        this.roueArriereDroite.restoreFactoryDefaults();
-        this.roueArriereGauche.restoreFactoryDefaults();   
+        this.roueAvantDroite = new Moteur(ROUE_AVANT_DROITE);
+        this.roueAvantGauche = new Moteur(ROUE_AVANT_GAUCHE);
+        this.roueArriereDroite = new Moteur(ROUE_ARRIERE_DROITE);
+        this.roueArriereGauche = new Moteur(ROUE_ARRIERE_GAUCHE);
 
         // lire sur getAbsoluteEncoder et getAlternateEncoder()
         // this.encodeurAvantDroit = this.roueAvantDroite.getEncoder();
@@ -61,10 +58,6 @@ abstract public class Roues extends SousSysteme implements Roulable, Dirigeable,
         // this.encodeurAvantGauche = this.roueAvantGauche.getEncoder();
         // this.encodeurArriereGauche = this.roueArriereGauche.getEncoder();
 
-        this.roueAvantDroite.setIdleMode(IdleMode.kBrake);
-        this.roueAvantGauche.setIdleMode(IdleMode.kBrake);
-        this.roueArriereDroite.setIdleMode(IdleMode.kBrake);
-        this.roueArriereGauche.setIdleMode(IdleMode.kBrake);
         
         this.arreter();
     }

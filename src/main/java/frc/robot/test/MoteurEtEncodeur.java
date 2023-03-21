@@ -7,12 +7,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.soussysteme.SousSysteme;
 
-public class Moteur extends SousSysteme{
+public class MoteurEtEncodeur extends SousSysteme{
 
     protected CANSparkMax roue;
     protected RelativeEncoder encodeur;
 
-    public Moteur(int numero)
+    public MoteurEtEncodeur(int numero)
     {
         this.roue = new CANSparkMax(numero, MotorType.kBrushless);
         this.roue.restoreFactoryDefaults();
