@@ -23,8 +23,6 @@ public class Bras extends SousSysteme implements Materiel.Bras
         // configuration
         this.moteurPrincipal.setOpenLoopRampRate(0);
         this.moteurSecondaire.setOpenLoopRampRate(0);
-        this.moteurPrincipal.setIdleMode(IdleMode.kBrake);
-        this.moteurSecondaire.setIdleMode(IdleMode.kBrake);
         this.moteurPrincipal.setInverted(true);
         // on n'a pas besoin d'inverser le moteur secondaire meme s'il est inverse car il suit
         // selon les tests les deux fonctionnenet
