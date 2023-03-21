@@ -75,9 +75,4 @@ abstract public class Roues extends SousSysteme implements Roulable, Dirigeable,
       // this.roueArriereDroite.set(0);
     }
  
-	public double limiter(double vitesse) 
-	{
-		return Math.max(-1, Math.min(1, vitesse));
-	}
-
 }
