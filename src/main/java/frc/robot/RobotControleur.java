@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.interaction.*;
 import frc.robot.test.Testeur;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class RobotControleur extends TimedRobot {
 
@@ -13,13 +15,34 @@ public class RobotControleur extends TimedRobot {
   protected Robot robot;
   protected Testeur testeur;
   protected Contexte conteneur = null;
+  protected CANSparkMax roueAvantGauche;
+  protected CANSparkMax roueArriereGauche;
+  protected CANSparkMax roueArriereDroite;
+  protected CANSparkMax roueAvantDroite;
+  protected double speed = 0.05;
+
   
   @Override
   public void robotInit() {
-    System.out.println("robotInit()");
-    conteneur = new Contexte();
-    this.manette = Manette.getInstance();
-    this.robot = Robot.getInstance();
+    //System.out.println("robotInit()");
+    //conteneur = new Contexte();
+    //this.manette = Manette.getInstance();
+    //this.robot = Robot.getInstance();
+    this.roueAvantGauche = new CANSparkMax(1, MotorType.kBrushless);
+    this.roueAvantGauche.restoreFactoryDefaults();
+    this.roueAvantGauche.stopMotor();
+    this.roueArriereGauche = new CANSparkMax(2, MotorType.kBrushless);
+    this.roueArriereGauche.restoreFactoryDefaults();
+    this.roueArriereGauche.stopMotor();
+    this.roueArriereDroite = new CANSparkMax(3, MotorType.kBrushless);
+    this.roueArriereDroite.restoreFactoryDefaults();
+    this.roueArriereDroite.stopMotor();
+    this.roueAvantDroite = new CANSparkMax(4, MotorType.kBrushless);
+    this.roueAvantDroite.restoreFactoryDefaults();
+    this.roueAvantDroite.stopMotor();
+    //on inverse le sens des roues car elles sont montée de façon symétrique
+    this.roueArriereGauche.setInverted(true);
+    this.roueAvantGauche.setInverted(true);
   }
 
   @Override
@@ -53,13 +76,51 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
-    robot.roues.conduireAvecManette(this.manette);
-    testeur.executer();
+    //robot.roues.conduireAvecManette(this.manette);
+    //testeur.executer();
+    //this.roueAvantGauche.set(speed);
+    //this.roueArriereGauche.set(speed);
+    //this.roueAvantDroite.set(speed);
+    //this.roueArriereDroite.set(speed);
+    //diagonaleGauche();
+    //diagonaleDroite();
+    //diagonaleArriereGauche();
+    //diagonaleArriereDroite();
   }
+
+  public void diagonaleDroite(){
+    this.roueAvantGauche.set(speed);
+    this.roueArriereGauche.set(0);
+    this.roueAvantDroite.set(0);
+    this.roueArriereDroite.set(speed);
+  }
+
+  public void diagonaleGauche(){
+    this.roueAvantGauche.set(0);
+    this.roueArriereGauche.set(speed);
+    this.roueAvantDroite.set(speed);
+    this.roueArriereDroite.set(0);
+  }
+
+  public void diagonaleArriereDroite(){
+    this.roueAvantGauche.set(0);
+    this.roueArriereGauche.set(-speed);
+    this.roueAvantDroite.set(-speed);
+    this.roueArriereDroite.set(0);
+  }
+
+  public void diagonaleArriereGauche(){
+    this.roueAvantGauche.set(-speed);
+    this.roueArriereGauche.set(0);
+    this.roueAvantDroite.set(0);
+    this.roueArriereDroite.set(-speed);
+  }
+  
 
   @Override
   public void teleopExit() {
     System.out.println("teleopExit()");
+
   }
 
   @Override
