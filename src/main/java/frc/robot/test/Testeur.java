@@ -16,25 +16,41 @@ public class Testeur {
     protected ManetteTestBras manette;
     protected CommandBase commandeAbaisser;
     protected CommandBase commandeRelever;
+    protected RoueAvecControle roueSousControle;
     public Testeur()
     {
         SmartDashboard.putNumber("test", test); 
+        // TESTS de roue
         //this.roue = new Roue(2);        
         //this.moteur = new Moteur(5);
+        
+        // tests de moteurs de bras
         //this.bras = new Bras();
-        this.manette = new ManetteTestBras();
-        double vitesse = 0.1;
-        commandeAbaisser = new CommandeAbaisserBras(Robot.getInstance().bras, manette, vitesse);
-        commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
+        //this.manette = new ManetteTestBras();
+        //double vitesse = 0.1;
+        //commandeAbaisser = new CommandeAbaisserBras(Robot.getInstance().bras, manette, vitesse);
+        //commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
+
+        // TESTS de pid
+        this.roueSousControle = new RoueAvecControle();
     }
 
     public void executer()
     {
-        commandeAbaisser.execute();
-        commandeRelever.execute();
+        // TESTS de roue
         //this.roue.tourner(0.1);
         //this.moteur.tourner(0.1);
         //this.bras.tourner(0.1);
+
+        // tests de moteurs de bras
+        //commandeAbaisser.execute();
+        //commandeRelever.execute();
+    }
+
+    public void lancer()
+    {
+        // TESTS de pid
+        this.roueSousControle.avancer();
     }
     
 

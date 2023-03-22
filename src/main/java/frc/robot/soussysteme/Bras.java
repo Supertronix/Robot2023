@@ -58,6 +58,11 @@ public class Bras extends SousSysteme implements Materiel.Bras
         //this.moteurPrincipal.set(ControlMode.Position, -100);
         //this.moteurPrincipal.set(ControlMode.PercentOutput, 0.1);
     }
+    public void desactiver()
+    {
+        this.moteurPrincipal.close();
+        this.moteurSecondaire.close();
+    }
 }
 
 /**
