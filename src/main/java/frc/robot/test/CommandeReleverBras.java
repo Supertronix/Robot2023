@@ -29,9 +29,10 @@ public class CommandeReleverBras extends CommandBase implements Finissable{
 
     @Override
     public void execute() {
+        System.out.println("CommandeReleverBras.execute() " + vitesse);
         if (manette.getDemandeReleve()) {
+            System.out.println("if " + vitesse);
             this.finie = false;
-            //System.out.println("execute() " + vitesse);
             this.bras.tourner(-vitesse);
         } else {
             if(!finie) this.bras.tourner(0);

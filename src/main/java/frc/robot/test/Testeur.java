@@ -10,15 +10,15 @@ import frc.robot.soussysteme.RouesMecanumSynchro;
 
 public class Testeur {
 
+    double test = 5;
     //protected Roue roue;
     //protected Moteur moteur;
-    //protected Bras bras;
-    double test = 5;
-   // protected ManetteTestBras manette;
-    //protected CommandBase commandeAbaisser;
-    //protected CommandBase commandeRelever;
+    protected Bras bras;
+    protected ManetteTestBras manette;
+    protected CommandBase commandeAbaisser;
+    protected CommandBase commandeRelever;
     //protected RoueAvecControle roueSousControle;
-    protected RouesMecanumSynchro rouesMecanumSynchro;
+    //protected RouesMecanumSynchro rouesMecanumSynchro;
     public Testeur()
     {
         SmartDashboard.putNumber("test", test); 
@@ -28,14 +28,16 @@ public class Testeur {
         
         // tests de moteurs de bras
         //this.bras = new Bras();
-        //this.manette = new ManetteTestBras();
-        //double vitesse = 0.1;
-        //commandeAbaisser = new CommandeAbaisserBras(Robot.getInstance().bras, manette, vitesse);
-        //commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
+
+        // tests de limite switch
+        double vitesse = 0.05;
+        this.manette = new ManetteTestBras();
+        commandeAbaisser = new CommandeAbaisserBras(Robot.getInstance().bras, manette, vitesse);
+        commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
 
         // TESTS de pid
         //this.roueSousControle = new RoueAvecControle();
-        this.rouesMecanumSynchro = new RouesMecanumSynchro();
+        //this.rouesMecanumSynchro = new RouesMecanumSynchro();
     }
 
     public void executer()
@@ -46,14 +48,14 @@ public class Testeur {
         //this.bras.tourner(0.1);
 
         // tests de moteurs de bras
-        //commandeAbaisser.execute();
-        //commandeRelever.execute();
+        commandeAbaisser.execute();
+        commandeRelever.execute();
     }
 
     public void lancer()
     {
         // TESTS de pid
-        this.rouesMecanumSynchro.avancer();
+        // this.rouesMecanumSynchro.avancer();
     }
     
 

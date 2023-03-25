@@ -29,8 +29,9 @@ public class CommandeAbaisserBras extends CommandBase implements Finissable{
 
     @Override
     public void execute() {
+        System.out.println("CommandeAbaisserBras.execute() " + vitesse);
         if (manette.getDemandeAbaisse()) {
-            //System.out.println("execute() " + vitesse);
+            System.out.println("if " + vitesse);
             this.finie = false;
             this.bras.tourner(vitesse);
         } else {

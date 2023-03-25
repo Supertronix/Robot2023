@@ -55,7 +55,7 @@ public class RobotControleur extends TimedRobot {
   public void teleopPeriodic() {
     //System.out.println("teleopPeriodic()");   
     //robot.roues.conduireAvecManette(this.manette);
-    //testeur.executer();
+    testeur.executer();
   }
 
   @Override
