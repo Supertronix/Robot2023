@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Materiel;
 import frc.robot.composant.Moteur;
 // https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
+
+// limite switch a 13.9
+// homing dans limite switch arriere
 public class Bras extends SousSysteme implements Materiel.Bras
 {
 
@@ -103,7 +106,7 @@ public class Bras extends SousSysteme implements Materiel.Bras
     }
     public boolean estAuDepart()
     {
-        return this.moteurPrincipal.getLimiteAvant().isPressed();
+        return this.moteurPrincipal.getLimiteArriere().isPressed();
     }
 
 }

@@ -26,7 +26,7 @@ public class CommandeCalibrerBras extends CommandBase {
     @Override
     public void execute() {
         System.out.println("CommandeCalibrerBras.execute()");
-        this.bras.tourner(vitesse);
+        this.bras.tourner(-vitesse);
         SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
 
