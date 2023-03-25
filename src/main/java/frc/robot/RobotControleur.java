@@ -27,7 +27,7 @@ public class RobotControleur extends TimedRobot {
     //System.out.println("robotInit()");
     //conteneur = new Contexte();
     this.manette = Manette.getInstance();
-    //this.robot = Robot.getInstance();
+    this.robot = Robot.getInstance();
     this.roueAvantGauche = new CANSparkMax(1, MotorType.kBrushless);
     this.roueAvantGauche.restoreFactoryDefaults();
     this.roueAvantGauche.stopMotor();
