@@ -40,7 +40,11 @@ public interface Materiel {
     {
       public static final int MOTEUR_PRINCIPAL = 5; // tourne vers la batterie
       public static final int MOTEUR_SECONDAIRE = 6; // tourne vers la batterie
-    public void abaisser();
+      public static final float POSITION_AVANT = 12.75f;
+      public static final float POSTIION_MILIEU = 6.5f;
+      public static final float POSITION_ARRIERE = 0.875f;
+
+      public void abaisser();
     }
     
 }
