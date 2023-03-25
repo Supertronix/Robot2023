@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.interaction.Manette;
 import frc.robot.soussysteme.Bras;
+import frc.robot.soussysteme.RouesMecanumSynchro;
 
 public class Testeur {
 
@@ -13,10 +14,11 @@ public class Testeur {
     //protected Moteur moteur;
     //protected Bras bras;
     double test = 5;
-    protected ManetteTestBras manette;
-    protected CommandBase commandeAbaisser;
-    protected CommandBase commandeRelever;
-    protected RoueAvecControle roueSousControle;
+   // protected ManetteTestBras manette;
+    //protected CommandBase commandeAbaisser;
+    //protected CommandBase commandeRelever;
+    //protected RoueAvecControle roueSousControle;
+    protected RouesMecanumSynchro rouesMecanumSynchro;
     public Testeur()
     {
         SmartDashboard.putNumber("test", test); 
@@ -32,7 +34,8 @@ public class Testeur {
         //commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
 
         // TESTS de pid
-        this.roueSousControle = new RoueAvecControle();
+        //this.roueSousControle = new RoueAvecControle();
+        this.rouesMecanumSynchro = new RouesMecanumSynchro();
     }
 
     public void executer()
@@ -50,7 +53,7 @@ public class Testeur {
     public void lancer()
     {
         // TESTS de pid
-        this.roueSousControle.avancer();
+        this.rouesMecanumSynchro.avancer();
     }
     
 

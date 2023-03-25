@@ -16,7 +16,7 @@ public class Manette implements Materiel.Manette {
     protected static Manette instance = null;
     public static Manette getInstance()
     {
-      //if(null == Manette.instance) Manette.instance = new ManetteCompetition();
+      if(null == Manette.instance) Manette.instance = new ManetteCompetition();
       return Manette.instance;
     };
     public static void desactiverInstance()
