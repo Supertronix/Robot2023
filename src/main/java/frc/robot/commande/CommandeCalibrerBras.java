@@ -8,7 +8,7 @@ public class CommandeCalibrerBras extends CommandBase {
 
     protected Bras bras = null;
     protected boolean finie = false;
-    protected double vitesse = 0.02;
+    protected double vitesse = 0.1;
 
     public CommandeCalibrerBras(Bras bras)
     {
