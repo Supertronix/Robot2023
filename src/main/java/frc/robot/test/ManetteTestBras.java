@@ -30,6 +30,7 @@ public class ManetteTestBras extends Manette{
         this.boutonTestMouvement = new JoystickButton(this.manette, BOUTON_B);
         Command commandeMouvement= new CommandeReleverBras(Robot.getInstance().bras, 14);
         this.boutonTestMouvement.whenPressed(commandeMouvement);
+        
     }
 
     public boolean getDemandeAbaisse()

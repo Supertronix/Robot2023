@@ -14,7 +14,8 @@ public class Testeur {
     //protected Roue roue;
     //protected Moteur moteur;
     //protected Bras bras;
-    protected ManetteTestBras manette;
+    protected Manette manette;
+    //protected ManetteTestBras manette;
     //protected CommandBase commandeAbaisser;
     //protected CommandBase commandeRelever;
     //protected RoueAvecControle roueSousControle;
@@ -31,7 +32,7 @@ public class Testeur {
 
         // tests de limite switch
         //double vitesse = 0.05;
-        this.manette = new ManetteTestBras();
+        this.manette = Manette.getInstance();
         //commandeAbaisser = new CommandeAbaisserBrasAvecManette(Robot.getInstance().bras, manette, vitesse);
         //commandeRelever = new CommandeReleverBrasAvecManette(Robot.getInstance().bras, manette, vitesse);
 
