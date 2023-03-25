@@ -8,27 +8,19 @@ public class CommandeAbaisserBras extends CommandBase {
 
     protected Bras bras = null;
     protected boolean finie = false;
-    protected double vitesse = 0;
+    protected double position = 0;
 
-    public CommandeAbaisserBras(Bras bras, double vitesse)
+    public CommandeAbaisserBras(Bras bras, double position)
     {
         System.out.println("new CommandeAbaisserBras()");
         this.bras = bras;
-        this.vitesse = vitesse;
+        this.position = position;
         if(bras == null) this.finie = true;
-    }
-
-    public void setFinie()
-    {
-        //System.out.println("setFinie()");
-        this.finie = true;
     }
 
     @Override
     public void execute() {
-        System.out.println("CommandeAbaisserBras.execute() " + vitesse);
-        //this.finie = false;
-        //this.bras.tourner(vitesse);
+        System.out.println("CommandeAbaisserBras.execute() " + position);
     }
         
     @Override

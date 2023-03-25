@@ -1,14 +1,21 @@
 package frc.robot.soussysteme;
 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 // import com.revrobotics.SparkMaxPIDController;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
+import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Materiel;
 import frc.robot.composant.Moteur;
 // https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
 public class Bras extends SousSysteme implements Materiel.Bras
 {
+
     protected Moteur moteurPrincipal;
     protected Moteur moteurSecondaire;
 
@@ -36,9 +43,30 @@ public class Bras extends SousSysteme implements Materiel.Bras
 
         //SparkMaxPIDController pidMoteurPrincipal = this.moteurPrincipal.getPIDController();
         //SparkMaxPIDController pidMoteurSecondaire = this.moteurPrincipal.getPIDController();
-
-
+        this.preparerEncodeur();
     }
+    protected RelativeEncoder encodeur;
+    protected SparkMaxPIDController pid;
+    public void preparerEncodeur()
+    {
+        this.encodeur = this.moteurPrincipal.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+        // the encoder could not be inverted separately from motor in brushless mode        
+        // encodeur.setInverted(false);
+        pid = this.moteurPrincipal.getPIDController();
+        pid.setFeedbackDevice(encodeur);
+        //this.roue.setFeedbackDevice(encoder);
+        pid.setP(0.1);
+        //pid.setI(1e-4);
+        //pid.setD(1);
+        pid.setOutputRange(-0.1, 0.1); 
+    }
+    public void aller(double position)
+    {
+        System.out.println("Bras.aller()" + position);
+        pid.setReference(position, CANSparkMax.ControlType.kPosition);
+        SmartDashboard.putNumber("Position Bras", encodeur.getPosition());
+    }
+
 
     public void tourner(double vitesse)
     {
@@ -70,8 +98,9 @@ public class Bras extends SousSysteme implements Materiel.Bras
     }
     public boolean estAuDepart()
     {
-        return this.moteurPrincipal.getLimiteArriere().isPressed();
+        return this.moteurPrincipal.getLimiteAvant().isPressed();
     }
+
 }
 
 /**

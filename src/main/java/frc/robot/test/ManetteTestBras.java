@@ -7,13 +7,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Robot;
 import frc.robot.commande.CommandeCalibrerBras;
+import frc.robot.commande.CommandeAbaisserBras;
+import frc.robot.commande.CommandeReleverBras;
 import frc.robot.interaction.Manette;
 
 public class ManetteTestBras extends Manette{
     
-    //protected JoystickButton boutonTestBrasAbaisse;
-    //protected JoystickButton boutonTestBrasReleve;
     protected JoystickButton boutonTestCalibration;
+    protected JoystickButton boutonTestMouvement;
 
     public ManetteTestBras()
     {
@@ -25,18 +26,10 @@ public class ManetteTestBras extends Manette{
         this.boutonTestCalibration = new JoystickButton(this.manette, BOUTON_Y);
         Command commandeCalibration= new CommandeCalibrerBras(Robot.getInstance().bras);
         this.boutonTestCalibration.whenPressed(commandeCalibration);
-        //this.boutonTestBrasAbaisse.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasAbaisse)); 
 
-
-        //this.boutonTestBrasAbaisse = new JoystickButton(this.manette, BOUTON_A);
-        //Command commandeTestBrasAbaisse = new CommandeAbaisserBras(Robot.getInstance().bras);
-        //this.boutonTestBrasAbaisse.whenPressed(commandeTestBrasAbaisse);
-        //this.boutonTestBrasAbaisse.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasAbaisse)); 
-
-        //this.boutonTestBrasReleve = new JoystickButton(this.manette, BOUTON_B);
-        //Command commandeTestBrasReleve = new CommandeReleverBras(Robot.getInstance().bras);
-        //this.boutonTestBrasReleve.whenPressed(commandeTestBrasReleve);
-        //this.boutonTestBrasReleve.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasReleve)); 
+        this.boutonTestMouvement = new JoystickButton(this.manette, BOUTON_B);
+        Command commandeMouvement= new CommandeReleverBras(Robot.getInstance().bras, -100);
+        this.boutonTestMouvement.whenPressed(commandeMouvement);
     }
 
     public boolean getDemandeAbaisse()
@@ -49,3 +42,8 @@ public class ManetteTestBras extends Manette{
         return this.manette.getRawButton(BOUTON_B);
     }
 }
+
+//this.boutonTestBrasReleve = new JoystickButton(this.manette, BOUTON_B);
+//Command commandeTestBrasReleve = new CommandeReleverBras(Robot.getInstance().bras);
+//this.boutonTestBrasReleve.whenPressed(commandeTestBrasReleve);
+//this.boutonTestBrasReleve.whenReleased(new CommandeArreterCommande((Finissable)commandeTestBrasReleve)); 
