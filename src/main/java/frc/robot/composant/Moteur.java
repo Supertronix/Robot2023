@@ -36,6 +36,21 @@ public class Moteur extends CANSparkMax{
         return this;
     }
 
+    public SparkMaxLimitSwitch getLimiteAvant()
+    {
+        return this.limiteAvant;
+    }
+
+    public SparkMaxLimitSwitch getLimiteArriere()
+    {
+        return this.limiteArriere;
+    }
+
+    public boolean testerLimiteAvant()
+    {
+        return this.limiteAvant.isPressed();
+    }
+
     // https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Soft%20Limits/src/main/java/frc/robot/Robot.java
     // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
     // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);

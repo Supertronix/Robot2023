@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
-public class CommandeReleverBras extends CommandBase implements Finissable{
+public class CommandeReleverBrasAvecManette extends CommandBase implements Finissable{
 
     protected Bras bras = null;
     protected boolean finie = false;
     protected ManetteTestBras manette = null;
     protected double vitesse = 0;
 
-    public CommandeReleverBras(Bras bras, ManetteTestBras manette, double vitesse)
+    public CommandeReleverBrasAvecManette(Bras bras, ManetteTestBras manette, double vitesse)
     {
         System.out.println("new CommandeReleverBras()");
         this.bras = bras;

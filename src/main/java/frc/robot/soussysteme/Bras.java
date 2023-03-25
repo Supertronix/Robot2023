@@ -37,6 +37,7 @@ public class Bras extends SousSysteme implements Materiel.Bras
         //SparkMaxPIDController pidMoteurPrincipal = this.moteurPrincipal.getPIDController();
         //SparkMaxPIDController pidMoteurSecondaire = this.moteurPrincipal.getPIDController();
 
+
     }
 
     public void tourner(double vitesse)
@@ -62,6 +63,14 @@ public class Bras extends SousSysteme implements Materiel.Bras
     {
         this.moteurPrincipal.close();
         this.moteurSecondaire.close();
+    }
+    public void initialiser()
+    {
+        this.moteurPrincipal.getEncoder().setPosition(0);
+    }
+    public boolean estAuDepart()
+    {
+        return this.moteurPrincipal.getLimiteArriere().isPressed();
     }
 }
 

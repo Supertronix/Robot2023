@@ -13,10 +13,10 @@ public class Testeur {
     double test = 5;
     //protected Roue roue;
     //protected Moteur moteur;
-    protected Bras bras;
+    //protected Bras bras;
     protected ManetteTestBras manette;
-    protected CommandBase commandeAbaisser;
-    protected CommandBase commandeRelever;
+    //protected CommandBase commandeAbaisser;
+    //protected CommandBase commandeRelever;
     //protected RoueAvecControle roueSousControle;
     //protected RouesMecanumSynchro rouesMecanumSynchro;
     public Testeur()
@@ -30,10 +30,10 @@ public class Testeur {
         //this.bras = new Bras();
 
         // tests de limite switch
-        double vitesse = 0.05;
+        //double vitesse = 0.05;
         this.manette = new ManetteTestBras();
-        commandeAbaisser = new CommandeAbaisserBras(Robot.getInstance().bras, manette, vitesse);
-        commandeRelever = new CommandeReleverBras(Robot.getInstance().bras, manette, vitesse);
+        //commandeAbaisser = new CommandeAbaisserBrasAvecManette(Robot.getInstance().bras, manette, vitesse);
+        //commandeRelever = new CommandeReleverBrasAvecManette(Robot.getInstance().bras, manette, vitesse);
 
         // TESTS de pid
         //this.roueSousControle = new RoueAvecControle();
@@ -48,8 +48,8 @@ public class Testeur {
         //this.bras.tourner(0.1);
 
         // tests de moteurs de bras
-        commandeAbaisser.execute();
-        commandeRelever.execute();
+        //commandeAbaisser.execute();
+        //commandeRelever.execute();
     }
 
     public void lancer()
