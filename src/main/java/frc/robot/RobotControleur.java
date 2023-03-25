@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.interaction.*;
 import frc.robot.test.Testeur;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotControleur extends TimedRobot {
 
@@ -19,7 +20,7 @@ public class RobotControleur extends TimedRobot {
     System.out.println("robotInit()");
     conteneur = new Contexte();
     //this.manette = Manette.getInstance();
-    //this.robot = Robot.getInstance();
+    this.robot = Robot.getInstance();
     this.testeur = new Testeur();
   }
 
@@ -56,6 +57,7 @@ public class RobotControleur extends TimedRobot {
     //System.out.println("teleopPeriodic()");   
     //robot.roues.conduireAvecManette(this.manette);
     testeur.executer();
+    SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
   }
 
   @Override

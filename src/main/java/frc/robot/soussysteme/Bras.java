@@ -64,7 +64,12 @@ public class Bras extends SousSysteme implements Materiel.Bras
     {
         System.out.println("Bras.aller()" + position);
         pid.setReference(position, CANSparkMax.ControlType.kPosition);
-        SmartDashboard.putNumber("Position Bras", encodeur.getPosition());
+
+    }
+
+    public double getPosition()
+    {
+        return this.encodeur.getPosition();
     }
 
 

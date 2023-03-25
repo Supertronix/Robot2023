@@ -1,5 +1,6 @@
 package frc.robot.commande;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
 
@@ -24,6 +25,7 @@ public class CommandeReleverBras extends CommandBase
 
     @Override
     public void execute() {
+        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
         
 
@@ -31,6 +33,7 @@ public class CommandeReleverBras extends CommandBase
     public boolean isFinished() 
     {
         System.out.println("isFinished()");
+        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
         return true;
     }
 }

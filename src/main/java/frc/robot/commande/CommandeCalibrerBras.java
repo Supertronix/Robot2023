@@ -2,6 +2,7 @@ package frc.robot.commande;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
 public class CommandeCalibrerBras extends CommandBase {
@@ -15,27 +16,18 @@ public class CommandeCalibrerBras extends CommandBase {
         System.out.println("new CommandeAbaisserBras()");
         // addRequirements(bras);
         this.bras = bras;
-        //if(bras == null) this.finie = true;
     }
-
-    public void setFinie()
-    {
-        //System.out.println("setFinie()");
-        this.finie = true;
-    }
-        
+       
     @Override
     public void initialize() 
     {
         System.out.println("initialize()");
-        //this.bras.abaisser();
-
     }
     @Override
     public void execute() {
         System.out.println("CommandeCalibrerBras.execute()");
         this.bras.tourner(vitesse);
-        //this.finie = false;
+        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
 
     @Override
@@ -45,9 +37,9 @@ public class CommandeCalibrerBras extends CommandBase {
         if(this.bras.estAuDepart())
         {
             this.bras.initialiser();
+            SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
             return true;
         }
-        //return this.finie;
         return false;
     }
 }
