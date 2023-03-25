@@ -26,7 +26,7 @@ public class RobotControleur extends TimedRobot {
   public void robotInit() {
     //System.out.println("robotInit()");
     //conteneur = new Contexte();
-    //this.manette = Manette.getInstance();
+    this.manette = Manette.getInstance();
     //this.robot = Robot.getInstance();
     this.roueAvantGauche = new CANSparkMax(1, MotorType.kBrushless);
     this.roueAvantGauche.restoreFactoryDefaults();
@@ -74,18 +74,20 @@ public class RobotControleur extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {
-    //System.out.println("teleopPeriodic()");   
-    //robot.roues.conduireAvecManette(this.manette);
+  public void teleopPeriodic() {  
+    robot.roues.conduireAvecManette(this.manette);
     //testeur.executer();
-    //this.roueAvantGauche.set(speed);
-    //this.roueArriereGauche.set(speed);
-    //this.roueAvantDroite.set(speed);
-    //this.roueArriereDroite.set(speed);
     //diagonaleGauche();
     //diagonaleDroite();
     //diagonaleArriereGauche();
     //diagonaleArriereDroite();
+  }
+
+  public void avancer(){
+    this.roueAvantGauche.set(speed);
+    this.roueArriereGauche.set(speed);
+    this.roueAvantDroite.set(speed);
+    this.roueArriereDroite.set(speed);
   }
 
   public void diagonaleDroite(){
@@ -114,6 +116,54 @@ public class RobotControleur extends TimedRobot {
     this.roueArriereGauche.set(0);
     this.roueAvantDroite.set(0);
     this.roueArriereDroite.set(-speed);
+  }
+
+  public void pivoterGauche(){
+    //schéma d
+    this.roueAvantGauche.set(0);
+    this.roueArriereGauche.set(0);
+    this.roueAvantDroite.set(speed);
+    this.roueArriereDroite.set(speed);
+  }
+
+  public void pivoterDroite(){
+    //schéma d
+    this.roueAvantGauche.set(speed);
+    this.roueArriereGauche.set(speed);
+    this.roueAvantDroite.set(0);
+    this.roueArriereDroite.set(0);
+  }
+
+  public void demitourDroite(){
+    //schéma e
+    this.roueAvantGauche.set(speed);
+    this.roueArriereGauche.set(speed);
+    this.roueAvantDroite.set(-speed);
+    this.roueArriereDroite.set(-speed);
+  }
+
+  public void demitourGauche(){
+    //schéma e
+    this.roueAvantGauche.set(-speed);
+    this.roueArriereGauche.set(-speed);
+    this.roueAvantDroite.set(speed);
+    this.roueArriereDroite.set(speed);
+  }
+
+  public void pivoterFGauche(){
+    //schéma f
+    this.roueAvantGauche.set(-speed);
+    this.roueArriereGauche.set(0);
+    this.roueAvantDroite.set(speed);
+    this.roueArriereDroite.set(0);
+  }
+
+  public void pivoterFDroite(){
+    //schéma f
+    this.roueAvantGauche.set(speed);
+    this.roueArriereGauche.set(0);
+    this.roueAvantDroite.set(-speed);
+    this.roueArriereDroite.set(0);
   }
   
 
