@@ -58,10 +58,10 @@ public class Bras extends SousSysteme implements Materiel.Bras
         pid = this.moteurPrincipal.getPIDController();
         pid.setFeedbackDevice(encodeur);
         //this.roue.setFeedbackDevice(encoder);
-        pid.setP(0.1);
+        pid.setP(0.2);
         //pid.setI(1e-4);
         //pid.setD(1);
-        pid.setOutputRange(-0.1, 0.1); 
+        pid.setOutputRange(-0.25, 0.25); 
     }
     public void aller(double position)
     {

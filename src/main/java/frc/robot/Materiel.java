@@ -8,7 +8,7 @@ public interface Materiel {
         public int ROUE_ARRIERE_DROITE = 3; // ID 3 // roule avant
         public int ROUE_AVANT_GAUCHE = 1; // ID 1  // roule arriere
         public int ROUE_ARRIERE_GAUCHE = 2; // ID 2 // roule arriere
-        public double FACTEUR_ROUES = 0.5;
+        public double FACTEUR_ROUES = 1;
     }
     public interface Manette
     {
