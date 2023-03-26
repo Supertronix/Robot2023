@@ -1,14 +1,11 @@
 package frc.robot.soussysteme;
 
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMax.IdleMode;
 
-import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Materiel;
+import frc.robot.Cinematique;
 import frc.robot.interaction.Manette;
 import frc.robot.composant.Moteur;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
 
 interface Roulable
 {
@@ -34,7 +31,7 @@ interface Dirigeable
     public void conduireSelonGyro(double x, double y, double z, double gyro); 
 }
 
-abstract public class Roues extends SousSysteme implements Roulable, Dirigeable, Materiel.Roues {
+abstract public class Roues extends SousSysteme implements Roulable, Dirigeable, Materiel.Roues, Cinematique.Roues {
 
     protected Moteur roueAvantDroite;
     protected Moteur roueAvantGauche;

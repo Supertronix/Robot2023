@@ -2,9 +2,10 @@ package frc.robot.interaction;
 
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Materiel;
+import frc.robot.Cinematique;
 import java.lang.Math;
 
-public class Manette implements Materiel.Manette {
+public class Manette implements Materiel.Manette, Cinematique.Manette {
 
     protected Joystick manette = null;
 
