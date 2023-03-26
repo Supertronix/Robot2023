@@ -3,7 +3,7 @@ package frc.robot;
 public interface Cinematique {
     public interface Roues
     {
-        public double FACTEUR_ROUES = 1;
+        public double FACTEUR_ROUES = 0.7;
     }
     public interface Manette
     {

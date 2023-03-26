@@ -5,6 +5,7 @@ package frc.robot.soussysteme;
 import frc.robot.Materiel;
 import frc.robot.composant.Moteur;
 
+
 @SuppressWarnings("resource") // framework roborio appelle exit
 public class Machoire extends SousSysteme implements Materiel.Machoire
 {
