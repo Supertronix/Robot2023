@@ -21,6 +21,13 @@ public class Moteur extends CANSparkMax{
         this.restoreFactoryDefaults();
         this.setIdleMode(IdleMode.kBrake);
     }
+    public Moteur(int id, boolean avecBroches) // argument dummy
+    {
+        // CANSparkMax​(int deviceId, CANSparkMaxLowLevel.MotorType type)        
+        super(id, MotorType.kBrushed);
+        this.restoreFactoryDefaults();
+        this.setIdleMode(IdleMode.kBrake);
+    }
 	public static double limiter(double vitesse) 
 	{
 		return Math.max(-1, Math.min(1, vitesse));

@@ -1,15 +1,7 @@
 package frc.robot.soussysteme;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
 // import com.revrobotics.SparkMaxPIDController;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
-import com.revrobotics.SparkMaxRelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.RelativeEncoder;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Materiel;
 import frc.robot.composant.Moteur;
 
@@ -23,7 +15,8 @@ public class Machoire extends SousSysteme implements Materiel.Machoire
         System.out.println("new Machoire()");
         
         // creer
-        this.moteur = new Moteur(MOTEUR).avecLimites();
+        this.moteur = new Moteur(MOTEUR, true).avecLimites();
+        this.moteur.setInverted(true);
 
         // configuration
         this.moteur.setOpenLoopRampRate(0);
@@ -31,22 +24,19 @@ public class Machoire extends SousSysteme implements Materiel.Machoire
     public void aller(double position)
     {
         System.out.println("Bras.aller()" + position);
-
     }
 
     public void fermerAvecVitesse(double vitesse) {
         this.moteur.set(limiter(-vitesse));
     }
     public void ouvrirAvecVitesse(double vitesse) {
+        System.out.println("Machoire.ouvrirAvecVitesse("+vitesse+")");
         this.moteur.set(limiter(vitesse));
     }
 
     public void desactiver()
     {
         this.moteur.close();
-    }
-    public void initialiser()
-    {
     }
     public boolean estFermee()
     {

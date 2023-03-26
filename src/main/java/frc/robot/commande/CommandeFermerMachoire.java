@@ -9,7 +9,7 @@ public class CommandeFermerMachoire extends CommandBase {
 
     protected Machoire machoire = null;
     protected boolean finie = false;
-    protected double vitesse = 0.1;
+    protected double vitesse = 0.8;
 
     public CommandeFermerMachoire()
     {
@@ -22,10 +22,11 @@ public class CommandeFermerMachoire extends CommandBase {
     public void initialize() 
     {
         System.out.println("CommandeFermerMachoire.initialize()");
+        this.finie = false;
     }
     @Override
     public void execute() {
-        //System.out.println("CommandeFermerMachoire.execute()");
+        System.out.println("CommandeFermerMachoire.execute()");
         this.machoire.fermerAvecVitesse(vitesse);
     }
 
@@ -35,8 +36,8 @@ public class CommandeFermerMachoire extends CommandBase {
         if(this.machoire.estFermee())
         {
             System.out.println("CommandeFermerMachoire.isFinished() == true");
-            return true;
+            this.finie = true;
         }
-        return false;
+        return this.finie;
     }
 }

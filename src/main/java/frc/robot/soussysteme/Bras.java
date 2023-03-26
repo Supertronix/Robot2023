@@ -23,13 +23,13 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         // creer
         this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL).avecLimites();
         this.moteurSecondaire = new Moteur(MOTEUR_SECONDAIRE).avecLimites();
-        this.moteurPrincipal.disable();
-        this.moteurPrincipal.close();
 
         // configuration
-        this.moteurPrincipal.setOpenLoopRampRate(0);
-        this.moteurSecondaire.setOpenLoopRampRate(0);
+        this.moteurPrincipal.setOpenLoopRampRate(0); // a reactiver
+        this.moteurSecondaire.setOpenLoopRampRate(0); // a reactiver
         this.moteurPrincipal.setInverted(true);
+
+        
         // on n'a pas besoin d'inverser le moteur secondaire meme s'il est inverse car il suit
         // selon les tests les deux fonctionnenet
 

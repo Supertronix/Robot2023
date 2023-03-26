@@ -14,14 +14,15 @@ public class RobotControleur extends TimedRobot {
   protected Robot robot;
   protected Testeur testeur;
   protected Contexte conteneur = null;
-  
+
   @Override
   public void robotInit() {
     System.out.println("robotInit()");
     conteneur = new Contexte();
-    this.manette = Manette.getInstance();
-    this.robot = Robot.getInstance();
-    //this.testeur = new Testeur();
+
+    //this.manette = Manette.getInstance();
+    //this.robot = Robot.getInstance();
+    this.testeur = new Testeur();
   }
 
   @Override
@@ -49,15 +50,18 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopInit() {
     System.out.println("teleopInit()");
-    //this.testeur.lancer();
+    this.testeur.initialiser();
+    this.testeur.lancer();
   }
 
   @Override
   public void teleopPeriodic() {
-    //System.out.println("teleopPeriodic()");   
-    robot.roues.conduireAvecManette(this.manette);
-    //testeur.executer();
-    SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
+    System.out.println("teleopPeriodic()");   
+    
+    //robot.roues.conduireAvecManette(this.manette);
+    //SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
+
+    testeur.executer();
   }
 
   @Override
