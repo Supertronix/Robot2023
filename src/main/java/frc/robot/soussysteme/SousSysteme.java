@@ -1,5 +1,6 @@
 package frc.robot.soussysteme;
-
+// https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
+// https://docs.revrobotics.com/sparkmax/software-resources/migrating-ctre-to-rev
 public class SousSysteme {
 	
     public double limiter(double vitesse) 

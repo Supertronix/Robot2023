@@ -1,21 +1,15 @@
 package frc.robot.soussysteme;
 
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
-// import com.revrobotics.SparkMaxPIDController;
-// https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.RelativeEncoder;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Materiel;
 import frc.robot.Cinematique;
 import frc.robot.composant.Moteur;
-// https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
 
-// limite switch a 13.9
-// homing dans limite switch arriere
+// limite switch a 13.9 // homing dans limite switch arriere
 @SuppressWarnings("resource") // framework roborio appelle exit
 public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
 {

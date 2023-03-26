@@ -7,7 +7,6 @@ public interface Cinematique {
     }
     public interface Manette
     {
-
       public static final double SEUIL_ZERO = 0.08;//0.02;
       public static final double SEUIL_AXES_OPPOSES = 0.3;
       //static double BIAIS_AXE_GAUCHE_X = 0.06299212574958801;
