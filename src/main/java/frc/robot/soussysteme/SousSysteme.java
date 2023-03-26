@@ -11,5 +11,8 @@ public class SousSysteme {
 		//double test = 5;
         //SmartDashboard.putNumber("test",test );
 	}
+	public void liberer()
+	{
 
+	}
 }

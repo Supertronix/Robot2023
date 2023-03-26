@@ -16,6 +16,7 @@ import frc.robot.composant.Moteur;
 
 // limite switch a 13.9
 // homing dans limite switch arriere
+@SuppressWarnings("resource") // framework roborio appelle exit
 public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
 {
     protected Moteur moteurPrincipal;
@@ -28,6 +29,8 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         // creer
         this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL).avecLimites();
         this.moteurSecondaire = new Moteur(MOTEUR_SECONDAIRE).avecLimites();
+        this.moteurPrincipal.disable();
+        this.moteurPrincipal.close();
 
         // configuration
         this.moteurPrincipal.setOpenLoopRampRate(0);
@@ -106,6 +109,12 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     public boolean estAuDepart()
     {
         return this.moteurPrincipal.getLimiteArriere().isPressed();
+    }
+    @Override
+    public void liberer()
+    {
+        this.moteurPrincipal.liberer();
+        this.moteurSecondaire.liberer();
     }
 
 }

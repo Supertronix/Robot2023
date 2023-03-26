@@ -19,4 +19,10 @@ public class Robot {
         if(Robot.instance == null) Robot.instance = new Robot();
         return Robot.instance;
     }
+
+    public void fermer()
+    {
+        this.bras.liberer();
+        this.roues.liberer();
+    }
 }

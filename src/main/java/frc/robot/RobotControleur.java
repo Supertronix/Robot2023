@@ -80,5 +80,6 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void testExit() {
     System.out.println("testExit()");
+    this.robot.fermer();
   }
 }

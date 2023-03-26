@@ -71,5 +71,14 @@ abstract public class Roues extends SousSysteme implements Roulable, Dirigeable,
       // this.roueAvantDroite.set(0);
       // this.roueArriereDroite.set(0);
     }
+
+    @Override
+    public void liberer()
+    {
+        this.roueAvantDroite.liberer();
+        this.roueAvantGauche.liberer();
+        this.roueArriereDroite.liberer();
+        this.roueArriereGauche.liberer();
+    }
  
 }

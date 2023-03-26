@@ -56,6 +56,10 @@ public class Moteur extends CANSparkMax{
     // this.moteurPrincipal.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
     // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 200);
     // this.moteurPrincipal.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -200);
+    public void liberer()
+    {
+        this.close();
+    }
 
 }
 
