@@ -15,6 +15,7 @@ public class CommandeAbaisserBras extends CommandBase {
     {
         System.out.println("new CommandeAbaisserBras()");
         this.bras = Robot.getInstance().bras;
+        this.addRequirements(this.bras);
         this.position = position;
         if(bras == null) this.finie = true;
     }

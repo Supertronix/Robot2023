@@ -16,8 +16,8 @@ public class CommandeCalibrerBras extends CommandBase {
     public CommandeCalibrerBras()
     {
         System.out.println("new CommandeAbaisserBras()");
-        // addRequirements(bras);
         this.bras = Robot.getInstance().bras;
+        this.addRequirements(this.bras);
     }
        
     @Override

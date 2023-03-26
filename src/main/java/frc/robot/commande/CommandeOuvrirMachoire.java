@@ -15,7 +15,7 @@ public class CommandeOuvrirMachoire extends CommandBase {
     {
         System.out.println("new CommandeOuvrirMachoire()");
         this.machoire = Robot.getInstance().machoire;
-        // addRequirements(machoire);
+        this.addRequirements(this.machoire);
     }
        
     @Override

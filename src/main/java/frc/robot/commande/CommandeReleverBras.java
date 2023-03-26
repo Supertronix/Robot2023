@@ -15,6 +15,7 @@ public class CommandeReleverBras extends CommandBase
     {
         System.out.println("new CommandeReleverBras()");
         this.bras = Robot.getInstance().bras;
+        this.addRequirements(this.bras);
         this.position = position;
     }
     @Override
