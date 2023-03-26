@@ -21,11 +21,11 @@ public class CommandeCalibrerBras extends CommandBase {
     @Override
     public void initialize() 
     {
-        System.out.println("initialize()");
+        System.out.println("CommandeCalibrerBras.initialize()");
     }
     @Override
     public void execute() {
-        System.out.println("CommandeCalibrerBras.execute()");
+        //System.out.println("CommandeCalibrerBras.execute()");
         this.bras.tourner(-vitesse);
         SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }

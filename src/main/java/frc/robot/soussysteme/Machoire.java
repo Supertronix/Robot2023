@@ -34,12 +34,13 @@ public class Machoire extends SousSysteme implements Materiel.Machoire
 
     }
 
-    public void fermer() {
-
+    public void fermerAvecVitesse(double vitesse) {
+        this.moteur.set(limiter(-vitesse));
     }
-    public void ouvrir() {
-
+    public void ouvrirAvecVitesse(double vitesse) {
+        this.moteur.set(limiter(vitesse));
     }
+
     public void desactiver()
     {
         this.moteur.close();
@@ -47,10 +48,15 @@ public class Machoire extends SousSysteme implements Materiel.Machoire
     public void initialiser()
     {
     }
-    public boolean estAuDepart()
+    public boolean estFermee()
     {
         return this.moteur.getLimiteArriere().isPressed();
     }
+    public boolean estOuverte()
+    {
+        return this.moteur.getLimiteAvant().isPressed();
+    }
+
     @Override
     public void liberer()
     {

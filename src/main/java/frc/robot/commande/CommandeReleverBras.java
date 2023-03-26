@@ -25,7 +25,7 @@ public class CommandeReleverBras extends CommandBase
 
     @Override
     public void execute() {
-        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
+        //SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
         
 

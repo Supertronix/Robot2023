@@ -20,13 +20,13 @@ public class CommandeAbaisserBras extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("CommandeAbaisserBras.execute() " + position);
+        //System.out.println("CommandeAbaisserBras.execute() " + position);
     }
         
     @Override
     public void initialize() 
     {
-        System.out.println("initialize()");
+        System.out.println("CommandeAbaisserBras.initialize()");
 
         this.bras.abaisser();
     }
