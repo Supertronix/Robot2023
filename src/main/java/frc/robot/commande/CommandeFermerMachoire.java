@@ -1,6 +1,7 @@
 package frc.robot.commande;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.soussysteme.Machoire;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
@@ -10,10 +11,10 @@ public class CommandeFermerMachoire extends CommandBase {
     protected boolean finie = false;
     protected double vitesse = 0.1;
 
-    public CommandeFermerMachoire(Machoire machoire)
+    public CommandeFermerMachoire()
     {
         System.out.println("new CommandeFermerMachoire()");
-        this.machoire = machoire;
+        this.machoire = Robot.getInstance().machoire;
         // addRequirements(machoire);
     }
        
