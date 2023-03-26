@@ -3,6 +3,8 @@ package frc.robot.commande;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
 public class CommandeCalibrerBras extends CommandBase {
@@ -11,11 +13,11 @@ public class CommandeCalibrerBras extends CommandBase {
     protected boolean finie = false;
     protected double vitesse = 0.1;
 
-    public CommandeCalibrerBras(Bras bras)
+    public CommandeCalibrerBras()
     {
         System.out.println("new CommandeAbaisserBras()");
         // addRequirements(bras);
-        this.bras = bras;
+        this.bras = Robot.getInstance().bras;
     }
        
     @Override

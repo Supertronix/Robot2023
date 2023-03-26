@@ -11,7 +11,7 @@ public class CommandeAbaisserBras extends CommandBase {
     protected boolean finie = false;
     protected double position = 0;
 
-    public CommandeAbaisserBras(Bras bras, double position)
+    public CommandeAbaisserBras(double position)
     {
         System.out.println("new CommandeAbaisserBras()");
         this.bras = Robot.getInstance().bras;

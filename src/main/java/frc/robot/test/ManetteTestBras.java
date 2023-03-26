@@ -24,11 +24,11 @@ public class ManetteTestBras extends Manette{
         this.manette = new Joystick(MANETTE);
 
         this.boutonTestCalibration = new JoystickButton(this.manette, BOUTON_Y);
-        Command commandeCalibration= new CommandeCalibrerBras(Robot.getInstance().bras);
+        Command commandeCalibration= new CommandeCalibrerBras();
         this.boutonTestCalibration.whenPressed(commandeCalibration);
 
         this.boutonTestMouvement = new JoystickButton(this.manette, BOUTON_B);
-        Command commandeMouvement= new CommandeReleverBras(Robot.getInstance().bras, 14);
+        Command commandeMouvement= new CommandeReleverBras(10);
         this.boutonTestMouvement.whenPressed(commandeMouvement);
         
     }
