@@ -18,6 +18,7 @@ public class DetecteurImmobilite implements Cinematique.Bras{
 	}
 	public DetecteurImmobilite(Immobilisable objet)
 	{
+		System.out.println("new DetecteurImmobilite()");
 		this.objet = objet;
 		this.initialiser();
 	}
@@ -31,10 +32,12 @@ public class DetecteurImmobilite implements Cinematique.Bras{
 
 	public void mesurer()
 	{
+		System.out.println("mesurer()");
 		this.tempsActuel = System.currentTimeMillis();		
 		
 		if((this.tempsActuel - this.tempsDernier) > INTERVALLE_IMMOBILITE)
 		{
+			System.out.println("mesurer() if");
 			// verifier
 			this.distanceActuelle = objet.getDistancePourImmobilite();
 			this.estImmobile = (Math.abs(this.distanceActuelle - this.distanceDernier) < DISTANCE_NULLE);

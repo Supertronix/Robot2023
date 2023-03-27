@@ -51,14 +51,25 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     {
         this.encodeur = this.moteurPrincipal.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
         // the encoder could not be inverted separately from motor in brushless mode        
-        // encodeur.setInverted(false);
+        // encodeur.setInverted(false);setReferenceValue
+
         pid = this.moteurPrincipal.getPIDController();
-        pid.setFeedbackDevice(encodeur);
-        pid.setP(P);
-        pid.setI(I);
-        pid.setD(D);
+        this.reinitialiser();
+        
+    }
+    public void reinitialiser()
+    {
+        this.preparerCinematique(0,0,0);
+        pid.setOutputRange(-0, 0); 
+    }
+    public void preparerCinematique(double p, double i, double d)
+    {
+        pid.setP(p);
+        pid.setI(i);
+        pid.setD(d);
         pid.setOutputRange(-MAX, MAX); 
     }
+
     public void aller(double position)
     {
         System.out.println("Bras.aller(" + position + ")");
@@ -71,11 +82,24 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         return this.encodeur.getPosition();
     }
 
-
     public void tourner(double vitesse)
     {
         //System.out.println("tourner()");
         this.moteurPrincipal.set(limiter(vitesse));
+        //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
+        //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
+    }
+    public void avancer(double vitesse)
+    {
+        //System.out.println("tourner()");
+        this.moteurPrincipal.set(limiter(vitesse));
+        //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
+        //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
+    }
+    public void reculer(double vitesse)
+    {
+        //System.out.println("tourner()");
+        this.moteurPrincipal.set(limiter(-vitesse));
         //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
         //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
     }
@@ -106,6 +130,10 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         System.out.println("Bras.estAuDepart()");
         System.out.println(this.moteurPrincipal.getLimiteArriere().isPressed());
         return this.moteurPrincipal.getLimiteArriere().isPressed();
+    }
+    public void arreter()
+    {
+        this.moteurPrincipal.set(0);
     }
     @Override
     public void liberer()

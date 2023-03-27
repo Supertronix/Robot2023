@@ -3,10 +3,11 @@ package frc.robot.commande;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
+import frc.robot.Cinematique;
 import frc.robot.Robot;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
-public class CommandeReleverBras extends CommandBase 
+public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
 {
     protected Bras bras = null;
     protected double position = 0;
@@ -22,6 +23,7 @@ public class CommandeReleverBras extends CommandBase
     public void initialize() 
     {
         System.out.println("CommandeReleverBras.initialize()");
+        this.bras.preparerCinematique(P, I, D);
         this.bras.aller(position);
     }
 
