@@ -1,6 +1,7 @@
 package frc.robot;
 
 public interface Cinematique {
+
     public interface Roues
     {
       public double FACTEUR_ROUES = 0.7;
@@ -34,6 +35,7 @@ public interface Cinematique {
       public static final double MAX = 0.3;
 
       public static int INTERVALLE_IMMOBILITE = 500;
+      public static double TEMPS_MAXIMUM_CALIBRER = 2000;
       public static double DISTANCE_NULLE = 2; 
       // TODO peut-etre un ratio sur la distance
     
@@ -41,6 +43,10 @@ public interface Cinematique {
     public interface Machoire
     {
       public double VITESSE = 2;
+      public double VITESSE_OUVRIR = 5;
+      public double VITESSE_FERMER = 3;
+      public double TEMPS_MAXIMUM_OUVRIR = 2000;
+      public double TEMPS_MAXIMUM_FERMER = 2000;
     }
     
 }

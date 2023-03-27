@@ -3,7 +3,9 @@ package frc.robot.commande;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Cinematique;
 import frc.robot.Robot;
+import frc.robot.mesure.DetecteurDelais;
 import frc.robot.mesure.DetecteurImmobilite;
 import frc.robot.mesure.DetecteurImmobilite.*;
 
@@ -18,6 +20,7 @@ public class CommandeCalibrerBras extends CommandBase {
     protected double depart = 0;
     protected double delais = 0;
     protected static int essais = 0;
+    protected DetecteurDelais detecteur;
 
     public CommandeCalibrerBras()
     {
@@ -26,6 +29,7 @@ public class CommandeCalibrerBras extends CommandBase {
         this.bras.arreter();
         this.bras.reinitialiser();
         this.addRequirements(this.bras);
+        this.detecteur = new DetecteurDelais(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
     }
        
     @Override
@@ -34,11 +38,15 @@ public class CommandeCalibrerBras extends CommandBase {
         System.out.println("CommandeCalibrerBras.initialize()");
         this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
         this.depart = System.currentTimeMillis();
+        this.detecteur.initialiser();
     }
     
     @Override
     public void execute() {
         System.out.println("CommandeCalibrerBras.execute()");
+        this.detecteur.mesurer();
+
+        // pour adoucir l'arrivee
         this.delais = System.currentTimeMillis() - this.depart;
         this.bras.reculer(vitesse / (delais/20));
         
@@ -65,13 +73,15 @@ public class CommandeCalibrerBras extends CommandBase {
     public boolean isFinished() 
     {
         System.out.println("CommandeCalibrerBras.isFinished()");
-        if(this.bras.estAuDepart() || (this.detecteurImmobilite.estImmobile()&&!brasEnAvant))
+        if(this.bras.estAuDepart() || (this.detecteurImmobilite.estImmobile()&&!brasEnAvant) || this.detecteur.estTropLong())
         {
             System.out.println("this.bras.estAuDepart() == " + this.bras.estAuDepart());
             System.out.println("this.detecteurImmobilite.estImmobile() == " + this.detecteurImmobilite.estImmobile());
             this.bras.arreter();
             this.bras.initialiser();
             SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
+
+            // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison - peu importe sa position
             if(this.bras.estAuDepart() )
             {
                 essais = 0;
@@ -88,6 +98,8 @@ public class CommandeCalibrerBras extends CommandBase {
                 }
             }
             System.out.println("Essais " + essais);
+            // Fin EASTER EGG
+            
             return true;
         }
         return false;
