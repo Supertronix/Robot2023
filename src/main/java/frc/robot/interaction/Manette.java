@@ -39,13 +39,13 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
 
    public Axe getAxeMainDroite()
     {
-      this.axeMainDroite = new Axe(manette.getRawAxis(MAIN_DROITE_AXE_X), manette.getRawAxis(MAIN_DROITE_AXE_Y));
+      this.axeMainDroite = new Axe(manette.getRawAxis(BATON_DROIT_AXE_X), manette.getRawAxis(BATON_DROIT_AXE_Y));
       // System.out.println("axe main droite " + this.axeMainDroite.x + " " + this.axeMainDroite.y);
       return this.axeMainDroite;
     }
     public Axe getAxeMainGauche()
     {
-      this.axeMainGauche = new Axe(manette.getRawAxis(MAIN_GAUCHE_AXE_X), manette.getRawAxis(MAIN_GAUCHE_AXE_Y));
+      this.axeMainGauche = new Axe(manette.getRawAxis(BATON_GAUCHE_AXE_X), manette.getRawAxis(BATON_GAUCHE_AXE_Y));
       // System.out.println("axe main gauche " + this.axeMainGauche.x + " " + this.axeMainGauche.y);
       this.axeMainGauche.x = this.axeMainGauche.x - BIAIS_AXE_GAUCHE_X;
       this.axeMainGauche.y = this.axeMainGauche.y - BIAIS_AXE_GAUCHE_Y;
@@ -53,14 +53,12 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     }
     public double getDeclencheurMainGauche() 
     {
-    	return manette.getRawAxis(MAIN_GAUCHE_AXE_DECLENCHEUR);
+    	return manette.getRawAxis(MAIN_GAUCHE_AXE);
     }
     public double getDeclencheurMainDroite() 
     {
-    	return manette.getRawAxis(MAIN_DROITE_AXE_DECLENCHEUR);
+    	return manette.getRawAxis(MAIN_DROITE_AXE);
     }
-
-    enum Direction {DEVANT, DERRIERE, LATERAL_DROIT, LATERAL_GAUCHE, ROTATION_DROITE, ROTATION_GAUCHE};
 
     // 1 = droite, 0 tout droit, -1 = gauche
     public int getDirection()
@@ -73,13 +71,13 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     public boolean savoirSiBoutonDroitPresse()
     {
     	System.out.println("Manette.savoirSiBoutonDroitPresse()");
-    	return this.manette.getRawButtonPressed(BOUTON_DROIT);
+    	return this.manette.getRawButtonPressed(BOUTON_MAIN_DROITE);
     }
     
     public boolean savoirSiBoutonGauchePresse()
     {
     	System.out.println("Manette.savoirSiBoutonGauchePresse()");
-    	return this.manette.getRawButtonPressed(BOUTON_GAUCHE);
+    	return this.manette.getRawButtonPressed(BOUTON_MAIN_GAUCHE);
     }
     
     public void executerActions()

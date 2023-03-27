@@ -12,21 +12,22 @@ public interface Materiel {
     public interface Manette
     {
       public static final int MANETTE = 0;
+
       public static final int BOUTON_A = 1;
       public static final int BOUTON_B = 2;
       public static final int BOUTON_X = 3;		
       public static final int BOUTON_Y = 4;
-      public static final int BOUTON_GAUCHE = 5; 
-      public static final int BOUTON_DROIT = 6;
+      public static final int BOUTON_MAIN_GAUCHE = 5; 
+      public static final int BOUTON_MAIN_DROITE = 6;
       public static final int BOUTON_RETOUR = 7;
       public static final int BOUTON_DEMARRER = 8;
     
-      public static final int MAIN_GAUCHE_AXE_X = 0;
-      public static final int MAIN_GAUCHE_AXE_Y = 1;
-      public static final int MAIN_DROITE_AXE_X = 4;    
-      public static final int MAIN_DROITE_AXE_Y = 5;
-      public static final int MAIN_GAUCHE_AXE_DECLENCHEUR = 2;
-      public static final int MAIN_DROITE_AXE_DECLENCHEUR = 3;
+      public static final int BATON_GAUCHE_AXE_X = 0;
+      public static final int BATON_GAUCHE_AXE_Y = 1;
+      public static final int BATON_DROIT_AXE_X = 4;    
+      public static final int BATON_DROIT_AXE_Y = 5;
+      public static final int MAIN_GAUCHE_AXE = 2;
+      public static final int MAIN_DROITE_AXE = 3;
     } 
     public interface Bras
     {
