@@ -8,10 +8,11 @@ import com.revrobotics.RelativeEncoder;
 import frc.robot.Materiel;
 import frc.robot.Cinematique;
 import frc.robot.composant.Moteur;
+import frc.robot.mesure.DetecteurImmobilite;
 
 // limite switch a 13.9 // homing dans limite switch arriere
 @SuppressWarnings("resource") // framework roborio appelle exit
-public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
+public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras, DetecteurImmobilite.Immobilisable
 {
     protected Moteur moteurPrincipal;
     protected Moteur moteurSecondaire;
@@ -61,7 +62,7 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     }
     public void aller(double position)
     {
-        System.out.println("Bras.aller()" + position);
+        System.out.println("Bras.aller(" + position + ")");
         pid.setReference(position, CANSparkMax.ControlType.kPosition);
 
     }
@@ -98,10 +99,13 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     }
     public void initialiser()
     {
+        System.out.println("Bras.initialiser()");
         this.moteurPrincipal.getEncoder().setPosition(0);
     }
     public boolean estAuDepart()
     {
+        System.out.println("Bras.estAuDepart()");
+        System.out.println(this.moteurPrincipal.getLimiteArriere().isPressed());
         return this.moteurPrincipal.getLimiteArriere().isPressed();
     }
     @Override
@@ -109,6 +113,11 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     {
         this.moteurPrincipal.liberer();
         this.moteurSecondaire.liberer();
+    }
+
+    @Override
+    public double getDistancePourImmobilite() {
+        return this.moteurPrincipal.getEncoder().getPosition();
     }
 
 }

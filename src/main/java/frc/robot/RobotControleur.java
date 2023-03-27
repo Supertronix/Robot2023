@@ -56,7 +56,7 @@ public class RobotControleur extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    System.out.println("teleopPeriodic()");   
+    //System.out.println("teleopPeriodic()");   
     
     robot.roues.conduireAvecManette(this.manette);
     SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  

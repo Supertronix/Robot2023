@@ -25,7 +25,6 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     	Manette.instance = null;    	
     }
 
- 
     public class Axe 
     {
       public Axe(double x, double y) 

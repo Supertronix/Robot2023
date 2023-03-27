@@ -3,7 +3,7 @@ package frc.robot;
 public interface Cinematique {
     public interface Roues
     {
-        public double FACTEUR_ROUES = 0.7;
+      public double FACTEUR_ROUES = 0.7;
     }
     public interface Manette
     {
@@ -18,12 +18,25 @@ public interface Cinematique {
     } 
     public interface Bras
     {
-      public static final float POSITION_AVANT = 12.75f;
+      // B = 0 - A = 6.5 - X = 13
+      // arriere pour scorer- centrer pour deplacement - devant pour ramasser
+      public static final float POSITION_AVANT = 11.75f;
+      public static final float POSITION_PENCHE_AVANT = 9f;
       public static final float POSTIION_MILIEU = 6.5f;
-      public static final float POSITION_ARRIERE = 0.875f;
+      public static final float POSITION_PENCHE_ARRIERE = 5f;
+      public static final float POSITION_ARRIERE = 1.875f;
     }
     public interface Machoire
     {
     }
     
 }
+/**
+ * 
+       public static final float POSITION_AVANT = 12.75f;
+      public static final float POSTIION_MILIEU = 6.5f;
+      public static final float POSITION_ARRIERE = 0.875f;
+      public static final float POSITION_PENCHE_AVANT = 8.5f;
+      public static final float POSITION_PENCHE_ARRIERE = 4.5f;
+
+ */

@@ -34,8 +34,8 @@ public class CommandeReleverBras extends CommandBase
     @Override
     public boolean isFinished() 
     {
-        System.out.println("isFinished()");
-        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
+        System.out.println("CommandeReleverBras.isFinished()");
+        //SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
         return true;
     }
 }
