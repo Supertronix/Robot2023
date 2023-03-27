@@ -9,7 +9,7 @@ public class CommandeFermerMachoire extends CommandBase {
 
     protected Machoire machoire = null;
     protected boolean finie = false;
-    protected double vitesse = 0.8;
+    protected double vitesse = Machoire.VITESSE;
 
     public CommandeFermerMachoire()
     {

@@ -29,9 +29,6 @@ public class DetecteurImmobilite implements Cinematique.Bras{
 		this.estImmobile = false;		
 	}
 
-	public static int INTERVALLE_IMMOBILITE = 1000;
-	public static double DISTANCE_NULLE = 5; // TODO peut-etre un ratio sur la distance
-
 	public void mesurer()
 	{
 		this.tempsActuel = System.currentTimeMillis();		

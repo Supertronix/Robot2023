@@ -12,7 +12,7 @@ public class CommandeCalibrerBras extends CommandBase {
 
     protected Bras bras = null;
     protected boolean finie = false;
-    protected double vitesse = 0.1;
+    protected double vitesse = 0.2;
     protected DetecteurImmobilite detecteurImmobilite;
 
     public CommandeCalibrerBras()
@@ -28,12 +28,13 @@ public class CommandeCalibrerBras extends CommandBase {
         System.out.println("CommandeCalibrerBras.initialize()");
         this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
     }
+    
     @Override
     public void execute() {
         System.out.println("CommandeCalibrerBras.execute()");
         this.bras.tourner(-vitesse);
-        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
         this.detecteurImmobilite.mesurer();
+        SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
 
     @Override

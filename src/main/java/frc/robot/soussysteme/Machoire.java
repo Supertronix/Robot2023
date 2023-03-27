@@ -3,11 +3,12 @@ package frc.robot.soussysteme;
 // import com.revrobotics.SparkMaxPIDController;
 // https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmaxlowlevel
 import frc.robot.Materiel;
+import frc.robot.Cinematique;
 import frc.robot.composant.Moteur;
 
 
 @SuppressWarnings("resource") // framework roborio appelle exit
-public class Machoire extends SousSysteme implements Materiel.Machoire
+public class Machoire extends SousSysteme implements Materiel.Machoire, Cinematique.Machoire
 {
     protected Moteur moteur;
 
