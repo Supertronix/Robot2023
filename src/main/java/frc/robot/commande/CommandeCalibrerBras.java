@@ -44,14 +44,9 @@ public class CommandeCalibrerBras extends CommandBase {
         this.detecteurDuree.initialiser();
     }
     
-    @Override
-    public void execute() {
-        System.out.println("CommandeCalibrerBras.execute()");
-        this.detecteurDuree.mesurer();
-        this.delais = System.currentTimeMillis() - this.depart;
-        //this.bras.reculer(vitesse / (delais/20));         // pour adoucir l'arrivee
-        
-        // ADOUCISSEMENT du mouvement apres un certain temps selon position
+
+    public double calculerVitesseAdoucie()
+    {
         double vitesseAdoucie = 0;
         if(brasEnAvant) 
         {
@@ -75,7 +70,18 @@ public class CommandeCalibrerBras extends CommandBase {
                 vitesseAdoucie = vitesse/delais; //(vitesse - vitesse*(delais/1000));
             }
         } 
-        this.bras.reculer(vitesseAdoucie);
+        return vitesseAdoucie;
+    }
+
+    @Override
+    public void execute() {
+        System.out.println("CommandeCalibrerBras.execute()");
+        this.detecteurDuree.mesurer();
+        this.delais = System.currentTimeMillis() - this.depart;
+        //this.bras.reculer(vitesse / (delais/20));         // pour adoucir l'arrivee
+        
+        // ADOUCISSEMENT du mouvement apres un certain temps selon position
+        this.bras.reculer(calculerVitesseAdoucie());
         //this.bras.reculer(vitesse - vitesse*(delais/1000));
         System.out.println("Delais " + this.delais);
 
