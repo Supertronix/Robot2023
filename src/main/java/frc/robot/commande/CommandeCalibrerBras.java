@@ -159,6 +159,9 @@ public class CommandeCalibrerBras extends CommandBase {
             }
         }
     }
+
+    boolean enReglage = false;
+    double debutReglage = 0;
     
     @Override
     public boolean isFinished() 
@@ -186,7 +189,22 @@ public class CommandeCalibrerBras extends CommandBase {
 
             //this.transitionnerEtat();
             //this.bras.reinitialiser();
-            this.bras.reglerPointDepart(); 
+            if(!enReglage) 
+            {
+                enReglage = true;
+                this.debutReglage = System.currentTimeMillis();
+                return false;
+            }
+            if(enReglage)
+            {
+                double maintenant = System.currentTimeMillis();
+                if((maintenant - debutReglage) > 1000)
+                {
+                    this.bras.reglerPointDepart(); 
+                    return true;
+                }
+                return false;
+            }
             return true;
         }
         
