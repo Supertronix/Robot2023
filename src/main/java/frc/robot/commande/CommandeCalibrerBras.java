@@ -38,10 +38,9 @@ public class CommandeCalibrerBras extends CommandBase {
         System.out.println("CommandeCalibrerBras.initialize()");
         this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
         this.depart = System.currentTimeMillis();
-        if(this.brasEnAvant)
-            this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER_AVANT);
-        else
-            this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
+
+        double tempsMaximal = (brasEnAvant)?Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER_AVANT:Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER;
+        this.detecteurDuree = new DetecteurDuree(tempsMaximal);
         this.detecteurDuree.initialiser();
     }
     
@@ -52,30 +51,31 @@ public class CommandeCalibrerBras extends CommandBase {
         this.delais = System.currentTimeMillis() - this.depart;
         //this.bras.reculer(vitesse / (delais/20));         // pour adoucir l'arrivee
         
+        // ADOUCISSEMENT du mouvement apres un certain temps selon position
+        double vitesseAdoucie = 0;
         if(brasEnAvant) 
         {
             if(delais < 1000)
             {
-                this.bras.reculer(vitesse);
+                vitesseAdoucie = vitesse;
             }
             else
             {
-                this.bras.reculer(vitesse/delais);
-                //this.bras.reculer(vitesse - vitesse*(delais/1000));
+                vitesseAdoucie = vitesse/delais; // vitesse*(delais/1000));
             }            
         }
         else
         {
             if(delais < 10)
             {
-                this.bras.reculer(vitesse);
+                vitesseAdoucie = vitesse;
             }
             else
             {
-                this.bras.reculer(vitesse/delais);
-                //this.bras.reculer(vitesse - vitesse*(delais/1000));
+                vitesseAdoucie = vitesse/delais; //(vitesse - vitesse*(delais/1000));
             }
-        }        
+        } 
+        this.bras.reculer(vitesseAdoucie);
         //this.bras.reculer(vitesse - vitesse*(delais/1000));
         System.out.println("Delais " + this.delais);
 
@@ -103,7 +103,7 @@ public class CommandeCalibrerBras extends CommandBase {
                 brasEnAvant = false;
                 this.bras.arreter();
             }
-            
+
             // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison 
             // - peu importe sa position
             if(this.detecteurImmobilite.estImmobile() ) 
