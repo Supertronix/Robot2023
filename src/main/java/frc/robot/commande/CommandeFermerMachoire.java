@@ -26,6 +26,7 @@ public class CommandeFermerMachoire extends CommandBase {
     public void initialize() 
     {
         System.out.println("CommandeFermerMachoire.initialize()");
+        this.detecteur.initialiser();
         this.finie = false;
     }
     @Override

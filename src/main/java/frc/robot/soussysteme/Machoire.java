@@ -23,10 +23,6 @@ public class Machoire extends SousSysteme implements Materiel.Machoire, Cinemati
         // configuration
         this.moteur.setOpenLoopRampRate(0);
     }
-    public void aller(double position)
-    {
-        System.out.println("Bras.aller()" + position);
-    }
 
     public void fermerAvecVitesse(double vitesse) {
         this.moteur.set(limiter(-vitesse));

@@ -42,11 +42,11 @@ public interface Cinematique {
     }
     public interface Machoire
     {
-      public double VITESSE = 2;
-      public double VITESSE_OUVRIR = 5;
-      public double VITESSE_FERMER = 3;
-      public double TEMPS_MAXIMUM_OUVRIR = 500;
-      public double TEMPS_MAXIMUM_FERMER = 500;
+      public double VITESSE = 1;
+      public double VITESSE_OUVRIR = 0.5;
+      public double VITESSE_FERMER = 0.5;
+      public double TEMPS_MAXIMUM_OUVRIR = 1000; // ms
+      public double TEMPS_MAXIMUM_FERMER = 1000; // ms
     }
     
 }

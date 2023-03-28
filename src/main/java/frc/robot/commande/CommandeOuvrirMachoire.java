@@ -26,6 +26,7 @@ public class CommandeOuvrirMachoire extends CommandBase {
     public void initialize() 
     {
         System.out.println("CommandeOuvrirMachoire.initialize()");
+        this.detecteur.initialiser();
         this.finie = false;
     }
     @Override
