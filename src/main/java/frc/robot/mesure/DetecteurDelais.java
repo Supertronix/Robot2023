@@ -6,7 +6,7 @@ public class DetecteurDelais{
 	protected double tempsActuel; 
 	protected boolean estTropLong;
 	protected double limite;
-					
+	
 	public interface Immobilisable
 	{
 		public double getDistancePourImmobilite();
@@ -32,7 +32,7 @@ public class DetecteurDelais{
 
 	public boolean estTropLong()
 	{
-		this.estTropLong = (this.tempsActuel- this.tempsDebut) > this.limite;
+		this.estTropLong = (this.tempsActuel - this.tempsDebut) > this.limite;
 		if(this.estTropLong) System.out.println("Delais trop long !");
 		return this.estTropLong;
 	}

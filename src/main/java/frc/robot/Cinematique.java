@@ -45,8 +45,8 @@ public interface Cinematique {
       public double VITESSE = 2;
       public double VITESSE_OUVRIR = 5;
       public double VITESSE_FERMER = 3;
-      public double TEMPS_MAXIMUM_OUVRIR = 2000;
-      public double TEMPS_MAXIMUM_FERMER = 2000;
+      public double TEMPS_MAXIMUM_OUVRIR = 500;
+      public double TEMPS_MAXIMUM_FERMER = 500;
     }
     
 }

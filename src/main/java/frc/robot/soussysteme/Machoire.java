@@ -35,6 +35,10 @@ public class Machoire extends SousSysteme implements Materiel.Machoire, Cinemati
         System.out.println("Machoire.ouvrirAvecVitesse("+vitesse+")");
         this.moteur.set(limiter(vitesse));
     }
+    public void arreter()
+    {
+        this.moteur.set(0);
+    }
 
     public void desactiver()
     {

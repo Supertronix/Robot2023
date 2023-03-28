@@ -42,6 +42,7 @@ public class CommandeOuvrirMachoire extends CommandBase {
         {
             System.out.println("CommandeOuvrirMachoire.isFinished() == true");
             this.finie = true;
+            this.machoire.arreter();
         }
         return this.finie;
     }
