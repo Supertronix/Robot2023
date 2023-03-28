@@ -19,8 +19,11 @@ public class CommandeCalibrerBras extends CommandBase {
     protected DetecteurImmobilite detecteurImmobilite;
     protected double depart = 0;
     protected double delais = 0;
-    protected static int essais = 0;
     protected DetecteurDuree detecteurDuree;
+
+    // pour recommencer apres 3 essais
+    protected static int essais = 0;
+    protected boolean brasEnAvant = false;
 
     public CommandeCalibrerBras()
     {
@@ -89,7 +92,25 @@ public class CommandeCalibrerBras extends CommandBase {
         SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
     }
 
-    boolean brasEnAvant = false;
+    // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison 
+    // - peu importe sa position
+    private boolean recommencerApresTroisEssais()
+    {
+        essais++;
+        System.out.println("Essais " + essais);
+        if(essais >= 2)
+        {
+            essais = 0; 
+            brasEnAvant = true;
+
+            // repartir a zero
+            this.initialize();
+            return true;
+        }
+        return false;
+    }
+    // Fin EASTER EGG
+
     @Override
     public boolean isFinished() 
     {
@@ -110,23 +131,10 @@ public class CommandeCalibrerBras extends CommandBase {
                 this.bras.arreter();
             }
 
-            // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison 
-            // - peu importe sa position
             if(this.detecteurImmobilite.estImmobile() ) 
             {
-                essais++;
-                System.out.println("Essais " + essais);
-                if(essais >= 2)
-                {
-                    essais = 0; 
-                    brasEnAvant = true;
-
-                    // repartir a zero
-                    this.initialize();
-                    return false;
-                }
+                if(this.recommencerApresTroisEssais()) return false;
             }
-            // Fin EASTER EGG
 
             this.bras.reglerPointDepart();         
             return true;
