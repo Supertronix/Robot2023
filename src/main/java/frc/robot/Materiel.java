@@ -5,6 +5,11 @@ public interface Materiel {
     public static int INTERRUPTEUR_DROIT = 11;
     public static int INTERRUPTEUR_GAUCHE = 12;
 
+    public interface Affichage
+    {
+      public static int SIGNAL_ANIMATION_LED = 1; // et plusieurs autres pour les modes
+    }
+
     public interface Roues
     {
         public int ROUE_AVANT_DROITE = 4; // ID 4 // roule avant
