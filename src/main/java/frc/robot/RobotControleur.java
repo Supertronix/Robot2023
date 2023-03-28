@@ -12,7 +12,7 @@ public class RobotControleur extends TimedRobot {
 
   protected Manette manette;
   protected Robot robot;
-  protected Testeur testeur;
+  //protected Testeur testeur;
   protected Contexte conteneur = null;
 
   @Override

@@ -21,6 +21,12 @@ public class CommandeCalibrerBras extends CommandBase {
     protected double delais = 0;
     protected DetecteurDuree detecteurDuree;
 
+    public enum ETAT {INACTIF, PREMIER_JET, SECOND_JET};
+    protected ETAT etat = ETAT.INACTIF;
+    public enum SOUS_ETAT {INACTIF, REMONTER, REDESCENDRE};
+    protected SOUS_ETAT sousetat = SOUS_ETAT.INACTIF;
+    protected double debutSousEtat = 0;
+
     // pour recommencer apres 3 essais
     protected static int essais = 0;
     protected boolean brasEnAvant = false;
@@ -29,25 +35,31 @@ public class CommandeCalibrerBras extends CommandBase {
     {
         System.out.println("new CommandeAbaisserBras()");
         this.bras = Robot.getInstance().bras;
-        this.bras.arreter();
-        this.bras.reinitialiser();
+        //this.bras.arreter();
+        //this.bras.reinitialiser();
         this.addRequirements(this.bras);
         this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
+        this.etat = ETAT.INACTIF;
     }
        
     @Override
     public void initialize() 
     {
         System.out.println("CommandeCalibrerBras.initialize()");
+        this.commencer();
+        this.bras.arreter();
+        this.bras.reinitialiser();
+    }
+    public void commencer()
+    {
         this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
         this.depart = System.currentTimeMillis();
-
         double tempsMaximal = (brasEnAvant)?Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER_AVANT:Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER;
         this.detecteurDuree = new DetecteurDuree(tempsMaximal);
         this.detecteurDuree.initialiser();
+        this.etat = ETAT.PREMIER_JET;  
     }
     
-
     public double calculerVitesseAdoucie()
     {
         double vitesseAdoucie = 0;
@@ -85,6 +97,21 @@ public class CommandeCalibrerBras extends CommandBase {
         
         // ADOUCISSEMENT du mouvement apres un certain temps selon position
         this.bras.reculer(calculerVitesseAdoucie());
+        /*
+        if(this.etat == ETAT.PREMIER_JET)
+        {
+            this.bras.reculer(calculerVitesseAdoucie());
+        }
+        else if (this.etat == ETAT.SECOND_JET)
+        {
+            if(this.sousetat == SOUS_ETAT.REMONTER)
+            {
+                System.out.println("REMONTER");
+                this.bras.avancer(0.2);
+            }
+        } 
+        */
+
         //this.bras.reculer(vitesse - vitesse*(delais/1000));
         System.out.println("Delais " + this.delais);
 
@@ -104,41 +131,65 @@ public class CommandeCalibrerBras extends CommandBase {
             brasEnAvant = true;
 
             // repartir a zero
-            this.initialize();
+            this.commencer();
             return true;
         }
         return false;
     }
     // Fin EASTER EGG
 
+    private void transitionnerEtat()
+    {
+        if(this.etat == ETAT.PREMIER_JET) 
+        {
+            System.out.println("SECOND_JET");
+            System.out.println("REMONTER");
+            this.etat = ETAT.SECOND_JET;
+            this.sousetat = SOUS_ETAT.REMONTER;
+            this.debutSousEtat = System.currentTimeMillis();
+        }
+        if(this.etat == ETAT.SECOND_JET)
+        {
+            System.out.println("SECOND_JET");
+            double maintenant = System.currentTimeMillis();
+            if(maintenant - this.debutSousEtat > 300)
+            {
+                System.out.println("REDESCENDRE");
+                this.sousetat = SOUS_ETAT.REDESCENDRE;
+            }
+        }
+    }
+    
     @Override
     public boolean isFinished() 
     {
         System.out.println("CommandeCalibrerBras.isFinished()");
+        if(this.detecteurImmobilite.estImmobile() ) 
+        {
+            System.out.println("this.detecteurImmobilite.estImmobile() == " + this.detecteurImmobilite.estImmobile());
+            if(this.recommencerApresTroisEssais()) return false;
+        }
+
         if(this.bras.estAuDepart() 
         || (this.detecteurImmobilite.estImmobile()&&!brasEnAvant) 
         || this.detecteurDuree.estTropLongue())
         {
-            System.out.println("this.bras.estAuDepart() == " + this.bras.estAuDepart());
-            System.out.println("this.detecteurImmobilite.estImmobile() == " + this.detecteurImmobilite.estImmobile());
-            System.out.println("this.detecteurDuree.estTropLongue() == " + this.detecteurDuree.estTropLongue());
             SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
 
             if(this.bras.estAuDepart() || this.detecteurDuree.estTropLongue())
             {
-                essais = 0;
-                brasEnAvant = false;
+                System.out.println("this.bras.estAuDepart() == " + this.bras.estAuDepart());
+                System.out.println("this.detecteurDuree.estTropLongue() == " + this.detecteurDuree.estTropLongue());
+                essais = 0; brasEnAvant = false; // recommencer les trois essais
                 this.bras.arreter();
             }
 
-            if(this.detecteurImmobilite.estImmobile() ) 
-            {
-                if(this.recommencerApresTroisEssais()) return false;
-            }
-
-            this.bras.reglerPointDepart();         
+            //this.transitionnerEtat();
+            //this.bras.reinitialiser();
+            this.bras.reglerPointDepart(); 
             return true;
         }
+        
         return false;
     }
 }

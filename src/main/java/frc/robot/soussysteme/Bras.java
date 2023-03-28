@@ -3,6 +3,9 @@ package frc.robot.soussysteme;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxRelativeEncoder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.RelativeEncoder;
 import frc.robot.Materiel;
@@ -102,6 +105,7 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     {
         //System.out.println("tourner()");
         this.moteurPrincipal.set(limiter(vitesse));
+        SmartDashboard.putNumber("Vitesse bras", vitesse);
         //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
         //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
     }
@@ -109,6 +113,7 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     {
         //System.out.println("tourner()");
         this.moteurPrincipal.set(limiter(-vitesse));
+        SmartDashboard.putNumber("Vitesse bras", -vitesse);
         //SmartDashboard.putBoolean("Forward Limit Switch", limiteAvant.isPressed());
         //SmartDashboard.putBoolean("Reverse Limit Switch", limiteArriere.isPressed());
     }
