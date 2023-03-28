@@ -23,13 +23,13 @@ public class ManetteTestBras extends Manette{
         // non deprecated version for this year is the CommandXboxController. 
         this.manette = new Joystick(MANETTE);
 
-        this.boutonTestCalibration = new JoystickButton(this.manette, BOUTON_Y);
-        Command commandeCalibration= new CommandeCalibrerBras();
-        this.boutonTestCalibration.whenPressed(commandeCalibration);
+        //this.boutonTestCalibration = new JoystickButton(this.manette, BOUTON_Y);
+        //Command commandeCalibration= new CommandeCalibrerBras();
+        //this.boutonTestCalibration.whenPressed(commandeCalibration);
 
-        this.boutonTestMouvement = new JoystickButton(this.manette, BOUTON_B);
-        Command commandeMouvement= new CommandeReleverBras(10);
-        this.boutonTestMouvement.whenPressed(commandeMouvement);
+        //this.boutonTestMouvement = new JoystickButton(this.manette, BOUTON_B);
+        //Command commandeMouvement= new CommandeReleverBras(10);
+        //this.boutonTestMouvement.whenPressed(commandeMouvement);
         
     }
 

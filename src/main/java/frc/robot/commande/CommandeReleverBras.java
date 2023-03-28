@@ -13,23 +13,39 @@ public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
     protected Bras bras = null;
     protected double position = 0;
     //protected DetecteurDuree detecteur;
-
-    public CommandeReleverBras(double position)
+    public CommandeReleverBras(POSITION nom)
     {
         System.out.println("new CommandeReleverBras()");
         this.bras = Robot.getInstance().bras;
+        this.bras.positionNom = nom;
+        this.position = POSITION_NUMERIQUE.get(nom);
+        this.addRequirements(this.bras);
+        //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
+    }
+
+    public CommandeReleverBras(POSITION nom, double position)
+    {
+        System.out.println("new CommandeReleverBras()");
+        this.bras = Robot.getInstance().bras;
+        this.bras.positionNom = nom;
         this.addRequirements(this.bras);
         this.position = position;
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
+    
     @Override
     public void initialize() 
     {
         System.out.println("CommandeReleverBras.initialize()");
         System.out.println("Position de depart du bras : " + this.bras.getPosition());
+
+        // rappeler au bras sa derniere position et lui indiquer la nouvelle
+        this.bras.rappelerPosition(this.bras.positionDemandee);
+        this.bras.positionDemandee = position;
+
+        // effectivement aller a la position
         this.bras.preparerCinematique(P, I, D);
         this.bras.aller(position);
-        //this.detecteur.initialiser();
     }
 
     @Override
@@ -43,6 +59,7 @@ public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
     public boolean isFinished() 
     {
         System.out.println("CommandeReleverBras.isFinished()");
+        this.bras.positionDemandee = position;
         //SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
         return true;
     }

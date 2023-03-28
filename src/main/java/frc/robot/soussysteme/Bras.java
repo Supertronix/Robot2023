@@ -16,10 +16,15 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
 {
     protected Moteur moteurPrincipal;
     protected Moteur moteurSecondaire;
+    public POSITION positionNom;
+    public double positionDemandee;
+
 
     public Bras()
     {
         System.out.println("new Bras()");
+        this.positionNom = POSITION.INCONNUE;
+        this.positionDemandee = POSITION_INCONNUE;
         
         // creer
         this.moteurPrincipal = new Moteur(MOTEUR_PRINCIPAL).avecLimites();
@@ -134,6 +139,11 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         System.out.println("Facteur : " + this.moteurPrincipal.getEncoder().getPositionConversionFactor());
         System.out.println("Position 2 : " + this.moteurSecondaire.getEncoder().getPosition());
         System.out.println("Facteur 2 : " + this.moteurSecondaire.getEncoder().getPositionConversionFactor());
+    }
+    public void rappelerPosition(double position)
+    {
+        if(positionDemandee != Cinematique.Bras.POSITION_INCONNUE) 
+            this.moteurPrincipal.getEncoder().setPosition(position);
     }
     public boolean estAuDepart()
     {

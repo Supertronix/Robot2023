@@ -1,5 +1,8 @@
 package frc.robot;
 
+import java.util.Map;
+import static java.util.Map.entry; 
+
 public interface Cinematique {
 
     public interface Roues
@@ -26,6 +29,14 @@ public interface Cinematique {
       public static final float POSTIION_MILIEU = 6.6f;
       public static final float POSITION_PENCHE_ARRIERE = 4.5f;
       public static final float POSITION_ARRIERE = 1.75f;
+      public enum POSITION {POSITION_AVANT, POSITION_PENCHE_AVANT, POSTIION_MILIEU, POSITION_PENCHE_ARRIERE, POSITION_ARRIERE, AJUSTEE, INCONNUE};
+      public static final double POSITION_INCONNUE = -1;
+      Map<POSITION, Float> POSITION_NUMERIQUE = Map.ofEntries(
+        entry(POSITION.POSITION_AVANT, POSITION_AVANT),
+        entry(POSITION.POSITION_PENCHE_AVANT, POSITION_PENCHE_AVANT),
+        entry(POSITION.POSTIION_MILIEU, POSTIION_MILIEU),
+        entry(POSITION.POSITION_PENCHE_ARRIERE, POSITION_PENCHE_ARRIERE),
+        entry(POSITION.POSITION_ARRIERE, POSITION_ARRIERE));
 
       //public static final double P = 0.05;
       //public static final double I = 0.000001;//0.0001;  // gros = bang bang
@@ -39,6 +50,8 @@ public interface Cinematique {
       public static double TEMPS_MAXIMUM_CALIBRER_AVANT = 1600;
       public static double DISTANCE_NULLE = 2; 
       // TODO peut-etre un ratio sur la distance
+
+
     
     }
     public interface Machoire
