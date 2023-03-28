@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.soussysteme.Bras;
 import frc.robot.Cinematique;
 import frc.robot.Robot;
-//import frc.robot.mesure.DetecteurDelais;
+//import frc.robot.mesure.DetecteurDuree;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
 public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
 {
     protected Bras bras = null;
     protected double position = 0;
-    //protected DetecteurDelais detecteur;
+    //protected DetecteurDuree detecteur;
 
     public CommandeReleverBras(double position)
     {
@@ -20,12 +20,13 @@ public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
         this.bras = Robot.getInstance().bras;
         this.addRequirements(this.bras);
         this.position = position;
-        //this.detecteur = new DetecteurDelais(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
+        //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
     @Override
     public void initialize() 
     {
         System.out.println("CommandeReleverBras.initialize()");
+        System.out.println("Position de depart du bras : " + this.bras.getPosition());
         this.bras.preparerCinematique(P, I, D);
         this.bras.aller(position);
         //this.detecteur.initialiser();

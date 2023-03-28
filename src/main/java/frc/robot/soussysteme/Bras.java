@@ -81,6 +81,10 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
     {
         return this.encodeur.getPosition();
     }
+    public double getPosition2()
+    {
+        return this.moteurSecondaire.getEncoder().getPosition();
+    }
 
     public void tourner(double vitesse)
     {
@@ -120,10 +124,16 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         this.moteurPrincipal.close();
         this.moteurSecondaire.close();
     }
-    public void initialiser()
+    public void reglerPointDepart()
     {
         System.out.println("Bras.initialiser()");
-        this.moteurPrincipal.getEncoder().setPosition(0);
+
+        while(Math.abs(this.moteurPrincipal.getEncoder().getPosition()) > 1)
+            this.moteurPrincipal.getEncoder().setPosition(0);
+        System.out.println("Position : " + this.moteurPrincipal.getEncoder().getPosition());
+        System.out.println("Facteur : " + this.moteurPrincipal.getEncoder().getPositionConversionFactor());
+        System.out.println("Position 2 : " + this.moteurSecondaire.getEncoder().getPosition());
+        System.out.println("Facteur 2 : " + this.moteurSecondaire.getEncoder().getPositionConversionFactor());
     }
     public boolean estAuDepart()
     {

@@ -21,11 +21,11 @@ public interface Cinematique {
     {
       // B = 0 - A = 6.5 - X = 13
       // arriere pour scorer- centrer pour deplacement - devant pour ramasser
-      public static final float POSITION_AVANT = 11.75f;
+      public static final float POSITION_AVANT = 11.5f;
       public static final float POSITION_PENCHE_AVANT = 9f;
-      public static final float POSTIION_MILIEU = 6.85f;
-      public static final float POSITION_PENCHE_ARRIERE = 5f;
-      public static final float POSITION_ARRIERE = 2f;
+      public static final float POSTIION_MILIEU = 6.6f;
+      public static final float POSITION_PENCHE_ARRIERE = 4.5f;
+      public static final float POSITION_ARRIERE = 1.75f;
 
       //public static final double P = 0.05;
       //public static final double I = 0.000001;//0.0001;  // gros = bang bang
@@ -34,8 +34,9 @@ public interface Cinematique {
       public static final double D = 8;
       public static final double MAX = 0.3;
 
-      public static int INTERVALLE_IMMOBILITE = 500;
-      public static double TEMPS_MAXIMUM_CALIBRER = 2000;
+      public static int INTERVALLE_IMMOBILITE = 250;
+      public static double TEMPS_MAXIMUM_CALIBRER = 800;
+      public static double TEMPS_MAXIMUM_CALIBRER_AVANT = 1600;
       public static double DISTANCE_NULLE = 2; 
       // TODO peut-etre un ratio sur la distance
     

@@ -5,7 +5,7 @@ import frc.robot.soussysteme.Bras;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Cinematique;
 import frc.robot.Robot;
-import frc.robot.mesure.DetecteurDelais;
+import frc.robot.mesure.DetecteurDuree;
 import frc.robot.mesure.DetecteurImmobilite;
 import frc.robot.mesure.DetecteurImmobilite.*;
 
@@ -20,7 +20,7 @@ public class CommandeCalibrerBras extends CommandBase {
     protected double depart = 0;
     protected double delais = 0;
     protected static int essais = 0;
-    protected DetecteurDelais detecteur;
+    protected DetecteurDuree detecteurDuree;
 
     public CommandeCalibrerBras()
     {
@@ -29,7 +29,7 @@ public class CommandeCalibrerBras extends CommandBase {
         this.bras.arreter();
         this.bras.reinitialiser();
         this.addRequirements(this.bras);
-        this.detecteur = new DetecteurDelais(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
+        this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
     }
        
     @Override
@@ -38,29 +38,44 @@ public class CommandeCalibrerBras extends CommandBase {
         System.out.println("CommandeCalibrerBras.initialize()");
         this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
         this.depart = System.currentTimeMillis();
-        this.detecteur.initialiser();
+        if(this.brasEnAvant)
+            this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER_AVANT);
+        else
+            this.detecteurDuree = new DetecteurDuree(Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER);
+        this.detecteurDuree.initialiser();
     }
     
     @Override
     public void execute() {
         System.out.println("CommandeCalibrerBras.execute()");
-        this.detecteur.mesurer();
-
-        // pour adoucir l'arrivee
+        this.detecteurDuree.mesurer();
         this.delais = System.currentTimeMillis() - this.depart;
-        this.bras.reculer(vitesse / (delais/20));
+        //this.bras.reculer(vitesse / (delais/20));         // pour adoucir l'arrivee
         
-        if(brasEnAvant) this.bras.reculer(vitesse);
-        else if(delais < 10)
+        if(brasEnAvant) 
         {
-            this.bras.reculer(vitesse);
+            if(delais < 1000)
+            {
+                this.bras.reculer(vitesse);
+            }
+            else
+            {
+                this.bras.reculer(vitesse/delais);
+                //this.bras.reculer(vitesse - vitesse*(delais/1000));
+            }            
         }
         else
         {
-            this.bras.reculer(vitesse/delais);
-            //this.bras.reculer(vitesse - vitesse*(delais/1000));
-        }
-        
+            if(delais < 10)
+            {
+                this.bras.reculer(vitesse);
+            }
+            else
+            {
+                this.bras.reculer(vitesse/delais);
+                //this.bras.reculer(vitesse - vitesse*(delais/1000));
+            }
+        }        
         //this.bras.reculer(vitesse - vitesse*(delais/1000));
         System.out.println("Delais " + this.delais);
 
@@ -73,33 +88,41 @@ public class CommandeCalibrerBras extends CommandBase {
     public boolean isFinished() 
     {
         System.out.println("CommandeCalibrerBras.isFinished()");
-        if(this.bras.estAuDepart() || (this.detecteurImmobilite.estImmobile()&&!brasEnAvant) || this.detecteur.estTropLong())
+        if(this.bras.estAuDepart() 
+        || (this.detecteurImmobilite.estImmobile()&&!brasEnAvant) 
+        || this.detecteurDuree.estTropLongue())
         {
             System.out.println("this.bras.estAuDepart() == " + this.bras.estAuDepart());
             System.out.println("this.detecteurImmobilite.estImmobile() == " + this.detecteurImmobilite.estImmobile());
-            this.bras.arreter();
-            this.bras.initialiser();
+            System.out.println("this.detecteurDuree.estTropLongue() == " + this.detecteurDuree.estTropLongue());
             SmartDashboard.putNumber("Position Bras", this.bras.getPosition());  
 
-            // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison - peu importe sa position
-            if(this.bras.estAuDepart() )
+            if(this.bras.estAuDepart() || this.detecteurDuree.estTropLongue())
             {
                 essais = 0;
                 brasEnAvant = false;
+                this.bras.arreter();
             }
-            if(this.detecteurImmobilite.estImmobile()) 
+            
+            // EASTER EGG !!! on presse 3x sur le bouton homing pour le ramener à la maison 
+            // - peu importe sa position
+            if(this.detecteurImmobilite.estImmobile() ) 
             {
                 essais++;
-                if(essais >= 3)
+                System.out.println("Essais " + essais);
+                if(essais >= 2)
                 {
                     essais = 0; 
                     brasEnAvant = true;
+
+                    // repartir a zero
+                    this.initialize();
                     return false;
                 }
             }
-            System.out.println("Essais " + essais);
             // Fin EASTER EGG
-            
+
+            this.bras.reglerPointDepart();         
             return true;
         }
         return false;

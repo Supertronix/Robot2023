@@ -3,7 +3,7 @@ package frc.robot.commande;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Cinematique;
 import frc.robot.Robot;
-import frc.robot.mesure.DetecteurDelais;
+import frc.robot.mesure.DetecteurDuree;
 import frc.robot.soussysteme.Machoire;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
@@ -12,14 +12,14 @@ public class CommandeFermerMachoire extends CommandBase {
     protected Machoire machoire = null;
     protected boolean finie = false;
     protected double vitesse = Machoire.VITESSE_OUVRIR;
-    protected DetecteurDelais detecteur;
+    protected DetecteurDuree detecteur;
 
     public CommandeFermerMachoire()
     {
         System.out.println("new CommandeFermerMachoire()");
         this.machoire = Robot.getInstance().machoire;
         this.addRequirements(this.machoire);
-        this.detecteur = new DetecteurDelais(Cinematique.Machoire.TEMPS_MAXIMUM_FERMER);
+        this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_FERMER);
     }
        
     @Override
@@ -39,7 +39,7 @@ public class CommandeFermerMachoire extends CommandBase {
     @Override
     public boolean isFinished() 
     {
-        if(this.machoire.estFermee() || this.detecteur.estTropLong())
+        if(this.machoire.estFermee() || this.detecteur.estTropLongue())
         {
             System.out.println("CommandeFermerMachoire.isFinished() == true");
             this.machoire.arreter();
