@@ -8,12 +8,12 @@ import frc.robot.Robot;
 //import frc.robot.mesure.DetecteurDuree;
 
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
-public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
+public class CommandeDeplacerBras extends CommandBase implements Cinematique.Bras
 {
     protected Bras bras = null;
     protected double position = 0;
     //protected DetecteurDuree detecteur;
-    public CommandeReleverBras(POSITION nom)
+    public CommandeDeplacerBras(POSITION nom)
     {
         System.out.println("new CommandeReleverBras()");
         this.bras = Robot.getInstance().bras;
@@ -23,7 +23,7 @@ public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
 
-    public CommandeReleverBras(POSITION nom, double position)
+    public CommandeDeplacerBras(POSITION nom, double position)
     {
         System.out.println("new CommandeReleverBras()");
         this.bras = Robot.getInstance().bras;
@@ -44,7 +44,13 @@ public class CommandeReleverBras extends CommandBase implements Cinematique.Bras
         this.bras.positionDemandee = position;
 
         // effectivement aller a la position
-        this.bras.preparerCinematique(P, I, D);
+        double deplacement = this.position - this.bras.positionDemandee;
+        if(deplacement > SEUIL_GRAND_MOUVEMENT)
+            this.bras.preparerCinematique(GRAND_MOUVEMENT.P, GRAND_MOUVEMENT.I, GRAND_MOUVEMENT.D);
+        else if(deplacement > SEUIL_PETIT_MOUVEMENT)
+            this.bras.preparerCinematique(GRAND_MOUVEMENT.P, GRAND_MOUVEMENT.I, GRAND_MOUVEMENT.D);
+        else 
+            this.bras.preparerCinematique(GRAND_MOUVEMENT.P, GRAND_MOUVEMENT.I, GRAND_MOUVEMENT.D);
         this.bras.aller(position);
     }
 

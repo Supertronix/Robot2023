@@ -45,6 +45,37 @@ public interface Cinematique {
       public static final double D = 8;
       public static final double MAX = 0.3;
 
+      public static double SEUIL_GRAND_MOUVEMENT = 10;
+      public static double SEUIL_PETIT_MOUVEMENT = 4;
+      public interface GRAND_MOUVEMENT
+      {
+        public static final double P = 0.1;
+        public static final double I = 0.000002;//0.0001;  // gros = bang bang
+        public static final double D = 8;
+        public static final double MAX = 0.3;  
+      }
+      public interface MOYEN_MOUVEMENT
+      {
+        public static final double P = 0.1;
+        public static final double I = 0.000002;//0.0001;  // gros = bang bang
+        public static final double D = 8;
+        public static final double MAX = 0.3;  
+      }
+      public interface PETIT_MOUVEMENT
+      {
+        public static final double P = 0.1;
+        public static final double I = 0.000002;//0.0001;  // gros = bang bang
+        public static final double D = 8;
+        public static final double MAX = 0.3;  
+      }
+      public interface INCREMENT
+      {
+        public static final double P = 0.1;
+        public static final double I = 0.000002;//0.0001;  // gros = bang bang
+        public static final double D = 8;
+        public static final double MAX = 0.3;  
+      }
+
       public static int INTERVALLE_IMMOBILITE = 250;
       public static double TEMPS_MAXIMUM_CALIBRER = 800;
       public static double TEMPS_MAXIMUM_CALIBRER_AVANT = 1600;

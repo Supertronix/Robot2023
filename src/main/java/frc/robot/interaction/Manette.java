@@ -51,11 +51,11 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
       this.axeMainGauche.y = this.axeMainGauche.y - BIAIS_AXE_GAUCHE_Y;
       return this.axeMainGauche;
     }
-    public double getDeclencheurMainGauche() 
+    public double getPressionMainGauche() 
     {
     	return manette.getRawAxis(MAIN_GAUCHE_AXE);
     }
-    public double getDeclencheurMainDroite() 
+    public double getPressionMainDroite() 
     {
     	return manette.getRawAxis(MAIN_DROITE_AXE);
     }

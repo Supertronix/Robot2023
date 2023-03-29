@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commande.CommandeCalibrerBras;
 import frc.robot.commande.CommandeFermerMachoire;
 import frc.robot.commande.CommandeOuvrirMachoire;
-import frc.robot.commande.CommandeReleverBras;
-import frc.robot.Cinematique;
+import frc.robot.commande.CommandeDeplacerBras;
 import frc.robot.Cinematique.Bras.POSITION;
 
 // https://docs.wpilib.org/en/2020/docs/software/old-commandbased/commands/running-commands-joystick-input.html
@@ -36,23 +35,23 @@ public class ManetteCompetition extends Manette {
         this.boutonMaison.whenPressed(commandeCalibration);
 
         this.boutonDemarrer = new JoystickButton(this.manette, BOUTON_A);
-        Command commandeMilieu = new CommandeReleverBras(POSITION.POSTIION_MILIEU);
+        Command commandeMilieu = new CommandeDeplacerBras(POSITION.POSTIION_MILIEU);
         this.boutonDemarrer.whenPressed(commandeMilieu);
 
         this.boutonArriere = new JoystickButton(this.manette, BOUTON_X);
-        Command commandeArriere = new CommandeReleverBras(POSITION.POSITION_AVANT);
+        Command commandeArriere = new CommandeDeplacerBras(POSITION.POSITION_AVANT);
         this.boutonArriere.whenPressed(commandeArriere);
 
         this.boutonPencheDevant = new JoystickButton(this.manette, BOUTON_B);
-        Command commandePencheDevant = new CommandeReleverBras(POSITION.POSITION_ARRIERE);
+        Command commandePencheDevant = new CommandeDeplacerBras(POSITION.POSITION_ARRIERE);
         this.boutonPencheDevant.whenPressed(commandePencheDevant);
 
         this.boutonDevant = new JoystickButton(this.manette, BOUTON_DEMARRER);
-        Command commandeDevant = new CommandeReleverBras(POSITION.POSITION_PENCHE_AVANT);
+        Command commandeDevant = new CommandeDeplacerBras(POSITION.POSITION_PENCHE_AVANT);
         this.boutonDevant.whenPressed(commandeDevant);
 
         this.boutonPencheArriere = new JoystickButton(this.manette, BOUTON_RETOUR);
-        Command commandePencheArriere = new CommandeReleverBras(POSITION.POSITION_PENCHE_ARRIERE);
+        Command commandePencheArriere = new CommandeDeplacerBras(POSITION.POSITION_PENCHE_ARRIERE);
         this.boutonPencheArriere.whenPressed(commandePencheArriere);
         
         this.boutonMainDroite = new JoystickButton(this.manette, BOUTON_MAIN_DROITE);
