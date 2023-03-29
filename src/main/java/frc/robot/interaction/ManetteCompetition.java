@@ -31,27 +31,27 @@ public class ManetteCompetition extends Manette {
     {
         this.manette = new Joystick(MANETTE);
 
-        this.boutonMaison = new JoystickButton(this.manette, BOUTON_RETOUR);
+        this.boutonMaison = new JoystickButton(this.manette, BOUTON_Y);
         Command commandeCalibration = new CommandeCalibrerBras();
         this.boutonMaison.whenPressed(commandeCalibration);
 
-        this.boutonDemarrer = new JoystickButton(this.manette, BOUTON_DEMARRER);
+        this.boutonDemarrer = new JoystickButton(this.manette, BOUTON_A);
         Command commandeMilieu = new CommandeReleverBras(POSITION.POSTIION_MILIEU);
         this.boutonDemarrer.whenPressed(commandeMilieu);
 
-        this.boutonDevant = new JoystickButton(this.manette, BOUTON_Y);
-        Command commandeDevant = new CommandeReleverBras(POSITION.POSITION_AVANT);
-        this.boutonDevant.whenPressed(commandeDevant);
-
         this.boutonArriere = new JoystickButton(this.manette, BOUTON_X);
-        Command commandeArriere = new CommandeReleverBras(POSITION.POSITION_ARRIERE);
+        Command commandeArriere = new CommandeReleverBras(POSITION.POSITION_AVANT);
         this.boutonArriere.whenPressed(commandeArriere);
 
         this.boutonPencheDevant = new JoystickButton(this.manette, BOUTON_B);
-        Command commandePencheDevant = new CommandeReleverBras(POSITION.POSITION_PENCHE_AVANT);
+        Command commandePencheDevant = new CommandeReleverBras(POSITION.POSITION_ARRIERE);
         this.boutonPencheDevant.whenPressed(commandePencheDevant);
 
-        this.boutonPencheArriere = new JoystickButton(this.manette, BOUTON_A);
+        this.boutonDevant = new JoystickButton(this.manette, BOUTON_DEMARRER);
+        Command commandeDevant = new CommandeReleverBras(POSITION.POSITION_PENCHE_AVANT);
+        this.boutonDevant.whenPressed(commandeDevant);
+
+        this.boutonPencheArriere = new JoystickButton(this.manette, BOUTON_RETOUR);
         Command commandePencheArriere = new CommandeReleverBras(POSITION.POSITION_PENCHE_ARRIERE);
         this.boutonPencheArriere.whenPressed(commandePencheArriere);
         
