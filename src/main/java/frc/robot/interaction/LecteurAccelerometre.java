@@ -22,4 +22,9 @@ public class LecteurAccelerometre {
         this.pitch = this.accelerometre.getPitch();
         return this.pitch;
     }
+
+    public boolean depasseSeuil()
+    {
+        return (Math.abs(this.getPitch()) >= SEUIL_PENTE);
+    }
 }

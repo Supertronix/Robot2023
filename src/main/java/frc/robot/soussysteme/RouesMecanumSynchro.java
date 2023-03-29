@@ -59,4 +59,21 @@ public class RouesMecanumSynchro extends RouesMecanum {
         pid.setReference(pas, CANSparkMax.ControlType.kPosition); // reculer 
         //pid.setReference(50, CANSparkMax.ControlType.kPosition);
     }
-}
+    public void avancerAvecVitesse(double vitesse)
+    {
+        System.out.println("avancerAvecVitesse()");
+        this.roueAvantDroite.set(vitesse);
+    }
+    public void reinitialiser()
+    {
+        this.preparerCinematique(0,0,0);
+        this.pid.setOutputRange(-0, 0); 
+        this.avancerAvecVitesse(0);
+    }
+    public void preparerCinematique(double p, double i, double d)
+    {
+        this.pid.setP(p);
+        this.pid.setI(i);
+        this.pid.setD(d);
+        //this.pid.setOutputRange(-MAX, MAX); 
+    }}

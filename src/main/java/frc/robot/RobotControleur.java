@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Cinematique.Bras.POSITION;
 import frc.robot.commande.CommandeAvancer;
+import frc.robot.commande.CommandeAvancerJusquaPlateforme;
 import frc.robot.commande.CommandeCalibrerBras;
 import frc.robot.commande.CommandeDeplacerBras;
 import frc.robot.commande.CommandeFermerMachoire;
@@ -47,10 +48,20 @@ public class RobotControleur extends TimedRobot {
     System.out.println("autonomousInit()");
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
+    System.out.println("CHOIX MODE AUTONOME = " + choix);
+/* 
     switch(choix)
     {
       case 3:
-
+      modeAutonome = new SequentialCommandGroup(
+        //new CommandeFermerMachoire(),
+        new CommandeAvancer(6),
+        new CommandeCalibrerBras(),
+        new CommandeOuvrirMachoire(),
+        new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
+        //new CommandeAvancer(6),
+        new CommandeAvancerJusquaPlateforme()
+        );
       break;
       case 0:
         modeAutonome = new SequentialCommandGroup(
@@ -64,6 +75,7 @@ public class RobotControleur extends TimedRobot {
       break;
     }
       if(modeAutonome != null)modeAutonome.schedule(); 
+      */
   }
 
   @Override
