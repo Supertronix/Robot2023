@@ -43,7 +43,7 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
 
         // effectivement aller a la position
         this.bras.preparerCinematique(INCREMENT.P, INCREMENT.I, INCREMENT.D);
-        this.bras.aller(position);
+        this.bras.aller(this.position);
     }
 
     @Override

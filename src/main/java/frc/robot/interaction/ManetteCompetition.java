@@ -38,7 +38,7 @@ public class ManetteCompetition extends Manette {
         this.boutonPressionMainDroite = new BoutonDeclencheur(manette, MAIN_DROITE_AXE);
         //this.boutonPressionMainGauche.whenPressed(new CommandeAjusterBras(0.3));
         //this.boutonPressionMainDroite.whenPressed(new CommandeAjusterBras(-0.3));
-        this.boutonPressionMainGauche.setCommande(new CommandeAjusterBras(0.2));
+        this.boutonPressionMainGauche.setCommande(new CommandeAjusterBras(-0.2));
         this.boutonPressionMainDroite.setCommande(new CommandeAjusterBras(0.2));
 
 
