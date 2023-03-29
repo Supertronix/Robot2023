@@ -1,4 +1,7 @@
 package frc.robot;
+import java.util.Map;
+import static java.util.Map.entry; 
+
 
 public interface Materiel {
 
@@ -36,7 +39,21 @@ public interface Materiel {
       public static final int BATON_DROIT_AXE_Y = 5;
       public static final int MAIN_GAUCHE_AXE = 2;
       public static final int MAIN_DROITE_AXE = 3;
-    } 
+
+      public enum ANGLE {HAUT, HAUT_DROIT, DROIT, BAS_DROIT, BAS, BAS_GAUCHE, GAUCHE, HAUT_GAUCHE};
+        
+      Map<ANGLE, Integer> ANGLE_POV = Map.ofEntries(
+            entry(ANGLE.HAUT, 0),
+            entry(ANGLE.HAUT_DROIT, 45),
+            entry(ANGLE.DROIT, 90),
+            entry(ANGLE.BAS_DROIT, 135),
+            entry(ANGLE.BAS, 180),
+            entry(ANGLE.BAS_GAUCHE, 225),
+            entry(ANGLE.GAUCHE, 270),
+            entry(ANGLE.HAUT_GAUCHE, 315)
+            );
+    
+    }
     public interface Bras
     {
       public static final int MOTEUR_PRINCIPAL = 5; // tourne vers la batterie

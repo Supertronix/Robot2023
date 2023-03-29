@@ -67,5 +67,6 @@ public class ManetteCompetition extends Manette {
     {
     	
     }
+    
 }
 // this.boutonControllerAttrapeur.whenReleased(new CommandeArmerAttrapeur());

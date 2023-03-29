@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Materiel;
 import frc.robot.Cinematique;
 import java.lang.Math;
+import edu.wpi.first.wpilibj2.command.button.*; // POVButton
 
 public class Manette implements Materiel.Manette, Cinematique.Manette {
 
@@ -77,6 +78,29 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     {
     	System.out.println("Manette.savoirSiBoutonGauchePresse()");
     	return this.manette.getRawButtonPressed(BOUTON_MAIN_GAUCHE);
+    }
+
+    protected POVButton povHaut;
+    protected POVButton povHautDroit;
+    protected POVButton povDroit;
+    protected POVButton povBasDroit;
+    protected POVButton povBas;
+    protected POVButton povBasGauche;
+    protected POVButton povGauche;
+    protected POVButton povHautGauche;
+
+    //On joysticks, the POV is a directional hat that can select one of 8 different angles or read -1 for unpressed.
+    //for(int i = 0; i < 8; i++) {
+    public void preparerPointDeVue()
+    {
+      this.povHaut = new POVButton(manette, ANGLE_POV.get(ANGLE.HAUT));
+      this.povHautDroit = new POVButton(manette, ANGLE_POV.get(ANGLE.HAUT_DROIT));
+      this.povDroit = new POVButton(manette, ANGLE_POV.get(ANGLE.DROIT));
+      this.povBasDroit = new POVButton(manette, ANGLE_POV.get(ANGLE.BAS_DROIT));
+      this.povBas = new POVButton(manette, ANGLE_POV.get(ANGLE.BAS));
+      this.povBasGauche = new POVButton(manette, ANGLE_POV.get(ANGLE.BAS_GAUCHE));
+      this.povGauche = new POVButton(manette, ANGLE_POV.get(ANGLE.GAUCHE));
+      this.povHautGauche = new POVButton(manette, ANGLE_POV.get(ANGLE.HAUT_GAUCHE));
     }
     
     public void executerActions()
