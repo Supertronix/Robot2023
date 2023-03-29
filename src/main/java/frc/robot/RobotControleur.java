@@ -11,7 +11,9 @@ import frc.robot.commande.CommandeAvancer;
 import frc.robot.commande.CommandeAvancerJusquaPlateforme;
 import frc.robot.commande.CommandeCalibrerBras;
 import frc.robot.commande.CommandeDeplacerBras;
+import frc.robot.commande.CommandeDormir;
 import frc.robot.commande.CommandeFermerMachoire;
+import frc.robot.commande.CommandeMaintenirRobot;
 import frc.robot.commande.CommandeMonterPlateforme;
 import frc.robot.commande.CommandeOuvrirMachoire;
 import frc.robot.interaction.*;
@@ -64,10 +66,15 @@ public class RobotControleur extends TimedRobot {
         //new CommandeAvancer(6),
         new CommandeAvancerJusquaPlateforme(),
         new ParallelCommandGroup(
-          new CommandeDeplacerBras(POSITION.POSITION_AVANT),
+          new SequentialCommandGroup(
+              new CommandeDeplacerBras(POSITION.POSITION_AVANT),
+              new CommandeDormir(1000),
+              new CommandeDeplacerBras(POSITION.POSITION_ARRIERE)
+          ),
           new CommandeMonterPlateforme()
         ),
-        new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
+        new CommandeAvancer(-10),
+        new CommandeMaintenirRobot()
         );
       break;
       case 0:

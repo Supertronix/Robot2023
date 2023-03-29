@@ -151,4 +151,9 @@ public class RouesMecanum extends Roues {
         this.roueArriereGauche.set(limiter(vitesseArriereGauche));
         this.roueArriereDroite.set(limiter(vitesseArriereDroite));
     }
+
+    public double getPosition()
+    {
+        return this.roueAvantDroite.getEncoder().getPosition();
+    }
 }
