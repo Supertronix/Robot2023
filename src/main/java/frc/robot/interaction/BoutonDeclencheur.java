@@ -44,13 +44,20 @@ public class BoutonDeclencheur extends Button{
     {
         if (Math.abs(manette.getRawAxis(axe)) > maximum)
         {
-            estDeclenche = true;
+            this.estDeclenche = true;
         }
         else if (Math.abs(manette.getRawAxis(axe)) < minimum)
         {
-            estDeclenche = false;
+            this.estDeclenche = false;
+            this.commandeEnCours = false;
         }
-        return estDeclenche;
+        return this.estDeclenche;
+    }
+    protected boolean commandeEnCours = false;
+    public void declencher()
+    {
+        if(!this.commandeEnCours) this.commande.initialize();
+        this.commandeEnCours = true;
     }
 
 }

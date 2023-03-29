@@ -80,11 +80,11 @@ public class ManetteCompetition extends Manette {
     {
     	if(this.boutonPressionMainGauche.getAsBoolean())
         {
-            this.boutonPressionMainGauche.getCommande().initialize();
+            this.boutonPressionMainGauche.declencher();;
         }
     	if(this.boutonPressionMainDroite.getAsBoolean())
         {
-            this.boutonPressionMainDroite.getCommande().initialize();
+            this.boutonPressionMainDroite.declencher();
         }
     }
     
