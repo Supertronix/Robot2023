@@ -41,7 +41,7 @@ public class CommandeDeplacerBras extends CommandBase implements Cinematique.Bra
         SmartDashboard.putNumber("Position demandee", this.position);
 
         // rappeler au bras sa derniere position et lui indiquer la nouvelle
-        this.bras.rappelerPosition(this.bras.positionDemandee);
+        //this.bras.rappelerPosition(this.bras.positionDemandee);
         this.bras.positionDemandee = position;
 
         // effectivement aller a la position

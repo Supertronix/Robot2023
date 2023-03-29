@@ -28,7 +28,7 @@ public interface Cinematique {
       public static final float POSITION_PENCHE_AVANT = 9f;
       public static final float POSTIION_MILIEU = 6.6f;
       public static final float POSITION_PENCHE_ARRIERE = 4.5f;
-      public static final float POSITION_ARRIERE = 0.5f;
+      public static final float POSITION_ARRIERE = 1f;
       public enum POSITION {POSITION_AVANT, POSITION_PENCHE_AVANT, POSTIION_MILIEU, POSITION_PENCHE_ARRIERE, POSITION_ARRIERE, AJUSTEE, INCONNUE};
       public static final double POSITION_INCONNUE = -1;
       Map<POSITION, Float> POSITION_NUMERIQUE = Map.ofEntries(
@@ -70,9 +70,9 @@ public interface Cinematique {
       }
       public interface INCREMENT
       {
-        public static final double P = 0.1;
-        public static final double I = 0.000002;//0.0001;  // gros = bang bang
-        public static final double D = 8;
+        public static final double P = 0.2;
+        public static final double I = 0;
+        public static final double D = 0;
         public static final double MAX = 0.3;  
       }
 
