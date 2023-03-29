@@ -1,9 +1,8 @@
 package frc.robot.commande;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Cinematique;
 import frc.robot.Robot;
-import frc.robot.soussysteme.Roues;
+import frc.robot.interaction.LecteurAccelerometre;
 import frc.robot.soussysteme.RouesMecanumSynchro;
 import frc.robot.mesure.DetecteurDuree;
 
@@ -12,15 +11,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
 public class CommandeMonterPlateforme extends CommandBase {
 
-    protected Roues roues = null;
-    protected boolean finie = false;
-    protected DetecteurDuree detecteur;
-    protected double pas;
+    protected RouesMecanumSynchro roues = null;
+    protected LecteurAccelerometre lecteurEquilibre = null;
+    //protected boolean finie = false;
+    //protected DetecteurDuree detecteur;
 
-    public CommandeMonterPlateforme(int pas)
+    public CommandeMonterPlateforme()
     {
-        System.out.println("new CommandeAvancer()");
-        this.pas = pas;
+        System.out.println("new CommandeAvancerJusquaPlateforme()");
+        this.lecteurEquilibre = LecteurAccelerometre.getInstance();
         //this.roues = Robot.getInstance().roues;
         //this.addRequirements(this.roues);
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
@@ -29,22 +28,31 @@ public class CommandeMonterPlateforme extends CommandBase {
     @Override
     public void initialize() 
     {
-        System.out.println("CommandeAvancer.initialize()");
-        this.roues = Robot.getInstance().roues;
-        this.roues.avancer(pas);
+        System.out.println("CommandeAvancerJusquaPlateforme.initialize()");
+        this.roues = (RouesMecanumSynchro)Robot.getInstance().roues;
         //this.detecteur.initialiser();
         //this.finie = false;
     }
     @Override
     public void execute() {
-        System.out.println("CommandeAvancer.execute()");
+        //System.out.println("CommandeAvancerJusquaPlateforme.execute()");
         //this.detecteur.mesurer();
+
+        this.roues.reinitialiser();
+        if(!lecteurEquilibre.depasseSeuilEquilibre())
+        {
+            this.roues.avancerAvecVitesse(0.15);
+        }
     }
 
     @Override
     public boolean isFinished() 
     {
-        //if(this.machoire.estOuverte() || this.detecteur.estTropLongue())
-        return true;
+        if(lecteurEquilibre.depasseSeuilEquilibre()) 
+        { 
+            System.out.println("CommandeAvancerJusquaPlateforme.isFinished() == true");
+            return true;
+        }
+        return false;
     }
 }

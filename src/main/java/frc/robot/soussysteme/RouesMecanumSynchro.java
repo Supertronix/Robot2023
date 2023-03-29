@@ -61,7 +61,7 @@ public class RouesMecanumSynchro extends RouesMecanum {
     }
     public void avancerAvecVitesse(double vitesse)
     {
-        System.out.println("avancerAvecVitesse()");
+        //System.out.println("avancerAvecVitesse()");
         this.roueAvantDroite.set(vitesse);
     }
     public void reinitialiser()

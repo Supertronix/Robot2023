@@ -4,6 +4,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Cinematique.Bras.POSITION;
 import frc.robot.commande.CommandeAvancer;
@@ -11,8 +12,10 @@ import frc.robot.commande.CommandeAvancerJusquaPlateforme;
 import frc.robot.commande.CommandeCalibrerBras;
 import frc.robot.commande.CommandeDeplacerBras;
 import frc.robot.commande.CommandeFermerMachoire;
+import frc.robot.commande.CommandeMonterPlateforme;
 import frc.robot.commande.CommandeOuvrirMachoire;
 import frc.robot.interaction.*;
+import frc.robot.interaction.LecteurAccelerometre.UNITE;
 //import frc.robot.test.Testeur;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -49,7 +52,6 @@ public class RobotControleur extends TimedRobot {
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
     System.out.println("CHOIX MODE AUTONOME = " + choix);
-/* 
     switch(choix)
     {
       case 3:
@@ -60,7 +62,12 @@ public class RobotControleur extends TimedRobot {
         new CommandeOuvrirMachoire(),
         new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
         //new CommandeAvancer(6),
-        new CommandeAvancerJusquaPlateforme()
+        new CommandeAvancerJusquaPlateforme(),
+        new ParallelCommandGroup(
+          new CommandeDeplacerBras(POSITION.POSITION_AVANT),
+          new CommandeMonterPlateforme()
+        ),
+        new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
         );
       break;
       case 0:
@@ -75,7 +82,6 @@ public class RobotControleur extends TimedRobot {
       break;
     }
       if(modeAutonome != null)modeAutonome.schedule(); 
-      */
   }
 
   @Override
@@ -89,9 +95,11 @@ public class RobotControleur extends TimedRobot {
     System.out.println("autonomousExit()");
   }
 
+  LecteurAccelerometre lecteurAccelerometre;
   @Override
   public void teleopInit() {
     System.out.println("teleopInit()");
+    //lecteurAccelerometre = new LecteurAccelerometre.getInstance();
     //this.testeur.initialiser();
     //this.testeur.lancer();
   }
@@ -103,7 +111,8 @@ public class RobotControleur extends TimedRobot {
     robot.roues.conduireAvecManette(this.manette);
     manette.executerActions();
     SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
-
+    //SmartDashboard.putNumber("Roll", lecteurAccelerometre.getRoll(UNITE.DEGRES));
+    //SmartDashboard.putNumber("Pitch", lecteurAccelerometre.getPitch(UNITE.DEGRES));
     //testeur.executer();
   }
 

@@ -32,10 +32,10 @@ public class SelecteurPositionAutonome implements Materiel{
     	SmartDashboard.putBoolean("Switch GAUCHE", this.interrupteurGauche.get());
     	SmartDashboard.putBoolean("Switch DROITE", this.interrupteurDroit.get());
     	
-    	if(this.interrupteurGauche.get() && this.interrupteurDroit.get()) position = 0;
-    	else if(!this.interrupteurGauche.get() && !this.interrupteurDroit.get()) position = 3;
-    	else if(this.interrupteurGauche.get()) position = 1;
-    	else if(this.interrupteurDroit.get()) position = 2;
+    	if(this.interrupteurGauche.get() && this.interrupteurDroit.get()) position = 3;
+    	else if(!this.interrupteurGauche.get() && !this.interrupteurDroit.get()) position = 0;
+    	else if(this.interrupteurGauche.get()) position = 2;
+    	else if(this.interrupteurDroit.get()) position = 1;
     	
     	System.out.println("Position trouvee " + position);
     	SmartDashboard.putNumber("Position depart autonome", position);

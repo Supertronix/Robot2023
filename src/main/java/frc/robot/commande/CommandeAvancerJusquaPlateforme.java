@@ -19,7 +19,7 @@ public class CommandeAvancerJusquaPlateforme extends CommandBase {
     public CommandeAvancerJusquaPlateforme()
     {
         System.out.println("new CommandeAvancerJusquaPlateforme()");
-        this.lecteurEquilibre = new LecteurAccelerometre();
+        this.lecteurEquilibre = LecteurAccelerometre.getInstance();
         //this.roues = Robot.getInstance().roues;
         //this.addRequirements(this.roues);
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
@@ -29,24 +29,30 @@ public class CommandeAvancerJusquaPlateforme extends CommandBase {
     public void initialize() 
     {
         System.out.println("CommandeAvancerJusquaPlateforme.initialize()");
-        if(!lecteurEquilibre.depasseSeuil())
-            this.roues = (RouesMecanumSynchro)Robot.getInstance().roues;
+        this.roues = (RouesMecanumSynchro)Robot.getInstance().roues;
         //this.detecteur.initialiser();
         //this.finie = false;
     }
     @Override
     public void execute() {
-        System.out.println("CommandeAvancerJusquaPlateforme.execute()");
+        //System.out.println("CommandeAvancerJusquaPlateforme.execute()");
         //this.detecteur.mesurer();
 
         this.roues.reinitialiser();
-        this.roues.avancerAvecVitesse(0.1);
+        if(!lecteurEquilibre.depasseSeuilPente())
+        {
+            this.roues.avancerAvecVitesse(0.15);
+        }
     }
 
     @Override
     public boolean isFinished() 
     {
-        //if(this.machoire.estOuverte() || this.detecteur.estTropLongue())
-        return true;
+        if(lecteurEquilibre.depasseSeuilPente()) 
+        { 
+            System.out.println("CommandeAvancerJusquaPlateforme.isFinished() == true");
+            return true;
+        }
+        return false;
     }
 }
