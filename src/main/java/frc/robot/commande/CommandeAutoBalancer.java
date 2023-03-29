@@ -41,15 +41,8 @@ public class CommandeAutoBalancer extends CommandBase {
         //this.detecteur.mesurer();
 
         System.out.println("getRoll() " + this.lecteurEquilibre.getRoll(UNITE.DEGRES));
-        double vitesse = 0.1;
-        if(this.lecteurEquilibre.getRoll(UNITE.DEGRES) > 12)
-        {
-            this.roues.conduireToutesDirections(vitesse/roll, vitesse, vitesse, vitesse);
-        }
-        if(this.lecteurEquilibre.getRoll(UNITE.DEGRES) < -12)
-        {
-            this.roues.conduireToutesDirections(-vitesse, -vitesse, -vitesse, -vitesse);
-        }
+        double vitesse = 0.01*this.lecteurEquilibre.getRoll(UNITE.DEGRES);
+        this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
     }
 
     @Override
