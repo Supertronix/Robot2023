@@ -17,6 +17,7 @@ import frc.robot.commande.CommandeMaintenirRobot;
 import frc.robot.commande.CommandeMonterPlateforme;
 import frc.robot.commande.CommandeOuvrirMachoire;
 import frc.robot.interaction.*;
+import frc.robot.interaction.LecteurAccelerometre;
 import frc.robot.interaction.LecteurAccelerometre.UNITE;
 //import frc.robot.test.Testeur;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -105,7 +106,7 @@ public class RobotControleur extends TimedRobot {
   @Override
   public void teleopInit() {
     System.out.println("teleopInit()");
-    //lecteurAccelerometre = new LecteurAccelerometre.getInstance();
+    lecteurAccelerometre = LecteurAccelerometre.getInstance();
     //this.testeur.initialiser();
     //this.testeur.lancer();
   }
@@ -117,8 +118,8 @@ public class RobotControleur extends TimedRobot {
     robot.roues.conduireAvecManette(this.manette);
     manette.executerActions();
     SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
-    //SmartDashboard.putNumber("Roll", lecteurAccelerometre.getRoll(UNITE.DEGRES));
-    //SmartDashboard.putNumber("Pitch", lecteurAccelerometre.getPitch(UNITE.DEGRES));
+    SmartDashboard.putNumber("Roll", lecteurAccelerometre.getRoll(UNITE.DEGRES));
+    SmartDashboard.putNumber("Pitch", lecteurAccelerometre.getPitch(UNITE.DEGRES));
     //testeur.executer();
   }
 
