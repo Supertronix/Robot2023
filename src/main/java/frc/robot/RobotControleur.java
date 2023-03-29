@@ -40,18 +40,30 @@ public class RobotControleur extends TimedRobot {
 
     //fooCommand.andThen(barCommand)
     //new SequentialCommandGroup(new FooCommand(), new BarCommand());
-    SequentialCommandGroup modeAutonome;
+    protected SequentialCommandGroup modeAutonome;
+    protected SelecteurPositionAutonome selecteurPositionAutonome;
     @Override
   public void autonomousInit() {
     System.out.println("autonomousInit()");
-    modeAutonome = new SequentialCommandGroup(
-      //new CommandeFermerMachoire(),
-      new CommandeAvancer(6),
-      new CommandeCalibrerBras(),
-      new CommandeOuvrirMachoire(),
-      new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
-      );
-      modeAutonome.schedule(); 
+    this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
+    int choix = this.selecteurPositionAutonome.lireChoix();
+    switch(choix)
+    {
+      case 3:
+
+      break;
+      case 0:
+        modeAutonome = new SequentialCommandGroup(
+          //new CommandeFermerMachoire(),
+          new CommandeAvancer(6),
+          new CommandeCalibrerBras(),
+          new CommandeOuvrirMachoire(),
+          new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
+          new CommandeAvancer(6)
+          );
+      break;
+    }
+      if(modeAutonome != null)modeAutonome.schedule(); 
   }
 
   @Override

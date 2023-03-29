@@ -4,9 +4,9 @@ import frc.robot.soussysteme.*;
 public class Robot {
     
     // en attendant que java invente les properties !
-    public Roues roues;
-    public Bras bras;  
-    public Machoire machoire;
+    public Roues roues = null;
+    public Bras bras = null;  
+    public Machoire machoire = null;
 
     protected Robot()
     {
