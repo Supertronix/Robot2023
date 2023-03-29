@@ -12,6 +12,7 @@ import frc.robot.Materiel;
 import frc.robot.Cinematique;
 import frc.robot.composant.Moteur;
 import frc.robot.mesure.DetecteurImmobilite;
+import edu.wpi.first.wpilibj.Timer;
 
 // limite switch a 13.9 // homing dans limite switch arriere
 @SuppressWarnings("resource") // framework roborio appelle exit
@@ -139,7 +140,10 @@ public class Bras extends SousSysteme implements Materiel.Bras, Cinematique.Bras
         System.out.println("Bras.initialiser()");
 
         while(Math.abs(this.moteurPrincipal.getEncoder().getPosition()) > 1)
+        {
             this.moteurPrincipal.getEncoder().setPosition(0);
+            Timer.delay(1.0);
+        }
         System.out.println("Position : " + this.moteurPrincipal.getEncoder().getPosition());
         System.out.println("Facteur : " + this.moteurPrincipal.getEncoder().getPositionConversionFactor());
         System.out.println("Position 2 : " + this.moteurSecondaire.getEncoder().getPosition());

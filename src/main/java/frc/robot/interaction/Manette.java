@@ -4,15 +4,21 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Materiel;
 import frc.robot.Cinematique;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*; // POVButton
 
 public class Manette implements Materiel.Manette, Cinematique.Manette {
 
     protected Joystick manette = null;
+    protected List<Command> commandes;
 
     protected Manette() // pour design pattern singleton
     {
         this.manette = new Joystick(MANETTE);
+        this.commandes = new ArrayList<Command>();
     }
     
     protected static Manette instance = null;
@@ -53,10 +59,12 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     }
     public double getPressionMainGauche() 
     {
+      System.out.println("Pression main gauche" + manette.getRawAxis(MAIN_GAUCHE_AXE));
     	return manette.getRawAxis(MAIN_GAUCHE_AXE);
     }
     public double getPressionMainDroite() 
     {
+      System.out.println("Pression main droite" + manette.getRawAxis(MAIN_DROITE_AXE));
     	return manette.getRawAxis(MAIN_DROITE_AXE);
     }
 
@@ -105,7 +113,10 @@ public class Manette implements Materiel.Manette, Cinematique.Manette {
     
     public void executerActions()
     {
-    	
+    	//for(Command commande : this.commandes)
+      //{
+      //  commande.initialize();
+      //}
     }
          
 }

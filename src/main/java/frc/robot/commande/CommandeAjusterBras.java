@@ -13,14 +13,15 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
     protected Bras bras = null;
     protected double position = 0;
     //protected DetecteurDuree detecteur;
+    protected double increment = 0;
 
     public CommandeAjusterBras(double increment)
     {
-        System.out.println("new CommandeReleverBras()");
+        System.out.println("new CommandeAjusterBras()");
+        this.increment = increment;
         this.bras = Robot.getInstance().bras;
-        this.position = this.bras.getPosition() + increment;
-        //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
         this.addRequirements(this.bras);
+        //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
     
     @Override
@@ -28,9 +29,16 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
     {
         System.out.println("CommandeAjusterBras.initialize()");
         System.out.println("Position de depart du bras : " + this.bras.getPosition());
+        SmartDashboard.putNumber("Position demandee", this.position);
+
+        // calculer la nouvelle position
+        this.position = this.bras.getPosition() + this.increment;
+        System.out.println("PositionActuelle = " + this.bras.getPosition());
+        System.out.println("Increment demande = " + this.increment);
+        System.out.println("Position demandee = " + this.position);
 
         // rappeler au bras sa derniere position et lui indiquer la nouvelle
-        this.bras.rappelerPosition(this.bras.positionDemandee);
+        //this.bras.rappelerPosition(this.bras.positionDemandee);
         this.bras.positionDemandee = position;
 
         // effectivement aller a la position

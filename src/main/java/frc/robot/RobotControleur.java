@@ -5,7 +5,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.interaction.*;
-import frc.robot.test.Testeur;
+//import frc.robot.test.Testeur;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotControleur extends TimedRobot {
@@ -59,6 +59,7 @@ public class RobotControleur extends TimedRobot {
     //System.out.println("teleopPeriodic()");   
     
     robot.roues.conduireAvecManette(this.manette);
+    manette.executerActions();
     SmartDashboard.putNumber("Position Bras", this.robot.bras.getPosition());  
 
     //testeur.executer();

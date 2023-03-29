@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 // https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/JoystickButton.html
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commande.CommandeAjusterBras;
 import frc.robot.commande.CommandeCalibrerBras;
 import frc.robot.commande.CommandeFermerMachoire;
 import frc.robot.commande.CommandeOuvrirMachoire;
@@ -25,46 +26,66 @@ public class ManetteCompetition extends Manette {
     protected JoystickButton boutonMainDroite;
     protected JoystickButton boutonMainGauche;
 
+    protected BoutonDeclencheur boutonPressionMainDroite;
+    protected BoutonDeclencheur boutonPressionMainGauche;
+
     @SuppressWarnings("deprecation") // la classe ouverte fonctionne aussi bien que la nouvelle classe proprietaire
     protected ManetteCompetition()
     {
         this.manette = new Joystick(MANETTE);
 
+        this.boutonPressionMainGauche = new BoutonDeclencheur(manette, MAIN_GAUCHE_AXE);
+        this.boutonPressionMainDroite = new BoutonDeclencheur(manette, MAIN_DROITE_AXE);
+        //this.boutonPressionMainGauche.whenPressed(new CommandeAjusterBras(0.3));
+        //this.boutonPressionMainDroite.whenPressed(new CommandeAjusterBras(-0.3));
+        this.boutonPressionMainGauche.setCommande(new CommandeAjusterBras(0.2));
+        this.boutonPressionMainDroite.setCommande(new CommandeAjusterBras(-0.2));
+
+
         this.boutonMaison = new JoystickButton(this.manette, BOUTON_Y);
+        this.boutonDemarrer = new JoystickButton(this.manette, BOUTON_A);
+        this.boutonArriere = new JoystickButton(this.manette, BOUTON_X);
+        this.boutonPencheDevant = new JoystickButton(this.manette, BOUTON_B);
+        this.boutonDevant = new JoystickButton(this.manette, BOUTON_DEMARRER);
+        this.boutonPencheArriere = new JoystickButton(this.manette, BOUTON_RETOUR);
+        this.boutonMainDroite = new JoystickButton(this.manette, BOUTON_MAIN_DROITE);
+        this.boutonMainGauche = new JoystickButton(this.manette, BOUTON_MAIN_GAUCHE);
+
         Command commandeCalibration = new CommandeCalibrerBras();
         this.boutonMaison.whenPressed(commandeCalibration);
 
-        this.boutonDemarrer = new JoystickButton(this.manette, BOUTON_A);
         Command commandeMilieu = new CommandeDeplacerBras(POSITION.POSTIION_MILIEU);
         this.boutonDemarrer.whenPressed(commandeMilieu);
 
-        this.boutonArriere = new JoystickButton(this.manette, BOUTON_X);
         Command commandeArriere = new CommandeDeplacerBras(POSITION.POSITION_AVANT);
         this.boutonArriere.whenPressed(commandeArriere);
 
-        this.boutonPencheDevant = new JoystickButton(this.manette, BOUTON_B);
         Command commandePencheDevant = new CommandeDeplacerBras(POSITION.POSITION_ARRIERE);
         this.boutonPencheDevant.whenPressed(commandePencheDevant);
 
-        this.boutonDevant = new JoystickButton(this.manette, BOUTON_DEMARRER);
         Command commandeDevant = new CommandeDeplacerBras(POSITION.POSITION_PENCHE_AVANT);
         this.boutonDevant.whenPressed(commandeDevant);
 
-        this.boutonPencheArriere = new JoystickButton(this.manette, BOUTON_RETOUR);
         Command commandePencheArriere = new CommandeDeplacerBras(POSITION.POSITION_PENCHE_ARRIERE);
         this.boutonPencheArriere.whenPressed(commandePencheArriere);
         
-        this.boutonMainDroite = new JoystickButton(this.manette, BOUTON_MAIN_DROITE);
-        this.boutonMainGauche = new JoystickButton(this.manette, BOUTON_MAIN_GAUCHE);
         Command commandeOuvrirMachoire = new CommandeOuvrirMachoire();
         Command commandeFermerMachoire = new CommandeFermerMachoire();
         this.boutonMainDroite.whenPressed(commandeFermerMachoire);
         this.boutonMainGauche.whenPressed(commandeOuvrirMachoire);
+
     }
  
     public void executerActions()
     {
-    	
+    	if(this.boutonPressionMainGauche.getAsBoolean())
+        {
+            this.boutonPressionMainGauche.getCommande().initialize();
+        }
+    	if(this.boutonPressionMainDroite.getAsBoolean())
+        {
+            this.boutonPressionMainDroite.getCommande().initialize();
+        }
     }
     
 }

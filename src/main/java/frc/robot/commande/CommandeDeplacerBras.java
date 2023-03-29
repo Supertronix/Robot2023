@@ -28,8 +28,8 @@ public class CommandeDeplacerBras extends CommandBase implements Cinematique.Bra
         System.out.println("new CommandeReleverBras()");
         this.bras = Robot.getInstance().bras;
         this.bras.positionNom = nom;
-        this.addRequirements(this.bras);
         this.position = position;
+        this.addRequirements(this.bras);
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
     
@@ -38,6 +38,7 @@ public class CommandeDeplacerBras extends CommandBase implements Cinematique.Bra
     {
         System.out.println("CommandeReleverBras.initialize()");
         System.out.println("Position de depart du bras : " + this.bras.getPosition());
+        SmartDashboard.putNumber("Position demandee", this.position);
 
         // rappeler au bras sa derniere position et lui indiquer la nouvelle
         this.bras.rappelerPosition(this.bras.positionDemandee);

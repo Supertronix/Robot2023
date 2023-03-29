@@ -8,6 +8,7 @@ import frc.robot.Robot;
 import frc.robot.mesure.DetecteurDuree;
 import frc.robot.mesure.DetecteurImmobilite;
 import frc.robot.mesure.DetecteurImmobilite.*;
+import edu.wpi.first.wpilibj.Timer;
 
 // Pleine vitesse 1235.0
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html
@@ -47,17 +48,18 @@ public class CommandeCalibrerBras extends CommandBase {
     {
         System.out.println("CommandeCalibrerBras.initialize()");
         this.commencer();
-        this.bras.arreter();
         this.bras.reinitialiser();
     }
     public void commencer()
     {
-        this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
         this.depart = System.currentTimeMillis();
         double tempsMaximal = (brasEnAvant)?Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER_AVANT:Cinematique.Bras.TEMPS_MAXIMUM_CALIBRER;
         this.detecteurDuree = new DetecteurDuree(tempsMaximal);
         this.detecteurDuree.initialiser();
+        this.detecteurImmobilite = new DetecteurImmobilite((Immobilisable)this.bras);
+
         this.etat = ETAT.PREMIER_JET;  
+        this.bras.arreter();
     }
     
     public double calculerVitesseAdoucie()
@@ -189,6 +191,7 @@ public class CommandeCalibrerBras extends CommandBase {
 
             //this.transitionnerEtat();
             //this.bras.reinitialiser();
+            /* 
             if(!enReglage) 
             {
                 enReglage = true;
@@ -205,6 +208,9 @@ public class CommandeCalibrerBras extends CommandBase {
                 }
                 return false;
             }
+            */
+            Timer.delay(1.0);
+            this.bras.reglerPointDepart(); 
             return true;
         }
         

@@ -41,6 +41,7 @@ public class CommandeOuvrirMachoire extends CommandBase {
     {
         if(this.machoire.estOuverte() || this.detecteur.estTropLongue())
         {
+            System.out.println("machoire.estFermee() == " + this.machoire.estFermee());
             System.out.println("CommandeOuvrirMachoire.isFinished() == true");
             this.finie = true;
             this.machoire.arreter();
