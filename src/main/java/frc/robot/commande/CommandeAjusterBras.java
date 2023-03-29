@@ -54,7 +54,7 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
 
         if(subiGravite()) 
         {
-            vraiIncrement = increment * 10;
+            vraiIncrement = increment * 6;
         }
         else
         {

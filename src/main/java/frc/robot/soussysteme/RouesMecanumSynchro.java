@@ -51,11 +51,12 @@ public class RouesMecanumSynchro extends RouesMecanum {
         //pid.setD(1);
         this.pid.setOutputRange(-0.2, 0.2); 
     }
-    public void avancer()
+    public void avancer(double pas)
     {
         System.out.println("avancer()");
         // 40 = barre jusqua plateforme = 6 pieds
-        pid.setReference(670, CANSparkMax.ControlType.kPosition); // reculer 
+        this.encodeur.setPosition(0);
+        pid.setReference(pas, CANSparkMax.ControlType.kPosition); // reculer 
         //pid.setReference(50, CANSparkMax.ControlType.kPosition);
     }
 }

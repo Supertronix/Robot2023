@@ -4,6 +4,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Cinematique.Bras.POSITION;
+import frc.robot.commande.CommandeAvancer;
+import frc.robot.commande.CommandeCalibrerBras;
+import frc.robot.commande.CommandeDeplacerBras;
+import frc.robot.commande.CommandeFermerMachoire;
+import frc.robot.commande.CommandeOuvrirMachoire;
 import frc.robot.interaction.*;
 //import frc.robot.test.Testeur;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,9 +38,20 @@ public class RobotControleur extends TimedRobot {
     CommandScheduler.getInstance().run();
   }
 
-  @Override
+    //fooCommand.andThen(barCommand)
+    //new SequentialCommandGroup(new FooCommand(), new BarCommand());
+    SequentialCommandGroup modeAutonome;
+    @Override
   public void autonomousInit() {
     System.out.println("autonomousInit()");
+    modeAutonome = new SequentialCommandGroup(
+      //new CommandeFermerMachoire(),
+      new CommandeAvancer(6),
+      new CommandeCalibrerBras(),
+      new CommandeOuvrirMachoire(),
+      new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
+      );
+      modeAutonome.schedule(); 
   }
 
   @Override
