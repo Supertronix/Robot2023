@@ -29,14 +29,14 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
         boolean aRenforcer = false;
         if(this.bras.getPosition() < 6.5)
         {
-            if(increment >= 1) // augmenter
+            if(increment > 0) // augmenter
             {
                 aRenforcer = true;
             }
         }
         else if(this.bras.getPosition() > 6.5)
         {
-            if(increment < 1) // augmenter
+            if(increment < 0) // augmenter
             {
                 aRenforcer = true;
             }
@@ -44,6 +44,7 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
         return aRenforcer;
     }
     
+    double vraiIncrement = 0;
     @Override
     public void initialize() 
     {
@@ -53,13 +54,17 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
 
         if(subiGravite()) 
         {
-            increment *=3;
+            vraiIncrement = increment * 10;
+        }
+        else
+        {
+            vraiIncrement = increment;
         }
 
         // calculer la nouvelle position
-        this.position = this.bras.getPosition() + this.increment;
+        this.position = this.bras.getPosition() + this.vraiIncrement;
         System.out.println("PositionActuelle = " + this.bras.getPosition());
-        System.out.println("Increment demande = " + this.increment);
+        System.out.println("Increment demande = " + this.vraiIncrement);
         System.out.println("Position demandee = " + this.position);
 
         // rappeler au bras sa derniere position et lui indiquer la nouvelle

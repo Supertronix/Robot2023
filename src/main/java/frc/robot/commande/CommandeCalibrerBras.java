@@ -78,7 +78,7 @@ public class CommandeCalibrerBras extends CommandBase {
         }
         else
         {
-            if(delais < 10)
+            if(delais < 100)
             {
                 vitesseAdoucie = vitesse;
             }
