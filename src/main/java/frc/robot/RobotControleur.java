@@ -68,7 +68,7 @@ public class RobotControleur extends TimedRobot {
         new ParallelCommandGroup(
           new SequentialCommandGroup(
               new CommandeDeplacerBras(POSITION.POSITION_AVANT),
-              new CommandeDormir(1000),
+              new CommandeDormir(100),
               new CommandeDeplacerBras(POSITION.POSITION_ARRIERE),
               new CommandeMaintenirRobot()
           ),
