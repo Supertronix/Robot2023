@@ -10,6 +10,7 @@ public class Robot {
 
     protected Robot()
     {
+        this.roues = new RouesMecanumSynchro();
         //this.roues = new RouesMecanum();
         this.bras = new Bras();    
         this.machoire = new Machoire();
