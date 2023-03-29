@@ -7,6 +7,7 @@ public class Robot {
     public Roues roues = null;
     public Bras bras = null;  
     public Machoire machoire = null;
+    public boolean equilibre = false;
 
     protected Robot()
     {

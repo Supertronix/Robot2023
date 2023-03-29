@@ -69,12 +69,11 @@ public class RobotControleur extends TimedRobot {
           new SequentialCommandGroup(
               new CommandeDeplacerBras(POSITION.POSITION_AVANT),
               new CommandeDormir(1000),
-              new CommandeDeplacerBras(POSITION.POSITION_ARRIERE)
+              new CommandeDeplacerBras(POSITION.POSITION_ARRIERE),
+              new CommandeMaintenirRobot()
           ),
           new CommandeMonterPlateforme()
-        ),
-        new CommandeAvancer(-10),
-        new CommandeMaintenirRobot()
+        )
         );
       break;
       case 0:

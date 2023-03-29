@@ -28,6 +28,7 @@ public class CommandeMaintenirRobot extends CommandBase {
     public void initialize() 
     {
         System.out.println("CommandeMaintenirRobot.initialize()");
+        Robot.getInstance().equilibre = true;
         this.roues = (RouesMecanumSynchro)Robot.getInstance().roues;
         this.roues.avancer(this.roues.getPosition());
         //this.detecteur.initialiser();

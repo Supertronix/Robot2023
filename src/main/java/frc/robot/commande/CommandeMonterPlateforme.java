@@ -48,7 +48,7 @@ public class CommandeMonterPlateforme extends CommandBase {
     @Override
     public boolean isFinished() 
     {
-        if(lecteurEquilibre.depasseSeuilEquilibre()) 
+        if(lecteurEquilibre.depasseSeuilEquilibre() || Robot.getInstance().equilibre) 
         { 
             System.out.println("CommandeAvancerJusquaPlateforme.isFinished() == true");
             return true;
