@@ -31,6 +31,26 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
         System.out.println("Position de depart du bras : " + this.bras.getPosition());
         SmartDashboard.putNumber("Position demandee", this.position);
 
+        boolean aRenforcer = false;
+        if(this.bras.getPosition() < 6.5)
+        {
+            if(increment >= 1) // augmenter
+            {
+                aRenforcer = true;
+            }
+        }
+        else if(this.bras.getPosition() > 6.5)
+        {
+            if(increment < 1) // augmenter
+            {
+                aRenforcer = true;
+            }
+        }
+        if(aRenforcer) 
+        {
+            increment *=3;
+        }
+
         // calculer la nouvelle position
         this.position = this.bras.getPosition() + this.increment;
         System.out.println("PositionActuelle = " + this.bras.getPosition());
@@ -40,6 +60,7 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
         // rappeler au bras sa derniere position et lui indiquer la nouvelle
         //this.bras.rappelerPosition(this.bras.positionDemandee);
         this.bras.positionDemandee = position;
+
 
         // effectivement aller a la position
         this.bras.preparerCinematique(INCREMENT.P, INCREMENT.I, INCREMENT.D);
