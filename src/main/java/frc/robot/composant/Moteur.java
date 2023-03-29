@@ -28,6 +28,11 @@ public class Moteur extends CANSparkMax{
         this.restoreFactoryDefaults();
         this.setIdleMode(IdleMode.kBrake);
     }
+    public void initialiser()
+    {
+        this.restoreFactoryDefaults();
+        this.setIdleMode(IdleMode.kBrake);
+    }
 	public static double limiter(double vitesse) 
 	{
 		return Math.max(-1, Math.min(1, vitesse));

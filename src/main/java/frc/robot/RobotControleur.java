@@ -16,6 +16,7 @@ import frc.robot.commande.CommandeFermerMachoire;
 import frc.robot.commande.CommandeMaintenirRobot;
 import frc.robot.commande.CommandeMonterPlateforme;
 import frc.robot.commande.CommandeOuvrirMachoire;
+import frc.robot.soussysteme.*;
 import frc.robot.interaction.*;
 import frc.robot.interaction.LecteurAccelerometre;
 import frc.robot.interaction.LecteurAccelerometre.UNITE;
@@ -57,7 +58,7 @@ public class RobotControleur extends TimedRobot {
     System.out.println("CHOIX MODE AUTONOME = " + choix);
     switch(choix)
     {
-      case 3:
+      case 0:
       modeAutonome = new SequentialCommandGroup(
         //new CommandeFermerMachoire(),
         new CommandeAvancer(6),
@@ -77,7 +78,7 @@ public class RobotControleur extends TimedRobot {
         )
         );
       break;
-      case 0:
+      case 3:
         modeAutonome = new SequentialCommandGroup(
           //new CommandeFermerMachoire(),
           new CommandeAvancer(6),
@@ -102,11 +103,12 @@ public class RobotControleur extends TimedRobot {
     System.out.println("autonomousExit()");
   }
 
-  LecteurAccelerometre lecteurAccelerometre;
+  protected LecteurAccelerometre lecteurAccelerometre;
   @Override
   public void teleopInit() {
     System.out.println("teleopInit()");
     lecteurAccelerometre = LecteurAccelerometre.getInstance();
+    ((RouesMecanumSynchro)Robot.getInstance().roues).convertirEnRouesHolonomiques();
     //this.testeur.initialiser();
     //this.testeur.lancer();
   }

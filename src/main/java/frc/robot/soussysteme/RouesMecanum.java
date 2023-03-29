@@ -11,15 +11,18 @@ public class RouesMecanum extends Roues {
     protected MecanumDrive mecanum;
     double facteur = 1;
 
+    // import edu.wpi.first.math.geometry.Rotation2d;
+    // this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
     public RouesMecanum()
+    {
+        this.facteur = FACTEUR_ROUES;
+        this.roueAvantGauche.setInverted(true);
+        this.roueArriereGauche.setInverted(true); 
+    }
+    public void activerModeHolonomique()
     {
         this.roueAvantGauche.setInverted(true);
         this.roueArriereGauche.setInverted(true); 
-        this.facteur = FACTEUR_ROUES;
-
-        //this.roueAvantDroite.setInverted(true);
-        //this.roueArriereDroite.setInverted(true); 
-        //this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
     }
     public void avancer(double vitesse)
     {
@@ -116,15 +119,6 @@ public class RouesMecanum extends Roues {
         this.roueAvantDroite.set(limiter(vitesseAvantDroite));
         this.roueArriereGauche.set(limiter(vitesseArriereGauche));
         this.roueArriereDroite.set(limiter(vitesseArriereDroite));
-
-        /* 
-	    this.conduireToutesDirections(
-            facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x + manette.getAxeMainDroite().x), 
-            facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x - manette.getAxeMainDroite().x),	      
-            facteur*(manette.getAxeMainGauche().y - manette.getAxeMainGauche().x + manette.getAxeMainDroite().x), 
-            facteur*(manette.getAxeMainGauche().y + manette.getAxeMainGauche().x - manette.getAxeMainDroite().x) 
-	      );*/
-
 	    //Formule 2017 (x + yGauche, yDroite - x, yGauche - x, x + yDroite);
     }
     public void conduire(double vitesseX, double vitesseY)

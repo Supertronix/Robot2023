@@ -1,10 +1,9 @@
 package frc.robot.soussysteme;
 
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-
 // https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Rotation2d.html
 // https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/drive/MecanumDrive.html    
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax;
@@ -22,33 +21,54 @@ public class RouesMecanumSynchro extends RouesMecanum {
 
     public RouesMecanumSynchro()
     {
+        this.activerModeSynchronisees();
+        this.preparerConsigneInitiale();
+    }
+
+    public RouesMecanum convertirEnRouesHolonomiques()
+    {
+        this.annulerConsigneInitiale();
+        this.desactiverModeSynchronisees();
+        this.reinitialiserMoteurs();
+        this.activerModeHolonomique();
+        return (RouesMecanum)this;
+    }
+
+    public void reinitialiserMoteurs()
+    {
+        this.roueAvantDroite.initialiser();
+        this.roueAvantGauche.initialiser();
+        this.roueArriereDroite.initialiser();
+        this.roueArriereGauche.initialiser();
+    }
+
+    public void activerModeSynchronisees()
+    {
         this.roueAvantGauche.follow(this.roueAvantDroite, true);
         this.roueArriereDroite.follow(this.roueAvantDroite, false);
         this.roueArriereGauche.follow(this.roueAvantDroite, true);
-
-        // import edu.wpi.first.math.geometry.Rotation2d;
-        // this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
-        this.preparerConsigne();
+    }
+    public void desactiverModeSynchronisees()
+    {
+        //this.roueAvantGauche.follow(null);
+        //this.roueArriereDroite.follow(null);
+        //this.roueArriereGauche.follow(null);
     }
 
-    public void preparerConsigne()
+    public void annulerConsigneInitiale()
+    {
+        this.avancerAvecVitesse(0);
+        this.preparerCinematique(0,0,0);
+        this.pid.setOutputRange(-0, 0); 
+        //this.pid.setFeedbackDevice(null);
+
+    }
+    public void preparerConsigneInitiale()
     {
         this.encodeur = this.roueAvantDroite.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, ticParTour);
-        // Calibrez l'encodeur
-        //this.encodeur.setDistancePerPulse(2); // Remplacez distancePerPulse par la distance parcourue par une impulsion de l'encodeur
-        //this.encodeur.reset(); // Réinitialisez l'encodeur
-        //this.encodeur.calibrate(); // Calibrez l'encodeur
-
-        // Obtenez la valeur initiale de l'encodeur après la calibration
-        //double initPosition = this.encodeur.getDistance();        // the encoder could not be inverted separately from motor in brushless mode        
-        // encodeur.setInverted(false);
-
         this.pid = this.roueAvantDroite.getPIDController();
         this.pid.setFeedbackDevice(encodeur);
-        //this.roue.setFeedbackDevice(encoder);
-        this.pid.setP(0.2);
-        //pid.setI(1e-4);
-        //pid.setD(1);
+        this.preparerCinematique(0.2, 0, 0); // test a la place de this.pid.setP(0.2);
         this.pid.setOutputRange(-0.2, 0.2); 
     }
     public void avancer(double pas)
@@ -57,7 +77,6 @@ public class RouesMecanumSynchro extends RouesMecanum {
         // 40 = barre jusqua plateforme = 6 pieds
         this.encodeur.setPosition(0);
         pid.setReference(pas, CANSparkMax.ControlType.kPosition); // reculer 
-        //pid.setReference(50, CANSparkMax.ControlType.kPosition);
     }
     public void avancerAvecVitesse(double vitesse)
     {
@@ -76,4 +95,7 @@ public class RouesMecanumSynchro extends RouesMecanum {
         this.pid.setI(i);
         this.pid.setD(d);
         //this.pid.setOutputRange(-MAX, MAX); 
-    }}
+    }
+}
+    //pid.setI(1e-4);
+        //pid.setD(1);
