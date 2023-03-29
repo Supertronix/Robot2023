@@ -23,14 +23,9 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
         this.addRequirements(this.bras);
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
     }
-    
-    @Override
-    public void initialize() 
-    {
-        System.out.println("CommandeAjusterBras.initialize()");
-        System.out.println("Position de depart du bras : " + this.bras.getPosition());
-        SmartDashboard.putNumber("Position demandee", this.position);
 
+    boolean subiGravite()
+    {
         boolean aRenforcer = false;
         if(this.bras.getPosition() < 6.5)
         {
@@ -46,7 +41,17 @@ public class CommandeAjusterBras extends CommandBase implements Cinematique.Bras
                 aRenforcer = true;
             }
         }
-        if(aRenforcer) 
+        return aRenforcer;
+    }
+    
+    @Override
+    public void initialize() 
+    {
+        System.out.println("CommandeAjusterBras.initialize()");
+        System.out.println("Position de depart du bras : " + this.bras.getPosition());
+        SmartDashboard.putNumber("Position demandee", this.position);
+
+        if(subiGravite()) 
         {
             increment *=3;
         }
