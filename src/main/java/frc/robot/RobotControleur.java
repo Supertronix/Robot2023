@@ -124,7 +124,10 @@ public class RobotControleur extends TimedRobot {
       //new CommandeMonterPlateforme(),
       //new CommandeAutoBalancer() 
       monterEtBalancer,
-      new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
+      new ParallelCommandGroup(
+        new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
+        new CommandeMaintenirRobot()
+      )
 
       //monterEtMaintenir
       );

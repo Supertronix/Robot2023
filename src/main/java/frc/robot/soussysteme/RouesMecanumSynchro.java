@@ -33,7 +33,14 @@ public class RouesMecanumSynchro extends RouesMecanum {
         this.activerModeHolonomique();
         return (RouesMecanum)this;
     }
-
+    public RouesMecanum convertirEnRouesSynchro()
+    {
+        this.annulerConsigneInitiale();
+        //this.desactiverModeSynchronisees();
+        this.reinitialiserMoteurs();
+        this.activerModeSynchronisees();
+        return (RouesMecanum)this;
+    }
     public void reinitialiserMoteurs()
     {
         this.roueAvantDroite.initialiser();
