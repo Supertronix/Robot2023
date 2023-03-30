@@ -35,14 +35,82 @@ public class CommandeAutoBalancer extends CommandBase {
         //this.detecteur.initialiser();
         //this.finie = false;
     }
+    // roll = avant-arriere
+    // pitch = sor les cotes
+    // yaw = rotation du robot
+    protected double VITESSE_BASE;
+    protected double vitesse;
+    protected double roll;
     @Override
     public void execute() {
         System.out.println("CommandeAutoBalancer.execute()");
         //this.detecteur.mesurer();
 
-        System.out.println("getRoll() " + this.lecteurEquilibre.getRoll(UNITE.DEGRES));
-        double vitesse = 0.01*this.lecteurEquilibre.getRoll(UNITE.DEGRES);
-        this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        //// TECHNIQUE MATHEMATIQUE /////// marche pas
+        // System.out.println("getRoll() " + this.lecteurEquilibre.getRoll(UNITE.DEGRES));
+        // double vitesse = 0.03*Math.max(1,Math.sqrt(this.lecteurEquilibre.getRoll(UNITE.DEGRES)));
+        // this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        ////  ===================== ///////
+
+        //// TCHNIQUE par INCREMENTS ///// MARCHE mais ne stabilise pas
+        /* 
+        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
+        System.out.println("getRoll() " + roll);
+        if(this.lecteurEquilibre.getRoll(UNITE.DEGRES) > 12)
+        {
+            this.roues.conduireToutesDirections(vitesse/roll, vitesse, vitesse, vitesse);
+        }
+        if(this.lecteurEquilibre.getRoll(UNITE.DEGRES) < -12)
+        {
+            this.roues.conduireToutesDirections(-vitesse, -vitesse, -vitesse, -vitesse);
+        }
+        */
+        //// ===================== ///////
+
+        //// TECHNIQUE par INCREMENTS ///// A tester
+        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
+        System.out.println("getRoll() " + roll);
+        if(roll >= 12) // avancer au debut
+        {
+            vitesse = VITESSE_BASE/roll;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll >= 6 && roll < 12)
+        {
+            vitesse = (VITESSE_BASE/roll)/2;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll >= 0 && roll < 6)
+        {
+            vitesse = (VITESSE_BASE/roll)/4;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll >= -6 && roll < 0)
+        {
+            vitesse = -(VITESSE_BASE/roll)/4;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll >= -12 && roll < -6)
+        {
+            vitesse = -(VITESSE_BASE/roll)/2;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll <= -12) // reculer apres
+        {
+            vitesse = -VITESSE_BASE;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        //// ===================== ///////
+
+
+        ///// TECHNIQUE par SEGMENTS //////
+
+
+
+
+        ///// ======================= ///////
+
+
     }
 
     @Override

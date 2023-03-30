@@ -10,8 +10,10 @@ public class LecteurAccelerometre {
     AHRS accelerometre;
     double pitch;
     double roll;
+    double yaw;
     double pitchDebut;
     double rollDebut;
+    double yawDebut;
 
     public enum UNITE {RADIAN, DEGRES};
     public static final double SEUIL_PENTE = 15;
@@ -29,6 +31,7 @@ public class LecteurAccelerometre {
         //accelerometre.resetDisplacement();
     }
 
+    // singleton pour calibrer une seule fois
     protected static LecteurAccelerometre instance = null;
     public static LecteurAccelerometre getInstance()
     {
@@ -40,6 +43,7 @@ public class LecteurAccelerometre {
     {
         this.pitchDebut = accelerometre.getPitch();
         this.rollDebut = accelerometre.getRoll();
+        this.yawDebut = accelerometre.getYaw();
     }
 
     public double getPitch()
@@ -63,6 +67,17 @@ public class LecteurAccelerometre {
         if(unites == UNITE.DEGRES) return this.getRoll();
         if(unites == UNITE.RADIAN) return this.getRoll() * Math.PI / 180.0;
         return this.getRoll();
+    }
+    public double getYaw()
+    {
+        this.yaw = (this.accelerometre.getYaw() - this.yawDebut);
+        return this.yaw;
+    }
+    public double getYaw(UNITE unites)
+    {
+        if(unites == UNITE.DEGRES) return this.getYaw();
+        if(unites == UNITE.RADIAN) return this.getYaw() * Math.PI / 180.0;
+        return this.getYaw();
     }
 
     public boolean depasseSeuilPente()

@@ -51,15 +51,16 @@ public class RobotControleur extends TimedRobot {
     //new SequentialCommandGroup(new FooCommand(), new BarCommand());
     protected SequentialCommandGroup modeAutonome;
     protected SelecteurPositionAutonome selecteurPositionAutonome;
-    CommandeAutoBalancer autoBalancer;
+    // CommandeAutoBalancer autoBalancer;
+    //SequentialCommandGroup avancerEtBalancer;
     @Override
   public void autonomousInit() {
     System.out.println("autonomousInit()");
-    autoBalancer = new CommandeAutoBalancer();
-    //autoBalancer.schedule();
-    autoBalancer.initialize();
-
-    /* 
+    //avancerEtBalancer = new SequentialCommandGroup(
+    //  new CommandeAvancerJusquaPlateforme(),    
+    //  new CommandeAutoBalancer());
+    //  avancerEtBalancer.schedule();
+    
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
     System.out.println("CHOIX MODE AUTONOME = " + choix);
@@ -73,7 +74,7 @@ public class RobotControleur extends TimedRobot {
       break;
     }
       if(modeAutonome != null)modeAutonome.schedule(); 
-      */
+      
   }
 
   public void conduireToutDroit()
@@ -84,10 +85,19 @@ public class RobotControleur extends TimedRobot {
       new CommandeCalibrerBras(),
       new CommandeOuvrirMachoire(),
       new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
-      new CommandeAvancer(6)
+      new CommandeAvancer(80)
       );
-
   }
+
+  ParallelCommandGroup monterEtMaintenir = new ParallelCommandGroup(
+    new SequentialCommandGroup(
+        new CommandeDeplacerBras(POSITION.POSITION_AVANT),
+        new CommandeDormir(100),
+        new CommandeDeplacerBras(POSITION.POSITION_ARRIERE),
+        new CommandeMaintenirRobot()
+    ),
+    new CommandeMonterPlateforme()
+  );
   public void conduireSurLaPlateforme()
   {
     modeAutonome = new SequentialCommandGroup(
@@ -98,15 +108,7 @@ public class RobotControleur extends TimedRobot {
       new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
       //new CommandeAvancer(6),
       new CommandeAvancerJusquaPlateforme(),
-      new ParallelCommandGroup(
-        new SequentialCommandGroup(
-            new CommandeDeplacerBras(POSITION.POSITION_AVANT),
-            new CommandeDormir(100),
-            new CommandeDeplacerBras(POSITION.POSITION_ARRIERE),
-            new CommandeMaintenirRobot()
-        ),
-        new CommandeMonterPlateforme()
-      )
+      new CommandeAutoBalancer() // monterEtMaintenir
       );
   }
 
@@ -114,7 +116,7 @@ public class RobotControleur extends TimedRobot {
   public void autonomousPeriodic() {
     //System.out.println("autonomousPeriodic()");
     //robot.roues.avancer(0.05);
-    autoBalancer.execute();
+    //autoBalancer.execute();
 
   }
 
