@@ -66,9 +66,11 @@ public class RobotControleur extends TimedRobot {
     System.out.println("CHOIX MODE AUTONOME = " + choix);
     switch(choix)
     {
+      // les 2 switch OFF
       case 0:
       this.conduireToutDroit();
       break;
+      // les 2 switch ON
       case 3:
       this.conduireSurLaPlateforme();
       break;

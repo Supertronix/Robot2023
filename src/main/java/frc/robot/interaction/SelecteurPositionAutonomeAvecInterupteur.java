@@ -12,16 +12,16 @@ public class SelecteurPositionAutonomeAvecInterupteur implements Materiel{
 
     protected int position = 0;
     
-    private SelecteurPositionAutonome()
+    private SelecteurPositionAutonomeAvecInterupteur()
     {
         this.interrupteurGauche = new DigitalInput(INTERRUPTEUR_GAUCHE);
         this.interrupteurDroit = new DigitalInput(INTERRUPTEUR_DROIT);
     }
     
-    static protected SelecteurPositionAutonome instance = null;
-    static public SelecteurPositionAutonome getInstance()
+    static protected SelecteurPositionAutonomeAvecInterupteur instance = null;
+    static public SelecteurPositionAutonomeAvecInterupteur getInstance()
     {
-    	if(null == instance) instance = new SelecteurPositionAutonome();
+    	if(null == instance) instance = new SelecteurPositionAutonomeAvecInterupteur();
     	return instance;
     }
     

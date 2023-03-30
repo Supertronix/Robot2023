@@ -15,7 +15,9 @@ public class CommandeAutoBalancer extends CommandBase {
     protected RouesMecanumSynchro roues = null;
     protected LecteurAccelerometre lecteurEquilibre = null;
 
-    boolean estFinie = false;
+    protected int compteur;
+    public static int FOIS = 3;
+    protected boolean estFinie = false;
     //protected boolean finie = false;
     //protected DetecteurDuree detecteur;
 
@@ -35,8 +37,19 @@ public class CommandeAutoBalancer extends CommandBase {
         this.roues = (RouesMecanumSynchro)Robot.getInstance().roues;
         this.roues.convertirEnRouesHolonomiques();
         this.estFinie = false;
+        this.compteur = 0;
         //this.detecteur.initialiser();
         //this.finie = false;
+    }
+
+    public void compterEtArreter()
+    {
+        compteur++;
+        if(compteur > 2*FOIS)
+        {
+           vitesse = 0;
+           this.estFinie = true;
+        }
     }
     // roll = avant-arriere
     // pitch = sor les cotes
@@ -95,15 +108,13 @@ public class CommandeAutoBalancer extends CommandBase {
         if(roll >= 0 && roll < 3)
         {
             vitesse = (VITESSE_BASE*roll)/10;
-            //vitesse = 0;
-            //this.estFinie = true;
+            this.compterEtArreter();
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
         if(roll >= -3 && roll < 0)
         {
             vitesse = (VITESSE_BASE*roll)/10;
-            //vitesse = 0;
-            //this.estFinie = true;
+            this.compterEtArreter();
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
         if(roll >= -6 && roll < 0)
