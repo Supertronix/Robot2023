@@ -52,6 +52,7 @@ public class CommandeMonterPlateforme extends CommandBase {
         { 
             System.out.println("CommandeAvancerJusquaPlateforme.isFinished() == true");
             return true;
+
         }
         return false;
     }

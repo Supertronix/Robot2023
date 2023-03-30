@@ -67,10 +67,10 @@ public class RobotControleur extends TimedRobot {
     switch(choix)
     {
       case 0:
-        this.conduireSurLaPlateforme();
+      this.conduireToutDroit();
       break;
       case 3:
-        this.conduireToutDroit();
+      this.conduireSurLaPlateforme();
       break;
     }
       if(modeAutonome != null)modeAutonome.schedule(); 
@@ -99,6 +99,16 @@ public class RobotControleur extends TimedRobot {
     ),
     new CommandeMonterPlateforme()
   );
+  ParallelCommandGroup monterEtBalancer = new ParallelCommandGroup(
+    new CommandeDeplacerBras(POSITION.POSITION_AVANT),
+    new SequentialCommandGroup(
+      new CommandeMonterPlateforme(),
+      //new CommandeDormir(100),
+      //new CommandeDeplacerBras(POSITION.POSITION_ARRIERE),
+      new CommandeAutoBalancer()      //new CommandeMaintenirRobot() // pas encore atteingnable
+      )
+
+  );
   public void conduireSurLaPlateforme()
   {
     modeAutonome = new SequentialCommandGroup(
@@ -109,7 +119,12 @@ public class RobotControleur extends TimedRobot {
       new CommandeDeplacerBras(POSITION.POSTIION_MILIEU),
       //new CommandeAvancer(6),
       new CommandeAvancerJusquaPlateforme(),
-      new CommandeAutoBalancer() // monterEtMaintenir
+      //new CommandeMonterPlateforme(),
+      //new CommandeAutoBalancer() 
+      monterEtBalancer,
+      new CommandeDeplacerBras(POSITION.POSTIION_MILIEU)
+
+      //monterEtMaintenir
       );
   }
 

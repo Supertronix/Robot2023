@@ -16,7 +16,7 @@ public class LecteurAccelerometre {
     double yawDebut;
 
     public enum UNITE {RADIAN, DEGRES};
-    public static final double SEUIL_PENTE = 15;
+    public static final double SEUIL_PENTE = 12;
     public static final double SEUIL_EQUILIBRE  = 5;
 
     protected LecteurAccelerometre()
