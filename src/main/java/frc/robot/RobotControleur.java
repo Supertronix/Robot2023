@@ -81,6 +81,7 @@ public class RobotControleur extends TimedRobot {
   {
     modeAutonome = new SequentialCommandGroup(
       //new CommandeFermerMachoire(),
+      new CommandeFermerMachoire(),
       new CommandeAvancer(6),
       new CommandeCalibrerBras(),
       new CommandeOuvrirMachoire(),
@@ -101,7 +102,7 @@ public class RobotControleur extends TimedRobot {
   public void conduireSurLaPlateforme()
   {
     modeAutonome = new SequentialCommandGroup(
-      //new CommandeFermerMachoire(),
+      new CommandeFermerMachoire(),
       new CommandeAvancer(6),
       new CommandeCalibrerBras(),
       new CommandeOuvrirMachoire(),
