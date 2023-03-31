@@ -66,12 +66,17 @@ public class CommandeAutoBalancer extends CommandBase {
     enum SENS {DECOLLAGE, ATTERRISSAGE};
     INCLINAISON inclinaison;
     SENS sens;
+    INCLINAISON inclinaisonPrecedente;
+    SENS sensPrecedent;
 
     float LIMITE_1 = 3.5f;
     float LIMITE_2 = 6;
     float LIMITE_3 = 12;
+    int iterations = 0;
     void classifierInclinaison()
     {
+        this.inclinaisonPrecedente = this.inclinaison;
+        this.sensPrecedent = this.sens;
         if(roll >= LIMITE_3) // avancer au debut
         {
             this.inclinaison = INCLINAISON.ELEVEE;
@@ -112,6 +117,7 @@ public class CommandeAutoBalancer extends CommandBase {
             this.inclinaison = INCLINAISON.PLAT;
             this.sens = SENS.ATTERRISSAGE;
         }
+        if(this.sensPrecedent != this.sens) this.iterations++;
     }
 
     @Override
@@ -131,6 +137,7 @@ public class CommandeAutoBalancer extends CommandBase {
         {
             if(sens == SENS.DECOLLAGE) vitesse = (VITESSE_BASE*roll)/3;
             if(sens == SENS.ATTERRISSAGE) vitesse = VITESSE_BASE;
+            if(this.iterations > 2) vitesse /= 2;
         }
         if(this.inclinaison == INCLINAISON.MOYENNE)
         {
