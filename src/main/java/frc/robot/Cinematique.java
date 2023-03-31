@@ -24,11 +24,11 @@ public interface Cinematique {
     {
       // B = 0 - A = 6.5 - X = 13
       // arriere pour scorer- centrer pour deplacement - devant pour ramasser
-      public static final float POSITION_AVANT = 11.5f;
-      public static final float POSITION_PENCHE_AVANT = 9f;
-      public static final float POSTIION_MILIEU = 6.6f;
-      public static final float POSITION_PENCHE_ARRIERE = 4.5f;
-      public static final float POSITION_ARRIERE = 1f;
+      public static final float POSITION_AVANT = 11f;
+      public static final float POSITION_PENCHE_AVANT = 8.5f;
+      public static final float POSTIION_MILIEU = 6.1f;
+      public static final float POSITION_PENCHE_ARRIERE = 4f;
+      public static final float POSITION_ARRIERE = 0.5f;
       public enum POSITION {POSITION_AVANT, POSITION_PENCHE_AVANT, POSTIION_MILIEU, POSITION_PENCHE_ARRIERE, POSITION_ARRIERE, AJUSTEE, INCONNUE};
       public static final double POSITION_INCONNUE = -1;
       Map<POSITION, Float> POSITION_NUMERIQUE = Map.ofEntries(

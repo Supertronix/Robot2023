@@ -45,7 +45,7 @@ public class CommandeAutoBalancer extends CommandBase {
     public void compterEtArreter()
     {
         compteur++;
-        if(compteur > 2*FOIS)
+        if(compteur > 3*FOIS)
         {
            vitesse = 0;
            this.estFinie = true;
@@ -55,7 +55,10 @@ public class CommandeAutoBalancer extends CommandBase {
     // pitch = sor les cotes
     // yaw = rotation du robot
     //protected double VITESSE_BASE = 0.05910;
-    protected double VITESSE_BASE = 0.02;
+    float LIMITE_1 = 3.5f;
+    float LIMITE_2 = 6;
+    float LIMITE_3 = 12;
+    protected double VITESSE_BASE = 0.05;
     protected double vitesse;
     protected double roll;
     @Override
@@ -90,44 +93,49 @@ public class CommandeAutoBalancer extends CommandBase {
 
         roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
         System.out.println("getRoll() " + roll);
-        if(roll >= 12) // avancer au debut
+
+        LIMITE_1 = 3.5f;
+        LIMITE_2 = 6;
+        LIMITE_3 = 12;
+ 
+        if(roll >= LIMITE_3) // avancer au debut
         {
             vitesse = VITESSE_BASE*roll;
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll >= 6 && roll < 12)
+        if(roll >= LIMITE_2 && roll < LIMITE_3)
         {
-            vitesse = (VITESSE_BASE*roll)/1.5;
+            vitesse = (VITESSE_BASE*roll)/3;
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll >= 3 && roll < 6)
+        if(roll >= LIMITE_1 && roll < LIMITE_2)
         {
-            vitesse = (VITESSE_BASE*roll)/4;
+            vitesse = (VITESSE_BASE*roll)/5;
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll >= 0 && roll < 3)
-        {
-            vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter();
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= -3 && roll < 0)
+        if(roll >= 0 && roll < LIMITE_1)
         {
             vitesse = (VITESSE_BASE*roll)/10;
             this.compterEtArreter();
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll >= -6 && roll < 0)
+        if(roll >= -LIMITE_1 && roll < 0)
         {
-            vitesse = (VITESSE_BASE*roll)/4;
+            vitesse = (VITESSE_BASE*roll)/10;
+            this.compterEtArreter();
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll >= -12 && roll < -6)
+        if(roll >= -LIMITE_2 && roll < -LIMITE_1)
         {
-            vitesse = (VITESSE_BASE*roll)/1.5;
+            vitesse = (VITESSE_BASE*roll)/5;
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
         }
-        if(roll <= -12) // reculer apres
+        if(roll >= -LIMITE_3 && roll < -LIMITE_2)
+        {
+            vitesse = (VITESSE_BASE*roll)/3;
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+        }
+        if(roll <= -LIMITE_3) // reculer apres
         {
             vitesse = VITESSE_BASE;
             this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
