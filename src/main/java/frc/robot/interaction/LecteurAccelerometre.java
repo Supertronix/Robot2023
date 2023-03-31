@@ -60,6 +60,7 @@ public class LecteurAccelerometre {
     public double getRoll()
     {
         this.roll = (this.accelerometre.getRoll() - this.pitchDebut);
+        this.roll -= 3;
         return this.roll;
     }
     public double getRoll(UNITE unites)
