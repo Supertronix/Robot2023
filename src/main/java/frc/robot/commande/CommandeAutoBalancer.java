@@ -59,7 +59,7 @@ public class CommandeAutoBalancer extends CommandBase {
     // pitch = sor les cotes
     // yaw = rotation du robot
     //protected double VITESSE_BASE = 0.05910;
-    protected double VITESSE_BASE = 0.05;
+    protected double VITESSE_BASE = 0.04;
     protected double vitesse;
     protected double roll;
     enum INCLINAISON {ELEVEE, MOYENNE, PETITE, PLAT};

@@ -64,7 +64,7 @@ public class RobotControleur extends TimedRobot {
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
     System.out.println("CHOIX MODE AUTONOME = " + choix);
-    choix = 3;
+    //choix = 3; // pour tester dans le champs de test
     switch(choix)
     {
       // les 2 switch OFF
@@ -160,7 +160,7 @@ public class RobotControleur extends TimedRobot {
     //this.testeur.lancer();
 
     /// TEST
-
+/* 
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
     System.out.println("CHOIX MODE AUTONOME = " + choix);
@@ -174,7 +174,7 @@ public class RobotControleur extends TimedRobot {
       case 3:
       SmartDashboard.putString("Mode autonome", "Conduire sur la plateforme");
       break;
-    }
+    }*/
   }
 
   @Override
