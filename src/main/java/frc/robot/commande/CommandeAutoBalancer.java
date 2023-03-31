@@ -69,7 +69,7 @@ public class CommandeAutoBalancer extends CommandBase {
     INCLINAISON inclinaisonPrecedente;
     SENS sensPrecedent;
 
-    float LIMITE_1 = 3.5f;
+    float LIMITE_1 = 4;
     float LIMITE_2 = 6;
     float LIMITE_3 = 12;
     int iterations = 0;
@@ -154,8 +154,9 @@ public class CommandeAutoBalancer extends CommandBase {
         }
         if(this.inclinaison == INCLINAISON.PLAT)
         {
-            vitesse = (VITESSE_BASE*roll)/10;
-            if(this.iterations > 2) vitesse /= (this.iterations/2);
+            //vitesse = (VITESSE_BASE*roll)/10;
+            //if(this.iterations > 2) vitesse /= (this.iterations/2);
+            vitesse = 0;
             this.compterEtArreter(10);
         }
 
