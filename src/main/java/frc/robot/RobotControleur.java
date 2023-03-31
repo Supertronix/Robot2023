@@ -64,6 +64,7 @@ public class RobotControleur extends TimedRobot {
     this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
     int choix = this.selecteurPositionAutonome.lireChoix();
     System.out.println("CHOIX MODE AUTONOME = " + choix);
+    choix = 3;
     switch(choix)
     {
       // les 2 switch OFF
