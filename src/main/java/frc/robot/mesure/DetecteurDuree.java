@@ -36,4 +36,9 @@ public class DetecteurDuree{
 		if(this.estTropLong) System.out.println("Delais trop long !");
 		return this.estTropLong;
 	}
+
+	public double getDuree()
+	{
+		return (this.tempsActuel - this.tempsDebut);
+	}
 }

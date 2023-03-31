@@ -18,6 +18,7 @@ public class CommandeAutoBalancer extends CommandBase {
     protected int compteur;
     public static int FOIS = 3;
     protected boolean estFinie = false;
+    protected DetecteurDuree detecteurDuree;
     //protected boolean finie = false;
     //protected DetecteurDuree detecteur;
 
@@ -25,6 +26,7 @@ public class CommandeAutoBalancer extends CommandBase {
     {
         System.out.println("new CommandeAutoBalancer()");
         this.lecteurEquilibre = LecteurAccelerometre.getInstance();
+        this.detecteurDuree = new DetecteurDuree(2000);
         //this.roues = Robot.getInstance().roues;
         //this.addRequirements(this.roues);
         //this.detecteur = new DetecteurDuree(Cinematique.Machoire.TEMPS_MAXIMUM_OUVRIR);
@@ -38,14 +40,16 @@ public class CommandeAutoBalancer extends CommandBase {
         this.roues.convertirEnRouesHolonomiques();
         this.estFinie = false;
         this.compteur = 0;
+        this.detecteurDuree.initialiser();
         //this.detecteur.initialiser();
         //this.finie = false;
     }
 
-    public void compterEtArreter()
+    public void compterEtArreter(int decompte)
     {
+        if(decompte < 0) decompte = 3;
         compteur++;
-        if(compteur > 3*FOIS)
+        if(compteur > decompte*FOIS)
         {
            vitesse = 0;
            this.estFinie = true;
@@ -55,9 +59,6 @@ public class CommandeAutoBalancer extends CommandBase {
     // pitch = sor les cotes
     // yaw = rotation du robot
     //protected double VITESSE_BASE = 0.05910;
-    float LIMITE_1 = 3.5f;
-    float LIMITE_2 = 6;
-    float LIMITE_3 = 12;
     protected double VITESSE_BASE = 0.05;
     protected double vitesse;
     protected double roll;
@@ -65,23 +66,12 @@ public class CommandeAutoBalancer extends CommandBase {
     enum SENS {DECOLLAGE, ATTERRISSAGE};
     INCLINAISON inclinaison;
     SENS sens;
-    @Override
-    public void execute() {
-        System.out.println("CommandeAutoBalancer.execute()");
-        //this.detecteur.mesurer();
 
-
-        //// TECHNIQUE par INCREMENTS ///// A tester
-        SmartDashboard.putNumber("roll", roll);
-        SmartDashboard.putNumber("vitesse", vitesse);
-
-        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
-        System.out.println("getRoll() " + roll);
-
-        LIMITE_1 = 3.5f;
-        LIMITE_2 = 6;
-        LIMITE_3 = 12;
- 
+    float LIMITE_1 = 3.5f;
+    float LIMITE_2 = 6;
+    float LIMITE_3 = 12;
+    void classifierInclinaison()
+    {
         if(roll >= LIMITE_3) // avancer au debut
         {
             this.inclinaison = INCLINAISON.ELEVEE;
@@ -122,9 +112,21 @@ public class CommandeAutoBalancer extends CommandBase {
             this.inclinaison = INCLINAISON.PLAT;
             this.sens = SENS.ATTERRISSAGE;
         }
-        
+    }
 
+    @Override
+    public void execute() {
+        System.out.println("CommandeAutoBalancer.execute()");
+        this.detecteurDuree.mesurer();
+        this.classifierInclinaison();
+
+        SmartDashboard.putNumber("roll", roll);
+        SmartDashboard.putNumber("vitesse", vitesse);
+
+        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
+        System.out.println("getRoll() " + roll);
         //// ===================== ///////
+
         if(this.inclinaison == INCLINAISON.ELEVEE)
         {
             if(sens == SENS.DECOLLAGE) vitesse = (VITESSE_BASE*roll)/3;
@@ -141,9 +143,11 @@ public class CommandeAutoBalancer extends CommandBase {
         if(this.inclinaison == INCLINAISON.PLAT)
         {
             vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter();
+            this.compterEtArreter(3);
         }
-        if(!this.estFinie) this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+
+        if(!this.estFinie) 
+            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
     }
 
     @Override
