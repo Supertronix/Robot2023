@@ -145,6 +145,7 @@ public class CommandeAutoBalancer extends CommandBase {
         if(this.inclinaison == INCLINAISON.MOYENNE)
         {
             vitesse = (VITESSE_BASE*roll)/3;
+            if(this.iterations > 2) vitesse /= (this.iterations/2);
         }
         if(this.inclinaison == INCLINAISON.PETITE)
         {
@@ -153,7 +154,7 @@ public class CommandeAutoBalancer extends CommandBase {
         if(this.inclinaison == INCLINAISON.PLAT)
         {
             vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter(10);
+            this.compterEtArreter(12);
         }
 
         if(!this.estFinie) 
