@@ -61,10 +61,102 @@ public class CommandeAutoBalancer extends CommandBase {
     protected double VITESSE_BASE = 0.05;
     protected double vitesse;
     protected double roll;
+    enum INCLINAISON {ELEVEE, MOYENNE, PETITE, PLAT};
+    enum SENS {DECOLLAGE, ATTERRISSAGE};
+    INCLINAISON inclinaison;
+    SENS sens;
     @Override
     public void execute() {
         System.out.println("CommandeAutoBalancer.execute()");
         //this.detecteur.mesurer();
+
+
+        //// TECHNIQUE par INCREMENTS ///// A tester
+        SmartDashboard.putNumber("roll", roll);
+        SmartDashboard.putNumber("vitesse", vitesse);
+
+        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
+        System.out.println("getRoll() " + roll);
+
+        LIMITE_1 = 3.5f;
+        LIMITE_2 = 6;
+        LIMITE_3 = 12;
+ 
+        if(roll >= LIMITE_3) // avancer au debut
+        {
+            this.inclinaison = INCLINAISON.ELEVEE;
+            this.sens = SENS.DECOLLAGE;
+        }
+        if(roll <= -LIMITE_3) // reculer apres
+        {
+            this.inclinaison = INCLINAISON.ELEVEE;
+            this.sens = SENS.ATTERRISSAGE;
+        }
+        if(roll >= LIMITE_2 && roll < LIMITE_3)
+        {
+            this.inclinaison = INCLINAISON.MOYENNE;
+            this.sens = SENS.DECOLLAGE;
+        }
+        if(roll >= -LIMITE_3 && roll < -LIMITE_2)
+        {
+            this.inclinaison = INCLINAISON.MOYENNE;
+            this.sens = SENS.ATTERRISSAGE;
+        }
+        if(roll >= LIMITE_1 && roll < LIMITE_2)
+        {
+            this.inclinaison = INCLINAISON.PETITE;
+            this.sens = SENS.DECOLLAGE;
+        }
+        if(roll >= -LIMITE_2 && roll < -LIMITE_1)
+        {
+            this.inclinaison = INCLINAISON.PETITE;
+            this.sens = SENS.ATTERRISSAGE;
+        }
+        if(roll >= 0 && roll < LIMITE_1)
+        {
+            this.inclinaison = INCLINAISON.PLAT;
+            this.sens = SENS.DECOLLAGE;
+        }
+        if(roll >= -LIMITE_1 && roll < 0)
+        {
+            this.inclinaison = INCLINAISON.PLAT;
+            this.sens = SENS.ATTERRISSAGE;
+        }
+        
+
+        //// ===================== ///////
+        if(this.inclinaison == INCLINAISON.ELEVEE)
+        {
+            if(sens == SENS.DECOLLAGE) vitesse = (VITESSE_BASE*roll)/3;
+            if(sens == SENS.ATTERRISSAGE) vitesse = VITESSE_BASE;
+        }
+        if(this.inclinaison == INCLINAISON.MOYENNE)
+        {
+            vitesse = (VITESSE_BASE*roll)/3;
+        }
+        if(this.inclinaison == INCLINAISON.PETITE)
+        {
+            vitesse = (VITESSE_BASE*roll)/5;
+        }
+        if(this.inclinaison == INCLINAISON.PLAT)
+        {
+            vitesse = (VITESSE_BASE*roll)/10;
+            this.compterEtArreter();
+        }
+        if(!this.estFinie) this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
+    }
+
+    @Override
+    public boolean isFinished() 
+    {
+        //if(lecteurEquilibre.depasseSeuilEquilibre() || Robot.getInstance().equilibre) 
+        //{ 
+        //    System.out.println("CommandeAutoBalancer.isFinished() == true");
+        //    return true;
+        //}
+        return this.estFinie;
+    }
+}
 
         //// TECHNIQUE MATHEMATIQUE /////// marche pas
         // System.out.println("getRoll() " + this.lecteurEquilibre.getRoll(UNITE.DEGRES));
@@ -86,81 +178,3 @@ public class CommandeAutoBalancer extends CommandBase {
         }
         */
         //// ===================== ///////
-
-        //// TECHNIQUE par INCREMENTS ///// A tester
-        SmartDashboard.putNumber("roll", roll);
-        SmartDashboard.putNumber("vitesse", vitesse);
-
-        roll = this.lecteurEquilibre.getRoll(UNITE.DEGRES);
-        System.out.println("getRoll() " + roll);
-
-        LIMITE_1 = 3.5f;
-        LIMITE_2 = 6;
-        LIMITE_3 = 12;
- 
-        if(roll >= LIMITE_3) // avancer au debut
-        {
-            vitesse = VITESSE_BASE*roll;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= LIMITE_2 && roll < LIMITE_3)
-        {
-            vitesse = (VITESSE_BASE*roll)/3;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= LIMITE_1 && roll < LIMITE_2)
-        {
-            vitesse = (VITESSE_BASE*roll)/5;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= 0 && roll < LIMITE_1)
-        {
-            vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter();
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= -LIMITE_1 && roll < 0)
-        {
-            vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter();
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= -LIMITE_2 && roll < -LIMITE_1)
-        {
-            vitesse = (VITESSE_BASE*roll)/5;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll >= -LIMITE_3 && roll < -LIMITE_2)
-        {
-            vitesse = (VITESSE_BASE*roll)/3;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        if(roll <= -LIMITE_3) // reculer apres
-        {
-            vitesse = VITESSE_BASE;
-            this.roues.conduireToutesDirections(vitesse, vitesse, vitesse, vitesse);
-        }
-        //// ===================== ///////
-
-
-        ///// TECHNIQUE par SEGMENTS //////
-
-
-
-
-        ///// ======================= ///////
-
-
-    }
-
-    @Override
-    public boolean isFinished() 
-    {
-        //if(lecteurEquilibre.depasseSeuilEquilibre() || Robot.getInstance().equilibre) 
-        //{ 
-        //    System.out.println("CommandeAutoBalancer.isFinished() == true");
-        //    return true;
-        //}
-        return this.estFinie;
-    }
-}
