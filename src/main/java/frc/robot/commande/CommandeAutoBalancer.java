@@ -118,6 +118,9 @@ public class CommandeAutoBalancer extends CommandBase {
             this.sens = SENS.ATTERRISSAGE;
         }
         if(this.sensPrecedent != this.sens) this.iterations++;
+        System.out.println("INCLINAISON = " + this.inclinaison);
+        System.out.println("SENS = " + this.sens);
+        System.out.println("iterations = " + this.iterations);
     }
 
     @Override
@@ -137,7 +140,7 @@ public class CommandeAutoBalancer extends CommandBase {
         {
             if(sens == SENS.DECOLLAGE) vitesse = (VITESSE_BASE*roll)/3;
             if(sens == SENS.ATTERRISSAGE) vitesse = VITESSE_BASE;
-            if(this.iterations > 2) vitesse /= 2;
+            if(this.iterations > 2) vitesse /= (this.iterations/2);
         }
         if(this.inclinaison == INCLINAISON.MOYENNE)
         {
@@ -150,7 +153,7 @@ public class CommandeAutoBalancer extends CommandBase {
         if(this.inclinaison == INCLINAISON.PLAT)
         {
             vitesse = (VITESSE_BASE*roll)/10;
-            this.compterEtArreter(3);
+            this.compterEtArreter(15);
         }
 
         if(!this.estFinie) 
