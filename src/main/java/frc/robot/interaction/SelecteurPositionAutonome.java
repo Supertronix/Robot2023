@@ -20,7 +20,9 @@ public class SelecteurPositionAutonome implements Materiel{
     
     public int lireChoix()
     {
+        //SmartDashboard.putBoolean("Mode autonome avec plateforme ?", false);
         boolean modePlateforme=SmartDashboard.getBoolean("Mode autonome avec plateforme ?", false);
+
         if(modePlateforme) position = 3;
         else position = 0;
 

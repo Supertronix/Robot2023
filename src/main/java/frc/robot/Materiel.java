@@ -5,8 +5,8 @@ import static java.util.Map.entry;
 
 public interface Materiel {
 
-    public static int INTERRUPTEUR_DROIT = 11;
-    public static int INTERRUPTEUR_GAUCHE = 12;
+    public static int INTERRUPTEUR_DROIT = 1;
+    public static int INTERRUPTEUR_GAUCHE = 2;
 
     public interface Affichage
     {

@@ -68,10 +68,12 @@ public class RobotControleur extends TimedRobot {
     {
       // les 2 switch OFF
       case 0:
+      SmartDashboard.putString("Mode autonome", "Conduire tout droit");
       this.conduireToutDroit();
       break;
       // les 2 switch ON
       case 3:
+      SmartDashboard.putString("Mode autonome", "Conduire sur la plateforme");
       this.conduireSurLaPlateforme();
       break;
     }
@@ -152,8 +154,26 @@ public class RobotControleur extends TimedRobot {
     System.out.println("teleopInit()");
     lecteurAccelerometre = LecteurAccelerometre.getInstance();
     ((RouesMecanumSynchro)Robot.getInstance().roues).convertirEnRouesHolonomiques();
+
     //this.testeur.initialiser();
     //this.testeur.lancer();
+
+    /// TEST
+
+    this.selecteurPositionAutonome = SelecteurPositionAutonome.getInstance();
+    int choix = this.selecteurPositionAutonome.lireChoix();
+    System.out.println("CHOIX MODE AUTONOME = " + choix);
+    switch(choix)
+    {
+      // les 2 switch OFF
+      case 0:
+      SmartDashboard.putString("Mode autonome", "Conduire tout droit");
+      break;
+      // les 2 switch ON
+      case 3:
+      SmartDashboard.putString("Mode autonome", "Conduire sur la plateforme");
+      break;
+    }
   }
 
   @Override

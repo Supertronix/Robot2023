@@ -5,23 +5,23 @@ import frc.robot.Materiel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SelecteurPositionAutonomeAvecInterupteur implements Materiel{
+public class SelecteurPositionAutonomeAvecInterrupteur implements Materiel{
 
     protected DigitalInput interrupteurGauche = null;
     protected DigitalInput interrupteurDroit = null;
 
     protected int position = 0;
     
-    private SelecteurPositionAutonomeAvecInterupteur()
+    private SelecteurPositionAutonomeAvecInterrupteur()
     {
         this.interrupteurGauche = new DigitalInput(INTERRUPTEUR_GAUCHE);
         this.interrupteurDroit = new DigitalInput(INTERRUPTEUR_DROIT);
     }
     
-    static protected SelecteurPositionAutonomeAvecInterupteur instance = null;
-    static public SelecteurPositionAutonomeAvecInterupteur getInstance()
+    static protected SelecteurPositionAutonomeAvecInterrupteur instance = null;
+    static public SelecteurPositionAutonomeAvecInterrupteur getInstance()
     {
-    	if(null == instance) instance = new SelecteurPositionAutonomeAvecInterupteur();
+    	if(null == instance) instance = new SelecteurPositionAutonomeAvecInterrupteur();
     	return instance;
     }
     
