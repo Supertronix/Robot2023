@@ -155,6 +155,7 @@ public class RobotControleur extends TimedRobot {
     System.out.println("teleopInit()");
     lecteurAccelerometre = LecteurAccelerometre.getInstance();
     ((RouesMecanumSynchro)Robot.getInstance().roues).convertirEnRouesHolonomiques();
+    ((RouesMecanumSynchro)Robot.getInstance().roues).setFacteur(0.8);
 
     //this.testeur.initialiser();
     //this.testeur.lancer();

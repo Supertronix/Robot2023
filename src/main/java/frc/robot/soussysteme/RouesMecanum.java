@@ -9,7 +9,7 @@ import frc.robot.interaction.Manette;
 public class RouesMecanum extends Roues {
 
     protected MecanumDrive mecanum;
-    double facteur = 1;
+    protected double facteur = 1;
 
     // import edu.wpi.first.math.geometry.Rotation2d;
     // this.mecanum = new MecanumDrive(this.roueArriereDroite, this.roueArriereGauche, this.roueAvantDroite, this.roueAvantGauche);
@@ -23,6 +23,10 @@ public class RouesMecanum extends Roues {
     {
         this.roueAvantGauche.setInverted(true);
         this.roueArriereGauche.setInverted(true); 
+    }
+    public void setFacteur(double facteur)
+    {
+        this.facteur = facteur;
     }
     public void avancer(double vitesse)
     {
